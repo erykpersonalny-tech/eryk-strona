@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eryk Jóskowski - Profesjonalny Trener Personalny w Rumii. 100+ zadowolonych klientów, 8000+ treningów, 10 lat doświadczenia.">
+    <title>Eryk Jóskowski - Trener Personalny Rumia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-green: #00ff88;
+            --dark-green: #00cc6a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #cccccc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        
+        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
+        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
+        .orb3 { width: 400px; height: 400px; background: linear-gradient(135deg, var(--dark-green), var(--neon-green)); top: 50%; right: 20%; animation-delay: 14s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+        
+        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.1); transition: all 0.3s; }
+        nav.scrolled { padding: 10px 50px; background: rgba(10, 10, 10, 0.95); box-shadow: 0 8px 32px rgba(0, 255, 136, 0.15); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
+        
+        .logo { cursor: pointer; transition: transform 0.3s; text-decoration: none; display: block; }
+        .logo:hover { transform: scale(1.05); }
+        .logo img { height: 50px; width: auto; display: block; }
+        nav.scrolled .logo img { height: 45px; }
+        
+        .nav-links { display: flex; gap: 5px; align-items: center; background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 50px; border: 1px solid rgba(0, 255, 136, 0.1); }
+        .nav-links a { color: var(--white); text-decoration: none; transition: all 0.3s; font-weight: 500; padding: 10px 20px; border-radius: 50px; font-size: 14px; }
+        .nav-links a:hover { background: rgba(0, 255, 136, 0.1); color: var(--neon-green); }
+        .nav-cta { background: linear-gradient(135deg, var(--neon-green), var(--dark-green)) !important; color: var(--black) !important; font-weight: 700; box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3); margin-left: 10px; }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5); }
+        
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--neon-green); transition: all 0.3s; border-radius: 3px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--black); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 0.5s, visibility 0.5s; }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-spinner { width: 60px; height: 60px; border: 4px solid rgba(0, 255, 136, 0.1); border-top: 4px solid var(--neon-green); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 50px; position: relative; overflow: hidden; }
+        .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; max-width: 1400px; width: 100%; z-index: 1; }
+        .hero-content { animation: slideInLeft 1s ease-out; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .hero-content h1 { font-size: 64px; margin-bottom: 35px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; line-height: 1.1; animation: fadeIn 1s ease-out 0.2s both; }
+        .hero-highlight { color: var(--neon-green); display: block; }
+        
+        .hero-cta-primary { display: inline-flex; align-items: center; gap: 12px; padding: 22px 50px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 18px; transition: all 0.3s; box-shadow: 0 15px 50px rgba(0, 255, 136, 0.5); border: none; cursor: pointer; position: relative; overflow: hidden; animation: fadeIn 1s ease-out 0.4s both; }
+        .hero-cta-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); transition: left 0.5s; }
+        .hero-cta-primary:hover::before { left: 100%; }
+        .hero-cta-primary:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 60px rgba(0, 255, 136, 0.7); }
+        
+        .hero-image-container { position: relative; animation: slideInRight 1s ease-out; display: flex; align-items: center; justify-content: center; }
+        .hero-image-wrapper { position: relative; max-width: 500px; width: 100%; }
+        .hero-image-bg-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 450px; height: 450px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 106, 0.05)); border-radius: 50%; border: 2px solid rgba(0, 255, 136, 0.3); animation: pulse 3s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; } }
+        .hero-image-bg-circle::before { content: ''; position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px; border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 50%; }
+        
+        .hero-image-main { position: relative; z-index: 2; filter: drop-shadow(0 20px 40px rgba(0, 255, 136, 0.3)); transition: all 0.5s ease; }
+        .hero-image-main:hover { transform: scale(1.05); filter: drop-shadow(0 25px 50px rgba(0, 255, 136, 0.5)); }
+        .hero-image-main img { width: 100%; height: auto; display: block; position: relative; z-index: 2; }
+        
+        .hero-image-badge { position: absolute; bottom: 20%; right: -80px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border: 2px solid var(--neon-green); border-radius: 16px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5); z-index: 3; white-space: nowrap; transform: scale(0.9); }
+        .hero-image-badge-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--black); }
+        .hero-image-badge-text { display: flex; flex-direction: column; }
+        .hero-image-badge-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        .hero-image-badge-value { font-size: 14px; font-weight: 700; color: var(--white); }
+        
+        .hero-glow-1, .hero-glow-2 { position: absolute; border-radius: 50%; opacity: 0.15; filter: blur(80px); z-index: 1; animation: float 8s ease-in-out infinite; }
+        .hero-glow-1 { width: 250px; height: 250px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: 10%; right: 10%; }
+        .hero-glow-2 { width: 200px; height: 200px; background: linear-gradient(135deg, var(--dark-green), var(--neon-green)); bottom: 20%; left: 10%; animation-delay: 4s; }
+        .hero-dots { position: absolute; top: 20%; right: -50px; width: 150px; height: 150px; background-image: radial-gradient(circle, rgba(0, 255, 136, 0.2) 2px, transparent 2px); background-size: 20px 20px; opacity: 0.3; animation: float 10s ease-in-out infinite; }
+        
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding: 100px 50px; max-width: 1200px; margin: 0 auto; }
+        .stat-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .stat-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.08); border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3); }
+        .stat-number { font-size: 48px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+        .stat-label { font-size: 16px; color: var(--gray); }
+        
+        .section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 48px; text-align: center; margin-bottom: 60px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+        
+        .section-divider { position: relative; height: 150px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .section-divider::before { content: ''; position: absolute; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--neon-green), transparent); animation: dividerPulse 3s infinite; }
+        @keyframes dividerPulse { 0%, 100% { opacity: 0.3; transform: scaleX(0.8); } 50% { opacity: 1; transform: scaleX(1); } }
+        .divider-icon { position: relative; z-index: 1; width: 60px; height: 60px; background: rgba(0, 255, 136, 0.1); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--neon-green); backdrop-filter: blur(10px); animation: dividerIconFloat 3s ease-in-out infinite; }
+        @keyframes dividerIconFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .divider-icon::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); opacity: 0; animation: dividerIconPulse 2s infinite; }
+        @keyframes dividerIconPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+        
+        .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .price-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; }
+        .price-card.featured { border: 2px solid var(--neon-green); transform: scale(1.05); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4); background: rgba(0, 255, 136, 0.05); }
+        .price-card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 20px 50px rgba(0, 255, 136, 0.4); border-color: rgba(0, 255, 136, 0.6); }
+        .featured-badge { position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .price { font-size: 56px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 20px 0; }
+        .price-features { list-style: none; margin: 30px 0; text-align: left; flex-grow: 1; }
+        .price-features li { padding: 10px 0; color: var(--gray); border-bottom: 1px solid rgba(0, 255, 136, 0.1); display: flex; align-items: center; gap: 10px; }
+        .price-features li:last-child { border-bottom: none; }
+        .price-features li::before { content: '✓'; color: var(--neon-green); font-weight: bold; font-size: 18px; }
+        
+        .cta-button { display: inline-block; padding: 18px 50px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; transition: all 0.3s; box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4); border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6); }
+        .service-title { font-size: 24px; margin-bottom: 15px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        
+        .transformation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .transformation-card { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); transition: all 0.3s; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .transformation-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4); border-color: rgba(0, 255, 136, 0.5); }
+        .transformation-card img { width: 100%; height: 350px; object-fit: cover; display: block; transition: transform 0.3s; }
+        .transformation-card:hover img { transform: scale(1.05); }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .blog-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; overflow: hidden; transition: all 0.3s; cursor: pointer; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .blog-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4); border-color: rgba(0, 255, 136, 0.5); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.3s; }
+        .blog-card:hover img { transform: scale(1.05); }
+        .blog-content { padding: 25px; }
+        .blog-tag { display: inline-block; padding: 5px 15px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 15px; font-size: 12px; color: var(--neon-green); margin-bottom: 15px; }
+        .blog-title { font-size: 22px; margin-bottom: 10px; color: var(--white); }
+        .blog-excerpt { color: var(--gray); line-height: 1.6; margin-bottom: 15px; }
+        
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 15px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s; }
+        .faq-item:hover { border-color: rgba(0, 255, 136, 0.4); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2); }
+        .faq-item.active { border-color: rgba(0, 255, 136, 0.5); background: rgba(0, 255, 136, 0.03); }
+        
+        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; cursor: pointer; transition: all 0.3s; user-select: none; }
+        .faq-question:hover { background: rgba(0, 255, 136, 0.05); }
+        .faq-question-text { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .faq-question-text i { font-size: 20px; color: var(--neon-green); min-width: 20px; }
+        .faq-question-text span { font-size: 18px; font-weight: 600; color: var(--white); }
+        
+        .faq-icon { font-size: 16px; color: var(--neon-green); transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+        .faq-item.active .faq-answer { max-height: 500px; padding: 0 30px 25px 65px; }
+        .faq-answer p { color: var(--gray); line-height: 1.8; font-size: 16px; }
+        .faq-answer strong { color: var(--neon-green); font-weight: 600; }
+        
+        footer { text-align: center; padding: 60px 40px 40px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-top: 1px solid rgba(0, 255, 136, 0.2); margin-top: 100px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--neon-green); margin-bottom: 20px; }
+        .footer-section p, .footer-section a { color: var(--gray); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.3s; }
+        .footer-section a:hover { color: var(--neon-green); }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 255, 136, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .social-links a:hover { background: var(--neon-green); transform: translateY(-5px); }
+        .social-links a:hover i { color: var(--black); }
+        .footer-bottom { padding-top: 30px; border-top: 1px solid rgba(0, 255, 136, 0.1); color: var(--gray); }
+        
+        .floating-whatsapp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); cursor: pointer; transition: all 0.3s; z-index: 999; text-decoration: none; }
+        .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7); }
+        .floating-whatsapp i { color: var(--white); font-size: 28px; }
+        
+        .scroll-to-top { position: fixed; bottom: 100px; right: 30px; width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
+        .scroll-to-top.visible { opacity: 1; visibility: visible; }
+        .scroll-to-top:hover { background: var(--neon-green); transform: translateY(-5px); }
+        .scroll-to-top:hover i { color: var(--black); }
+        .scroll-to-top i { color: var(--neon-green); font-size: 20px; transition: color 0.3s; }
+        
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hidden { display: none !important; }
+        
+        /* TEMPORARY HIDE - Remove this class when ready to show */
+        .temp-hide { display: none !important; }
+        
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; gap: 50px; }
+            .hero-content h1 { font-size: 48px; }
+            .hero-image-bg-circle { width: 350px; height: 350px; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .hero { padding: 120px 20px 50px; }
+            .hero-content h1 { font-size: 36px; }
+            .hero-image-bg-circle { width: 300px; height: 300px; }
+            .hero-image-wrapper { max-width: 350px; }
+            .hero-cta-primary { padding: 18px 40px; font-size: 16px; }
+            .nav-links { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: rgba(0, 0, 0, 0.98); flex-direction: column; justify-content: flex-start; padding-top: 50px; transition: left 0.3s; border-top: 1px solid rgba(0, 255, 136, 0.2); border-radius: 0; }
+            .nav-links.active { left: 0; }
+            .hamburger { display: flex; }
+            .section { padding: 50px 20px; }
+            .stats { padding: 50px 20px; }
+            .section-title { font-size: 36px; }
+            .price-card.featured { transform: scale(1); }
+            .footer-content { text-align: center; }
+            .social-links { justify-content: center; }
+            .faq-question { padding: 20px; }
+            .faq-question-text span { font-size: 16px; }
+            .faq-item.active .faq-answer { padding: 0 20px 20px 20px; }
+            .faq-answer p { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"><div class="loader-spinner"></div></div>
+    <div class="gradient-bg"></div>
+    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+    
+    <nav id="navbar">
+        <a href="#hero" class="logo" onclick="event.preventDefault(); scrollToSection('hero')">
+            <img src="https://i.imgur.com/BHCySvx.png" alt="Eryk Jóskowski Logo">
+        </a>
+        <div class="nav-links" id="navLinks">
+            <!-- <a href="#przemiany" onclick="event.preventDefault(); scrollToSection('przemiany')">Przemiany</a> -->
+            <a href="o-mnie.html">O mnie</a>
+            <a href="#proces" onclick="event.preventDefault(); scrollToSection('proces')">Proces</a>
+            <a href="#uslugi" onclick="event.preventDefault(); scrollToSection('uslugi')">Usługi</a>
+            <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
+            <a href="#faq" onclick="event.preventDefault(); scrollToSection('faq')">FAQ</a>
+            <a href="#kontakt" class="nav-cta" onclick="event.preventDefault(); scrollToSection('kontakt')">Kontakt</a>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Jesteś Następną Historią <span class="hero-highlight">Sportowego Sukcesu?</span></h1>
+                <a href="#kontakt" class="hero-cta-primary" onclick="event.preventDefault(); selectFreeTrial()">
+                    <i class="fas fa-gift"></i><span>Odbierz Trening GRATIS</span>
+                </a>
+            </div>
+            <div class="hero-image-container">
+                <div class="hero-glow-1"></div>
+                <div class="hero-glow-2"></div>
+                <div class="hero-dots"></div>
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-bg-circle"></div>
+                    <div class="hero-image-main">
+                        <img src="https://i.imgur.com/JB90FOy.png" alt="Eryk Jóskowski" loading="eager" style="mix-blend-mode: lighten;">
+                    </div>
+                    <div class="hero-image-badge">
+                        <div class="hero-image-badge-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="hero-image-badge-text">
+                            <span class="hero-image-badge-label">Certyfikowany</span>
+                            <span class="hero-image-badge-value">Trener Personalny</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats fade-in">
+        <div class="stat-card"><div class="stat-number" data-target="100">0</div><div class="stat-label">Zadowolonych podopiecznych</div></div>
+        <div class="stat-card"><div class="stat-number" data-target="8000">0</div><div class="stat-label">Przeprowadzonych sesji treningowych</div></div>
+        <div class="stat-card"><div class="stat-number" data-target="10">0</div><div class="stat-label">Lat doświadczenia w sporcie</div></div>
+    </div>
+
+    <div class="section-divider temp-hide"><div class="divider-icon"><i class="fas fa-fire"></i></div></div>
+
+    <section class="section fade-in temp-hide" id="przemiany">
+        <h2 class="section-title">Przemiany Moich Podopiecznych</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 40px;">
+            Zobacz niesamowite transformacje osób, które podjęły wyzwanie i osiągnęły swoje cele!
+        </p>
+        <div class="transformation-grid">
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400" alt="Transformacja 1" loading="lazy">
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400" alt="Transformacja 2" loading="lazy">
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400" alt="Transformacja 3" loading="lazy">
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400" alt="Transformacja 4" loading="lazy">
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400" alt="Transformacja 5" loading="lazy">
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=400" alt="Transformacja 6" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-star"></i></div></div>
+
+    <section class="section fade-in" id="opinie">
+        <h2 class="section-title">Co mówią moi podopieczni?</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-a2ea3e8a-4a16-437c-a601-cf7e835ba41f" data-elfsight-app-lazy></div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Eryk+Jóskowski+Trener+Personalny" target="_blank" class="cta-button">
+                <i class="fab fa-google"></i> Zobacz więcej opinii
+            </a>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-dumbbell"></i></div></div>
+
+    <section class="section fade-in" id="proces">
+        <h2 class="section-title">Jak to działa?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 64px; font-weight: bold; color: rgba(0, 255, 136, 0.2); margin-bottom: 20px;">01</div>
+                <div style="font-size: 24px; margin-bottom: 15px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Konsultacja</div>
+                <div style="color: var(--gray); line-height: 1.6;">Na podstawie analizy twoich potrzeb i możliwości opracuję plan treningowy dopasowany pod ciebie!</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 64px; font-weight: bold; color: rgba(0, 255, 136, 0.2); margin-bottom: 20px;">02</div>
+                <div style="font-size: 24px; margin-bottom: 15px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ustalenie grafiku</div>
+                <div style="color: var(--gray); line-height: 1.6;">Wspólnie ustalamy grafik treningów tak, żeby wpasować się w twój tryb życia.</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 64px; font-weight: bold; color: rgba(0, 255, 136, 0.2); margin-bottom: 20px;">03</div>
+                <div style="font-size: 24px; margin-bottom: 15px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Realizacja celów</div>
+                <div style="color: var(--gray); line-height: 1.6;">Przechodzimy do realizacji przygotowanego wcześniej planu i osiągamy założone cele.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-trophy"></i></div></div>
+
+    <section class="section fade-in">
+        <h2 class="section-title">Co zyskasz?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#1</div>
+                <div style="color: var(--gray); line-height: 1.6;">Wprowadzisz zdrowe nawyki do swojego życia</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#2</div>
+                <div style="color: var(--gray); line-height: 1.6;">Zaczniesz trenować w usystematyzowany sposób</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#3</div>
+                <div style="color: var(--gray); line-height: 1.6;">Dostaniesz porady żywieniowe, które przyśpieszą osiągnięcie celu</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#4</div>
+                <div style="color: var(--gray); line-height: 1.6;">Zbudujesz pewność siebie</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#5</div>
+                <div style="color: var(--gray); line-height: 1.6;">Poprawisz wygląd swojej sylwetki</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#6</div>
+                <div style="color: var(--gray); line-height: 1.6;">Staniesz się częścią świetnej społeczności</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 30px; display: flex; align-items: center; gap: 20px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div style="font-size: 36px; font-weight: bold; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; min-width: 60px;">#7</div>
+                <div style="color: var(--gray); line-height: 1.6;">Produktywnie spożytkujesz wolny czas</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-briefcase"></i></div></div>
+
+    <section class="section fade-in" id="uslugi">
+        <h2 class="section-title">Moje Usługi</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); text-align: center;">
+                <div style="font-size: 48px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px;"><i class="fas fa-dumbbell"></i></div>
+                <div class="service-title">Trening Personalny</div>
+                <div style="color: var(--gray); margin-bottom: 20px; line-height: 1.6;">Indywidualne zajęcia, na których skupiamy się wyłącznie na tobie i osiągnięciu twoich celów w Klubie Well Fitness Rumia.</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); text-align: center;">
+                <div style="font-size: 48px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px;"><i class="fas fa-video"></i></div>
+                <div class="service-title">Współpraca Online</div>
+                <div style="color: var(--gray); margin-bottom: 20px; line-height: 1.6;">Kompleksowa opieka na odległość - otrzymasz spersonalizowany plan treningowy i żywieniowy.</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); text-align: center;">
+                <div style="font-size: 48px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px;"><i class="fas fa-apple-alt"></i></div>
+                <div class="service-title">Doradztwo Żywieniowe</div>
+                <div style="color: var(--gray); margin-bottom: 20px; line-height: 1.6;">Poza treningami zajmiemy się zmianą twoich nawyków żywieniowych dla lepszych rezultatów.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-tags"></i></div></div>
+
+    <section class="section fade-in" id="cennik">
+        <h2 class="section-title">Cennik</h2>
+        <div class="pricing">
+            <div class="price-card">
+                <div class="service-title">Pakiet Starter</div>
+                <div class="price">200 zł</div>
+                <ul class="price-features">
+                    <li>Konsultacja</li>
+                    <li>Ocena aktualnej sprawności</li>
+                    <li>Trening personalny</li>
+                </ul>
+                <a href="#kontakt" class="cta-button" style="margin-top: 20px;" onclick="event.preventDefault(); selectPackage('Starter', '200 zł')">Wybieram</a>
+            </div>
+            <div class="price-card">
+                <div class="service-title">Pakiet Standard</div>
+                <div class="price">1500 zł</div>
+                <div style="text-align: center; margin: 10px 0;">
+                    <span style="color: var(--neon-green); font-size: 14px; font-weight: 600;">187,50 zł/trening</span>
+                </div>
+                <ul class="price-features">
+                    <li>8 treningów po 1 godz</li>
+                    <li>Realizacja indywidualnego programu</li>
+                    <li>Doradztwo żywieniowe</li>
+                </ul>
+                <a href="#kontakt" class="cta-button" style="margin-top: 20px;" onclick="event.preventDefault(); selectPackage('Standard', '1500 zł')">Wybieram</a>
+            </div>
+            <div class="price-card featured">
+                <div class="featured-badge">NAJLEPSZA CENA</div>
+                <div class="service-title">Pakiet Premium</div>
+                <div class="price">2000 zł</div>
+                <div style="text-align: center; margin: 10px 0;">
+                    <span style="color: var(--neon-green); font-size: 14px; font-weight: 600;">166,67 zł/trening</span>
+                </div>
+                <ul class="price-features">
+                    <li>12 treningów po 1 godz</li>
+                    <li>Realizacja indywidualnego programu</li>
+                    <li>Doradztwo żywieniowe</li>
+                </ul>
+                <a href="#kontakt" class="cta-button" style="margin-top: 20px;" onclick="event.preventDefault(); selectPackage('Premium', '2000 zł')">Wybieram</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-book"></i></div></div>
+
+    <section class="section fade-in" id="blog">
+        <h2 class="section-title">Blog</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 40px;">Porady, motywacja i wiedza o treningu i diecie</p>
+        <div class="blog-grid">
+            <a href="blog-bledy-poczatkujacych.html" style="text-decoration: none; color: inherit;">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400" alt="Blog">
+                    <div class="blog-content">
+                        <span class="blog-tag">Trening</span>
+                        <h3 class="blog-title">5 błędów początkujących na siłowni</h3>
+                        <p class="blog-excerpt">Dowiedz się, jakich najczęstszych błędów unikać, aby trenować bezpiecznie i efektywnie od samego początku...</p>
+                    </div>
+                </div>
+            </a>
+            <a href="blog-zdrowe-nawyki.html" style="text-decoration: none; color: inherit;">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400" alt="Blog">
+                    <div class="blog-content">
+                        <span class="blog-tag">Dieta</span>
+                        <h3 class="blog-title">Zdrowe nawyki żywieniowe</h3>
+                        <p class="blog-excerpt">Poznaj sprawdzone zasady zdrowego odżywiania, które pomogą Ci osiągnąć wymarzoną sylwetkę...</p>
+                    </div>
+                </div>
+            </a>
+            <a href="blog-motywacja.html" style="text-decoration: none; color: inherit;">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400" alt="Blog">
+                    <div class="blog-content">
+                        <span class="blog-tag">Motywacja</span>
+                        <h3 class="blog-title">Jak utrzymać motywację?</h3>
+                        <p class="blog-excerpt">Sprawdzone sposoby na to, jak pozostać zmotywowanym i konsekwentnie dążyć do swoich celów...</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-question-circle"></i></div></div>
+
+    <section class="section fade-in" id="faq">
+        <h2 class="section-title">Najczęściej Zadawane Pytania</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 50px;">Znajdź odpowiedzi na najważniejsze pytania dotyczące treningów personalnych</p>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-clock"></i>
+                        <span>Ile trwa jeden trening personalny?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Standardowy trening personalny trwa <strong>60 minut</strong>. W tym czasie przeprowadzamy kompletną sesję treningową dopasowaną do Twoich celów, możliwości i poziomu zaawansowania. Czas treningu może być również dostosowany do Twoich indywidualnych potrzeb.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-user-check"></i>
+                        <span>Czy mogę trenować będąc kompletnym początkującym?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Oczywiście!</strong> Trening personalny jest idealny właśnie dla początkujących. Nauczysz się prawidłowej techniki wykonywania ćwiczeń, bezpiecznego korzystania ze sprzętu i poznasz podstawy treningu. Każdy program jest tworzony od podstaw i dostosowany do Twojego poziomu – nie musisz mieć żadnego doświadczenia!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Jak wygląda pierwszy trening?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Pierwszy trening to przede wszystkim <strong>poznanie się i konsultacja</strong>. Rozmawiamy o Twoich celach, doświadczeniu, ewentualnych kontuzjach i ograniczeniach. Następnie przeprowadzam ocenę Twojej aktualnej sprawności fizycznej i pokazuję podstawowe ćwiczenia. Na tej podstawie tworzę spersonalizowany plan treningowy. To też okazja, żeby sprawdzić, czy chemia między nami pasuje!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Czy potrzebuję karnet na siłownię?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tak, do treningów personalnych w <strong>Klubie Well Fitness Rumia</strong> potrzebny jest ważny karnet. Jeśli jeszcze go nie masz, pomogę Ci wybrać najlepszą opcję dopasowaną do Twojego harmonogramu treningów. Klub oferuje różne pakiety karnetów w atrakcyjnych cenach.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-apple-alt"></i>
+                        <span>Czy dostaję plan żywieniowy?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tak! W ramach pakietów Standard i Premium otrzymujesz <strong>doradztwo żywieniowe</strong>. Pomagam wprowadzić zdrowe nawyki żywieniowe, doradzam co jeść, aby osiągnąć swoje cele (budowa masy, redukcja, rekompozycja). Nie jestem dietetykiem, więc nie tworzę szczegółowych jadłospisów, ale wskażę Ci właściwy kierunek i nauczę zasad zdrowego odżywiania.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Kiedy zobaczę pierwsze efekty?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Pierwsze efekty to kwestia indywidualna, ale większość osób zauważa pozytywne zmiany już po <strong>4-6 tygodniach</strong> regularnych treningów. Warto pamiętać, że efekty to nie tylko wygląd – szybciej poczujesz się <strong>lepsze samopoczucie, więcej energii, poprawę kondycji i siły</strong>. Wizualne efekty przychodzą z czasem przy systematyczności!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Czy nauczysz mnie trenować samodzielnie?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Absolutnie tak!</strong> Jednym z moich celów jest przekazanie Ci wiedzy i umiejętności, byś mógł/mogła z czasem trenować samodzielnie. Uczę prawidłowej techniki, planowania treningów, słuchania swojego ciała. Trening personalny to inwestycja w Twoją niezależność treningową i długoterminowe zdrowie.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question-text">
+                        <i class="fas fa-gift"></i>
+                        <span>Jak wygląda darmowy trening próbny?</span>
+                    </div>
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Darmowy trening to świetna okazja, żeby się poznać i sprawdzić, czy współpraca będzie dla Ciebie odpowiednia! Spotkamy się w <strong>Klubie Well Fitness w Rumii</strong>, porozmawiamy o Twoich celach, pokażę Ci jak pracuję i przeprowadzimy krótki trening. To <strong>całkowicie bezpłatne i bez zobowiązań</strong> – po prostu sprawdź, czy mój styl pracy Ci odpowiada!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-icon"><i class="fas fa-envelope"></i></div></div>
+
+    <section class="section fade-in" id="kontakt">
+        <h2 class="section-title">Zacznij Swoją Przygodę</h2>
+        <p style="text-align: center; color: var(--gray); font-size: 20px; margin-bottom: 40px;">Pierwszy trening całkowicie za darmo!</p>
+        <div style="max-width: 600px; margin: 40px auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 40px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+            <form id="contactForm" action="https://formsubmit.co/kontakt@erykpersonalny.pl" method="POST">
+                <input type="hidden" name="_subject" value="Nowa wiadomość ze strony!">
+                <input type="hidden" name="_captcha" value="false">
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Imię i nazwisko *</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Email *</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Telefon</label>
+                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Wiadomość *</label>
+                    <textarea id="message" name="message" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px; resize: vertical; min-height: 150px;"></textarea>
+                </div>
+                <button type="submit" class="cta-button">Wyślij wiadomość</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Eryk Jóskowski</h3>
+                <p>Profesjonalny trener personalny</p>
+                <p>Klub Well Fitness Rumia</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/eryk.joskowski/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Joskowski.Eryk" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <p><i class="fas fa-envelope"></i> kontakt@erykpersonalny.pl</p>
+                <p><i class="fas fa-phone"></i> +48 577 243 692</p>
+                <p><i class="fas fa-map-marker-alt"></i> Rumia, Pomorskie</p>
+            </div>
+            <div class="footer-section">
+                <h3>Szybkie linki</h3>
+                <a href="o-mnie.html">O mnie</a>
+                <a href="#proces" onclick="event.preventDefault(); scrollToSection('proces')">Jak to działa?</a>
+                <a href="#uslugi" onclick="event.preventDefault(); scrollToSection('uslugi')">Usługi</a>
+                <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
+                <a href="#blog" onclick="event.preventDefault(); scrollToSection('blog')">Blog</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Eryk Jóskowski - Trener Personalny. Wszystkie prawa zastrzeżone.</p>
+            <p style="margin-top: 15px;">
+                <a href="regulamin.html" style="color: var(--neon-green); text-decoration: none; margin: 0 15px;">Regulamin</a> | 
+                <a href="polityka-prywatnosci.html" style="color: var(--neon-green); text-decoration: none; margin: 0 15px;">Polityka Prywatności</a>
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="scroll-to-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(() => document.querySelector('.loader').classList.add('hidden'), 1000);
+            animateStats();
+        });
+
+        function selectPackage(packageName, price) {
+            scrollToSection('kontakt');
+            setTimeout(() => {
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.value = `Dzień dobry!\n\nJestem zainteresowany/a Pakietem ${packageName} (${price}).\n\nProszę o kontakt w sprawie szczegółów i umówienia pierwszego treningu.\n\nPozdrawiam!`;
+                    messageField.focus();
+                    messageField.style.borderColor = 'var(--neon-green)';
+                    messageField.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
+                    setTimeout(() => {
+                        messageField.style.borderColor = 'rgba(0, 255, 136, 0.2)';
+                        messageField.style.boxShadow = 'none';
+                    }, 2000);
+                }
+            }, 800);
+        }
+
+        function selectFreeTrial() {
+            scrollToSection('kontakt');
+            setTimeout(() => {
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.value = `Dzień dobry!\n\nChciałbym/chciałabym skorzystać z darmowego treningu próbnego.\n\nProszę o kontakt w celu umówienia się na bezpłatną sesję treningową.\n\nPozdrawiam!`;
+                    messageField.focus();
+                    messageField.style.borderColor = 'var(--neon-green)';
+                    messageField.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
+                    setTimeout(() => {
+                        messageField.style.borderColor = 'rgba(0, 255, 136, 0.2)';
+                        messageField.style.boxShadow = 'none';
+                    }, 2000);
+                }
+            }, 800);
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                const navLinks = document.getElementById('navLinks');
+                const hamburger = document.getElementById('hamburger');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            }
+        }
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const scrollTop = document.getElementById('scrollTop');
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+            if (currentScroll > 300) scrollTop.classList.add('visible');
+            else scrollTop.classList.remove('visible');
+            lastScroll = currentScroll;
+        });
+
+        let statsAnimated = false;
+        function animateStats() {
+            if (statsAnimated) return;
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                const updateCount = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current) + (target >= 1000 ? '+' : '');
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target + (target >= 1000 ? '+' : '');
+                    }
+                };
+                updateCount();
+            });
+            statsAnimated = true;
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) animateStats();
+            });
+        }, { threshold: 0.5 });
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) statsObserver.observe(statsSection);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+                if (target) scrollToSection(target);
+            });
+        });
+
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            // Zamknij wszystkie inne otwarte FAQ
+            allItems.forEach(item => {
+                if (item !== faqItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle aktualnego FAQ
+            faqItem.classList.toggle('active');
+        }
+    </script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+```
+</body>
+</html>

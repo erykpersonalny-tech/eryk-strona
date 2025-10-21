@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Poznaj Eryka Jóskowskiego - certyfikowanego trenera personalnego z 10-letnim doświadczeniem w sporcie i ponad 8000 przeprowadzonych treningów.">
+    <title>O mnie - Eryk Jóskowski | Trener Personalny Rumia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-green: #00ff88;
+            --dark-green: #00cc6a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #cccccc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        
+        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
+        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
+        .orb3 { width: 400px; height: 400px; background: linear-gradient(135deg, var(--dark-green), var(--neon-green)); top: 50%; right: 20%; animation-delay: 14s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+        
+        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.1); transition: all 0.3s; }
+        nav.scrolled { padding: 10px 50px; background: rgba(10, 10, 10, 0.95); box-shadow: 0 8px 32px rgba(0, 255, 136, 0.15); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
+        
+        .logo { cursor: pointer; transition: transform 0.3s; text-decoration: none; display: block; }
+        .logo:hover { transform: scale(1.05); }
+        .logo img { height: 50px; width: auto; display: block; }
+        nav.scrolled .logo img { height: 45px; }
+        
+        .nav-links { display: flex; gap: 5px; align-items: center; background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 50px; border: 1px solid rgba(0, 255, 136, 0.1); }
+        .nav-links a { color: var(--white); text-decoration: none; transition: all 0.3s; font-weight: 500; padding: 10px 20px; border-radius: 50px; font-size: 14px; }
+        .nav-links a:hover { background: rgba(0, 255, 136, 0.1); color: var(--neon-green); }
+        .nav-cta { background: linear-gradient(135deg, var(--neon-green), var(--dark-green)) !important; color: var(--black) !important; font-weight: 700; box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3); margin-left: 10px; }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5); }
+        
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--neon-green); transition: all 0.3s; border-radius: 3px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--black); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 0.5s, visibility 0.5s; }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-spinner { width: 60px; height: 60px; border: 4px solid rgba(0, 255, 136, 0.1); border-top: 4px solid var(--neon-green); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 42px; text-align: center; margin-bottom: 50px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+        
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
+        .about-image-wrapper { position: relative; display: flex; align-items: center; justify-content: center; }
+        
+        .hero-image-wrapper { position: relative; max-width: 500px; width: 100%; }
+        .hero-image-bg-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 450px; height: 450px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 106, 0.05)); border-radius: 50%; border: 2px solid rgba(0, 255, 136, 0.3); animation: pulse 3s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; } }
+        .hero-image-bg-circle::before { content: ''; position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px; border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 50%; }
+        
+        .hero-image-main { position: relative; z-index: 2; filter: drop-shadow(0 20px 40px rgba(0, 255, 136, 0.3)); transition: all 0.5s ease; }
+        .hero-image-main:hover { transform: scale(1.05); filter: drop-shadow(0 25px 50px rgba(0, 255, 136, 0.5)); }
+        .hero-image-main img { width: 100%; height: auto; display: block; position: relative; z-index: 2; }
+        
+        .hero-image-badge { position: absolute; bottom: 20%; right: -40px; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border: 2px solid var(--neon-green); border-radius: 16px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5); z-index: 3; white-space: nowrap; transform: scale(0.9); }
+        .hero-image-badge-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--black); flex-shrink: 0; }
+        .hero-image-badge-text { display: flex; flex-direction: column; }
+        .hero-image-badge-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        .hero-image-badge-value { font-size: 13px; font-weight: 700; color: var(--white); line-height: 1.2; }
+        
+        .hero-glow-1, .hero-glow-2 { position: absolute; border-radius: 50%; opacity: 0.15; filter: blur(80px); z-index: 1; animation: float 8s ease-in-out infinite; }
+        .hero-glow-1 { width: 250px; height: 250px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: 10%; right: 10%; }
+        .hero-glow-2 { width: 200px; height: 200px; background: linear-gradient(135deg, var(--dark-green), var(--neon-green)); bottom: 20%; left: 10%; animation-delay: 4s; }
+        
+        .about-image { width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 255, 136, 0.3); border: 2px solid rgba(0, 255, 136, 0.3); transition: all 0.3s; }
+        .about-image:hover { transform: scale(1.02); box-shadow: 0 25px 70px rgba(0, 255, 136, 0.5); }
+        
+        .about-text { }
+        .about-text h2 { font-size: 36px; margin-bottom: 25px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about-text p { color: var(--gray); font-size: 18px; line-height: 1.8; margin-bottom: 20px; }
+        .about-text .highlight { color: var(--neon-green); font-weight: 600; }
+        
+        .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .value-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 20px; padding: 35px; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .value-card:hover { transform: translateY(-5px); border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 12px 40px rgba(0, 255, 136, 0.3); }
+        .value-number { font-size: 48px; font-weight: bold; color: rgba(0, 255, 136, 0.3); margin-bottom: 15px; }
+        .value-title { font-size: 22px; font-weight: 600; color: var(--neon-green); margin-bottom: 12px; }
+        .value-desc { color: var(--gray); line-height: 1.6; }
+        
+        .cta-section { text-align: center; padding: 80px 50px; background: rgba(0, 255, 136, 0.03); border-radius: 20px; margin: 80px auto; max-width: 1000px; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .cta-section h2 { font-size: 40px; margin-bottom: 20px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .cta-section p { font-size: 20px; color: var(--gray); margin-bottom: 35px; }
+        .cta-button { display: inline-block; padding: 20px 50px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; transition: all 0.3s; box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4); }
+        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6); }
+        
+        footer { text-align: center; padding: 60px 40px 40px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-top: 1px solid rgba(0, 255, 136, 0.2); margin-top: 100px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--neon-green); margin-bottom: 20px; }
+        .footer-section p, .footer-section a { color: var(--gray); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.3s; }
+        .footer-section a:hover { color: var(--neon-green); }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 255, 136, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .social-links a:hover { background: var(--neon-green); transform: translateY(-5px); }
+        .social-links a:hover i { color: var(--black); }
+        .footer-bottom { padding-top: 30px; border-top: 1px solid rgba(0, 255, 136, 0.1); color: var(--gray); }
+        
+        .floating-whatsapp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); cursor: pointer; transition: all 0.3s; z-index: 999; text-decoration: none; }
+        .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7); }
+        .floating-whatsapp i { color: var(--white); font-size: 28px; }
+        
+        .scroll-to-top { position: fixed; bottom: 100px; right: 30px; width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
+        .scroll-to-top.visible { opacity: 1; visibility: visible; }
+        .scroll-to-top:hover { background: var(--neon-green); transform: translateY(-5px); }
+        .scroll-to-top:hover i { color: var(--black); }
+        .scroll-to-top i { color: var(--neon-green); font-size: 20px; transition: color 0.3s; }
+        
+        @media (max-width: 1024px) {
+            .about-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-image-bg-circle { width: 350px; height: 350px; }
+            .hero-image-badge { right: -20px; bottom: 10%; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .section { padding: 50px 20px; }
+            .section:first-of-type { padding-top: 100px !important; }
+            .section-title { font-size: 32px; }
+            .hero-image-bg-circle { width: 300px; height: 300px; }
+            .hero-image-wrapper { max-width: 350px; }
+            .hero-image-badge { position: relative; right: 0; bottom: 0; margin-top: 20px; transform: scale(1); }
+            .nav-links { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: rgba(0, 0, 0, 0.98); flex-direction: column; justify-content: flex-start; padding-top: 50px; transition: left 0.3s; border-top: 1px solid rgba(0, 255, 136, 0.2); border-radius: 0; }
+            .nav-links.active { left: 0; }
+            .hamburger { display: flex; }
+            .footer-content { text-align: center; }
+            .social-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"><div class="loader-spinner"></div></div>
+    <div class="gradient-bg"></div>
+    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+    
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <img src="https://i.imgur.com/BHCySvx.png" alt="Eryk Jóskowski Logo">
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="o-mnie.html">O mnie</a>
+            <a href="index.html#proces">Proces</a>
+            <a href="index.html#uslugi">Usługi</a>
+            <a href="index.html#cennik">Cennik</a>
+            <a href="index.html#blog">Blog</a>
+            <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="section" style="padding-top: 120px;">
+        <div class="about-content">
+            <div class="about-image-wrapper">
+                <div class="hero-glow-1"></div>
+                <div class="hero-glow-2"></div>
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-bg-circle"></div>
+                    <div class="hero-image-main">
+                        <img src="https://i.imgur.com/EksGgob.png" alt="Eryk Jóskowski - Trener Personalny" loading="eager" style="mix-blend-mode: lighten;">
+                    </div>
+                    <div class="hero-image-badge">
+                        <div class="hero-image-badge-icon"><i class="fas fa-users"></i></div>
+                        <div class="hero-image-badge-text">
+                            <span class="hero-image-badge-label">Ponad</span>
+                            <span class="hero-image-badge-value">100 zadowolonych</span>
+                            <span class="hero-image-badge-value">podopiecznych</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>Cześć!</h2>
+                <p>Nazywam się <span class="highlight">Eryk Jóskowski</span> i jestem trenerem personalnym. Moim zadaniem jest poznać Twoje cele i pomóc Ci je osiągnąć – skutecznie i w sposób bezpieczny dla zdrowia.</p>
+                <p>W swojej pracy kładę mocny nacisk na ciągłe podnoszenie swoich kompetencji oraz wykazywanie się maksymalnie indywidualnym podejściem do każdego podopiecznego. Nie lubię podejścia "wszystko albo nic" i jestem za wkomponowywaniem aktywności fizycznej i zdrowych nawyków do życia, aniżeli dostosowywania życia pod sport.</p>
+                <p>Podczas treningów stawiam na luźną atmosferę połączoną z konkretnym wysiłkiem (dostosowanym do twoich możliwości), tak żeby twoje odczucia z przebywania na siłowni były jak najlepsze!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Co mówią moi podopieczni?</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-a2ea3e8a-4a16-437c-a601-cf7e835ba41f" data-elfsight-app-lazy></div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Eryk+Jóskowski+Trener+Personalny" target="_blank" class="cta-button">
+                <i class="fab fa-google"></i> Zobacz więcej opinii
+            </a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Moje Wartości</h2>
+        <div class="values">
+            <div class="value-card">
+                <div class="value-number">01</div>
+                <div class="value-title">Indywidualne Podejście</div>
+                <div class="value-desc">Każdy człowiek jest inny. Dlatego każdy plan treningowy jest tworzony specjalnie pod Ciebie, uwzględniając Twoje cele, możliwości i ograniczenia.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-number">02</div>
+                <div class="value-title">Profesjonalizm</div>
+                <div class="value-desc">Stale podnoszę swoje kwalifikacje i śledzę najnowsze trendy w treningu i dietetyce, aby oferować Ci najlepsze metody.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-number">03</div>
+                <div class="value-title">Motywacja i Wsparcie</div>
+                <div class="value-desc">Jestem z Tobą na każdym kroku Twojej drogi. Motywuję, wspieram i pomagam przezwyciężać trudności.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-number">04</div>
+                <div class="value-title">Długoterminowe Rezultaty</div>
+                <div class="value-desc">Nie wierzę w szybkie diety i cuda. Skupiam się na budowaniu trwałych nawyków, które przyniosą Ci rezultaty na lata.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-section">
+        <h2>Gotowy na Zmianę?</h2>
+        <p>Rozpocznij swoją przygodę z treningiem personalnym już dziś!</p>
+        <a href="index.html#kontakt" class="cta-button">Odbierz Darmowy Trening</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Eryk Jóskowski</h3>
+                <p>Profesjonalny trener personalny</p>
+                <p>Klub Well Fitness Rumia</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/eryk.joskowski/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Joskowski.Eryk" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <p><i class="fas fa-envelope"></i> kontakt@erykpersonalny.pl</p>
+                <p><i class="fas fa-phone"></i> +48 577 243 692</p>
+                <p><i class="fas fa-map-marker-alt"></i> Rumia, Pomorskie</p>
+            </div>
+            <div class="footer-section">
+                <h3>Szybkie linki</h3>
+                <a href="index.html">Strona główna</a>
+                <a href="o-mnie.html">O mnie</a>
+                <a href="index.html#proces">Jak to działa?</a>
+                <a href="index.html#uslugi">Usługi</a>
+                <a href="index.html#cennik">Cennik</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Eryk Jóskowski - Trener Personalny. Wszystkie prawa zastrzeżone.</p>
+            <p style="margin-top: 15px;">
+                <a href="regulamin.html" style="color: var(--neon-green); text-decoration: none; margin: 0 15px;">Regulamin</a> | 
+                <a href="polityka-prywatnosci.html" style="color: var(--neon-green); text-decoration: none; margin: 0 15px;">Polityka Prywatności</a>
+            </p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="scroll-to-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(() => document.querySelector('.loader').classList.add('hidden'), 1000);
+        });
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const scrollTop = document.getElementById('scrollTop');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+            
+            if (currentScroll > 300) scrollTop.classList.add('visible');
+            else scrollTop.classList.remove('visible');
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>

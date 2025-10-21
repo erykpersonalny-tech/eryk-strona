@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Poznaj sprawdzone zasady zdrowego odżywiania, które pomogą Ci osiągnąć wymarzoną sylwetkę bez diet cud.">
+    <title>Zdrowe Nawyki Żywieniowe | Blog Eryk Jóskowski</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-green: #00ff88;
+            --dark-green: #00cc6a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #cccccc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        
+        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
+        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+        
+        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
+        .logo img { height: 50px; }
+        .back-button { color: var(--white); text-decoration: none; padding: 10px 25px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
+        .back-button:hover { background: rgba(0, 255, 136, 0.1); border-color: var(--neon-green); }
+        
+        .article-header { padding: 140px 50px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .article-category { display: inline-block; padding: 8px 20px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 20px; color: var(--neon-green); font-size: 14px; margin-bottom: 20px; }
+        .article-title { font-size: 48px; margin-bottom: 20px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; line-height: 1.2; }
+        .article-meta { color: var(--gray); font-size: 16px; }
+        
+        .article-image { max-width: 1200px; margin: 40px auto; border-radius: 20px; overflow: hidden; }
+        .article-image img { width: 100%; height: auto; display: block; }
+        
+        .article-content { max-width: 800px; margin: 0 auto; padding: 40px 50px 100px; }
+        .article-content p { color: var(--gray); font-size: 18px; line-height: 1.9; margin-bottom: 25px; }
+        .article-content h2 { color: var(--white); font-size: 32px; margin: 50px 0 20px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .article-content h3 { color: var(--neon-green); font-size: 24px; margin: 35px 0 15px; }
+        .article-content strong { color: var(--neon-green); font-weight: 600; }
+        .article-content ul, .article-content ol { margin: 20px 0 25px 30px; color: var(--gray); font-size: 18px; }
+        .article-content li { margin-bottom: 12px; line-height: 1.8; }
+        
+        .highlight-box { background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--neon-green); padding: 25px 30px; margin: 35px 0; border-radius: 10px; }
+        .highlight-box p { color: var(--white); margin-bottom: 0; font-size: 17px; }
+        
+        .tip-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 136, 0.2); padding: 25px 30px; margin: 35px 0; border-radius: 15px; }
+        .tip-box h4 { color: var(--neon-green); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .tip-box p { margin-bottom: 0; }
+        
+        .myth-box { background: rgba(255, 50, 50, 0.05); border: 1px solid rgba(255, 50, 50, 0.3); padding: 25px 30px; margin: 35px 0; border-radius: 15px; }
+        .myth-box h4 { color: #ff3232; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .myth-box p { margin-bottom: 0; }
+        
+        .cta-section { text-align: center; padding: 60px 40px; background: rgba(0, 255, 136, 0.03); border-radius: 20px; margin: 60px 0; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .cta-section h3 { font-size: 32px; margin-bottom: 15px; color: var(--white); }
+        .cta-section p { color: var(--gray); margin-bottom: 25px; font-size: 18px; }
+        .cta-button { display: inline-block; padding: 18px 45px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; transition: all 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5); }
+        
+        footer { text-align: center; padding: 40px; background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(0, 255, 136, 0.2); color: var(--gray); }
+        
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .article-header { padding: 100px 20px 40px; }
+            .article-title { font-size: 32px; }
+            .article-content { padding: 30px 20px 60px; }
+            .article-content h2 { font-size: 26px; }
+            .article-content p, .article-content ul, .article-content ol { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+    
+    <nav>
+        <a href="index.html"><img src="https://i.imgur.com/BHCySvx.png" alt="Logo" class="logo"></a>
+        <a href="index.html#blog" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Powrót do bloga</span>
+        </a>
+    </nav>
+
+    <div class="article-header">
+        <span class="article-category">Dieta</span>
+        <h1 class="article-title">Zdrowe Nawyki Żywieniowe: Bez Diety-Cud i Głupot</h1>
+        <div class="article-meta">
+            <i class="far fa-clock"></i> 10 min czytania · Eryk Jóskowski
+        </div>
+    </div>
+
+    <div class="article-image">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200" alt="Zdrowe jedzenie">
+    </div>
+
+    <div class="article-content">
+        <p>Dieta sokowa. Keto. Paleo. Intermittent fasting. Dieta pudełkowa. Monodieta bananowa (tak, to naprawdę istnieje). Internet pęka w szwach od "rewolucyjnych" diet, które obiecują, że stracisz 10 kg w tydzień jedząc tylko zupy z selera.</p>
+
+        <p>Spoiler: to wszystko bzdury.</p>
+
+        <p>Nie ma diet-cud. Są tylko <strong>nawyki</strong> – dobre i złe. I dzisiaj porozmawiamy o tych dobrych. Bez clickbaitowych obietnic, bez sprzedawania ci proszku za 300 zł. Tylko konkretna wiedza, którą możesz wdrożyć już dziś.</p>
+
+        <h2>Nawyk #1: Jedz Prawdziwe Jedzenie (Nie, Ser Topiony w Tubce to Nie Jest Jedzenie)</h2>
+
+        <p>To brzmi banalnie, ale większość ludzi je głównie przetworzony śmieć. Produkty z listą składników dłuższą niż "Władca Pierścieni". Rzeczy, których twoja prababcia nie rozpoznałaby jako jedzenie.</p>
+
+        <h3>Co to znaczy "prawdziwe jedzenie"?</h3>
+
+        <ul>
+            <li><strong>Mięso, ryby, jajka</strong> – źródła białka, które faktycznie wyglądają jak mięso, ryby i jajka</li>
+            <li><strong>Warzywa i owoce</strong> – te, które rosną w ziemi lub na drzewach, nie w fabryce</li>
+            <li><strong>Pełne ziarna</strong> – ryż, kasza, płatki owsiane (nie te z 50 dodatkami)</li>
+            <li><strong>Orzechy i nasiona</strong> – bez dodatku tłuszczu palmowego i cukru</li>
+            <li><strong>Nabiał</strong> – mleko, ser, jogurt naturalny (nie jogurt "o smaku truskawkowym" z 4 łyżkami cukru)</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>Złota zasada:</strong> Jeśli ma więcej niż 5 składników lub zawiera rzeczy, których nie potrafisz wymówić – zostaw to na półce.</p>
+        </div>
+
+        <h3>Ale co z pizzą/burgerami/frytkami?</h3>
+
+        <p>Relax. Nie mówię, że nigdy nie możesz zjeść pizzy. Mówię, że pizza nie powinna być Twoim głównym źródłem kalorii. <strong>Zasada 80/20:</strong> 80% czasu jedz prawdziwe jedzenie, 20% czasu żyj normalnie i ciesz się życiem.</p>
+
+        <h2>Nawyk #2: Białko w Każdym Posiłku (To Nie Jest Negocjowalne)</h2>
+
+        <p>Białko to MVP odżywiania. Buduje mięśnie, daje uczucie sytości, ma wysoki efekt termiczny (organizm spala kalorie, żeby je strawić). A mimo to większość ludzi je go za mało.</p>
+
+        <h3>Ile białka potrzebujesz?</h3>
+
+        <p><strong>1.6-2.2g na kilogram masy ciała</strong>, jeśli trenujesz. Więc jeśli ważysz 70kg, to 112-154g białka dziennie. To nie jest dużo, ale wymaga świadomego planowania.</p>
+
+        <div class="tip-box">
+            <h4><i class="fas fa-drumstick-bite"></i> Proste źródła białka:</h4>
+            <p><strong>Pierś z kurczaka (100g):</strong> ~30g białka<br>
+            <strong>Jajka (2 duże):</strong> ~12g białka<br>
+            <strong>Ser twarogowy (200g):</strong> ~24g białka<br>
+            <strong>Grecki jogurt (150g):</strong> ~15g białka<br>
+            <strong>Łosoś (100g):</strong> ~25g białka</p>
+        </div>
+
+        <h3>Co z białkiem roślinnym?</h3>
+
+        <p>Działa, ale jest mniej "kompletne". Jeśli jesteś na diecie roślinnej, kombinuj różne źródła: ryż + fasola, hummus + pita, tofu + quinoa. To da Ci pełen profil aminokwasów.</p>
+
+        <h2>Nawyk #3: Węglowodany NIE Są Wrogiem (Seriously, Stop It)</h2>
+
+        <p>Keto-maniacy chcą Cię przekonać, że węglowodany to Darth Vader odżywiania. Że każda kromka chleba to krok w stronę otyłości. To jest… po prostu nieprawda.</p>
+
+        <div class="myth-box">
+            <h4><i class="fas fa-times-circle"></i> MIT: Węglowodany tuczą</h4>
+            <p><strong>FAKT:</strong> Nadmiar KALORII tuczy. Możesz tyć na keto (jedząc za dużo tłuszczu) i chudnąć na diecie wysokowęglowodanowej (jedząc w deficycie). It's physics, not magic.</p>
+        </div>
+
+        <h3>Jakość węglowodanów ma znaczenie</h3>
+
+        <p><strong>Dobre węgle:</strong> Kasza gryczana, ryż (biały i brązowy – obydwa są OK), owsianka, ziemniaki, bataty, owoce, warzywa</p>
+
+        <p><strong>Średnie węgle:</strong> Pieczywo pełnoziarniste, makarony, płatki śniadaniowe (bez tony cukru)</p>
+
+        <p><strong>Słabe węgle:</strong> Cukier, słodycze, białe pieczywo, rzeczy mocno przetworzone</p>
+
+        <p>Węglowodany to paliwo. Jeśli trenujesz – potrzebujesz ich. Jeśli siedzisz 10h dziennie – potrzebujesz ich mniej. Proste.</p>
+
+        <h2>Nawyk #4: Pij Wodę Jak Normalny Człowiek</h2>
+
+        <p>Twoje ciało to ~60% wody. Nie Coca-Coli, nie Red Bulla, nie kawy 5x dziennie. <strong>Wody</strong>.</p>
+
+        <h3>Ile pić?</h3>
+
+        <p>Klasyczne "8 szklanek dziennie" to mit. Prawda: <strong>pij, jak chce Ci się pić</strong>. Twoje ciało ma wbudowany system – nazywa się pragnienie. Zaskakujące, prawda?</p>
+
+        <div class="tip-box">
+            <h4><i class="fas fa-tint"></i> Praktyczne wskazówki:</h4>
+            <p>✓ Sikasz jasno-żółto lub prawie bezbarwnie? Dobrze nawodniony.<br>
+            ✓ Sikasz ciemno-żółto? Pij więcej.<br>
+            ✓ Czujesz pragnienie? No to… pij wodę. Genialne, co?</p>
+        </div>
+
+        <h3>A co z kawą?</h3>
+
+        <p>Kawa jest OK. 2-3 filiżanki dziennie nie zaszkodzą. Ale jeśli pijesz 6 espresso, bo inaczej nie funkcjonujesz – mamy problem. To znak, że źle śpisz, masz za dużo stresu albo jesteś uzależniony od kofeiny.</p>
+
+        <h2>Nawyk #5: Jedz Wolniej (Serio, Nie Jesteś Na Konkursie Prędkościowym)</h2>
+
+        <p>Większość ludzi je jak gdyby ktoś za chwilę miał im zabrać talerz. 5 minut i danie zniknęło. Problem? Twój mózg potrzebuje ~20 minut, żeby dostać sygnał "jestem najedzony".</p>
+
+        <p>Jak jesz w 5 minut, zjadasz więcej, niż potrzebujesz. Bo mózg jeszcze nie wie, że jesteś pełny.</p>
+
+        <h3>Jak jeść wolniej?</h3>
+
+        <ul>
+            <li><strong>Odkładaj sztućce</strong> między kęsami</li>
+            <li><strong>Gryź dokładnie</strong> – nie połykaj jedzenia w całości</li>
+            <li><strong>Gadaj z kimś</strong> podczas jedzenia (no chyba że jesz sam, wtedy… pogadaj ze ścianą?)</li>
+            <li><strong>Nie jedz przed TV/telefonem</strong> – skupisz się na ekranie, nie na jedzeniu</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>Bonus:</strong> Jedzenie wolniej = lepsza praca układu pokarmowego = mniej wzdęć, lepsze samopoczucie.</p>
+        </div>
+
+        <h2>Nawyk #6: Planuj Posiłki (Bo "Zjem Coś Później" Oznacza Fast Food o 22:00)</h2>
+
+        <p>Ile razy to było? "Dziś będę zdrowo jeść!" A potem masz nagle głód, lodówka pusta, więc zamawiasz kebaba. Bo co innego miałeś robić?</p>
+
+        <p><strong>Meal prep</strong> to nie jest tylko dla fitness-maniaczek na Instagramie. To po prostu bycie dorosłym człowiekiem, który planuje z wyprzedzeniem.</p>
+
+        <h3>Jak to robić bez szaleństwa?</h3>
+
+        <ol>
+            <li><strong>Niedziela = dzień gotowania.</strong> Ugotuj 2-3 dania na 3-4 dni.</li>
+            <li><strong>Prosta formuła:</strong> Białko + węgle + warzywa. Kurczak + ryż + brokuły. Łosoś + ziemniaki + szpinak. Easy.</li>
+            <li><strong>Nie musisz robić 20 pudełek.</strong> Wystarczy, że masz coś gotowego na następny dzień.</li>
+        </ol>
+
+        <div class="tip-box">
+            <h4><i class="fas fa-clock"></i> Nie masz czasu gotować?</h4>
+            <p>Banany + orzechy = śniadanie. Ser twarogowy + pomidor + pieczywo = lunch. Jajecznica + awokado = kolacja. Nie musisz być Masterchefem, żeby jeść zdrowo.</p>
+        </div>
+
+        <h2>Nawyk #7: 80/20, Nie 100/0 (Perfekcja to Mit)</h2>
+
+        <p>Najgorsza rzecz, jaką możesz zrobić, to myśleć "wszystko albo nic". Zjadłeś kawałek pizzy? Dzień stracony, wal następne 3 kawałki i torta na deser.</p>
+
+        <p><strong>NO.</strong></p>
+
+        <p>Jeden niezdrowy posiłek nie zniszczy Twojej diety. Tak samo jak jeden zdrowy posiłek nie da Ci six-packa. To co robisz przez 80% czasu ma znaczenie. Nie to, co robisz w weekend.</p>
+
+        <div class="highlight-box">
+            <p><strong>Zdrowe odżywianie to maraton, nie sprint.</strong> Lepiej jeść 80% zdrowo przez rok, niż 100% zdrowo przez 2 tygodnie, a potem wrócić do starego.</p>
+        </div>
+
+        <h2>Podsumowanie: Mniej Filozofii, Więcej Działania</h2>
+
+        <p>Nie potrzebujesz "diety cud". Potrzebujesz podstaw:</p>
+
+        <ul>
+            <li>✓ Jedz prawdziwe jedzenie</li>
+            <li>✓ Białko w każdym posiłku</li>
+            <li>✓ Węglowodany są OK</li>
+            <li>✓ Pij wodę</li>
+            <li>✓ Jedz wolniej</li>
+            <li>✓ Planuj posiłki</li>
+            <li>✓ Zasada 80/20</li>
+        </ul>
+
+        <p>Wdrożenie tych nawyków da Ci więcej niż 1000 "detoksów" i "diet" razem wziętych. Bo to są fundamenty. Reszta to już tylko szczegóły.</p>
+
+        <div class="cta-section">
+            <h3>Potrzebujesz Pomocy z Dietą?</h3>
+            <p>Zapisz się na trening personalny i otrzymaj indywidualne doradztwo żywieniowe!</p>
+            <a href="index.html#kontakt" class="cta-button">Zacznij Teraz</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Eryk Jóskowski - Trener Personalny</p>
+    </footer>
+</body>
+</html>

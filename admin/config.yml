@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: 'pl'
+
+collections:
+  - name: "blog"
+    label: "Wpisy blogowe"
+    folder: "blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "html"
+    format: "frontmatter"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Opis (meta)", name: "description", widget: "text"}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["Trening", "Dieta", "Motywacja"]}
+      - {label: "Data publikacji", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Zdjęcie główne (URL)", name: "image", widget: "string", default: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200"}
+      - {label: "Czas czytania (min)", name: "reading_time", widget: "number", default: 8}
+      - {label: "Treść artykułu", name: "body", widget: "markdown"}
+      
+  - name: "pages"
+    label: "Strony"
+    files:
+      - label: "Strona główna - Hero"
+        name: "home-hero"
+        file: "content/home-hero.json"
+        fields:
+          - {label: "Nagłówek główny", name: "heading", widget: "string"}
+          - {label: "Wyróżniony tekst", name: "highlight", widget: "string"}
+          - {label: "Tekst przycisku CTA", name: "cta_text", widget: "string"}
+          
+      - label: "Strona O mnie"
+        name: "about"
+        file: "content/about.json"
+        fields:
+          - {label: "Tytuł sekcji", name: "title", widget: "string"}
+          - {label: "Tekst wprowadzający", name: "intro", widget: "markdown"}
+          - {label: "Tekst główny", name: "main_text", widget: "markdown"}
+          
+      - label: "Cennik"
+        name: "pricing"
+        file: "content/pricing.json"
+        fields:
+          - label: "Pakiety"
+            name: "packages"
+            widget: "list"
+            fields:
+              - {label: "Nazwa pakietu", name: "name", widget: "string"}
+              - {label: "Cena", name: "price", widget: "string"}
+              - {label: "Cena za trening (opcjonalnie)", name: "per_session", widget: "string", required: false}
+              - {label: "Wyróżniony?", name: "featured", widget: "boolean", default: false}
+              - label: "Cechy pakietu"
+                name: "features"
+                widget: "list"
+                field: {label: "Cecha", name: "feature", widget: "string"}

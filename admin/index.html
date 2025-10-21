@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Panel Administracyjny - Eryk Jóskowski</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!-- Włącz widget CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <!-- Dodatkowa konfiguracja polskiego języka -->
+  <script>
+    CMS.registerLocale('pl', {
+      auth: {
+        login: 'Zaloguj się',
+        loggingIn: 'Logowanie...',
+        loginWithNetlifyIdentity: 'Zaloguj przez Netlify Identity',
+        errors: {
+          email: 'Wprowadź swój email',
+          password: 'Wprowadź hasło',
+          identitySettings: 'Nie można uzyskać dostępu do ustawień tożsamości. Jeśli używasz backendu git-gateway, upewnij się, że włączyłeś usługę Identity i Git Gateway.'
+        }
+      },
+      app: {
+        header: {
+          content: 'Wpisy',
+          workflow: 'Przepływ pracy',
+          media: 'Media',
+          quickAdd: 'Szybkie dodawanie'
+        },
+        app: {
+          errorHeader: 'Błąd ładowania konfiguracji CMS',
+          configErrors: 'Błędy konfiguracji',
+          checkConfigYml: 'Sprawdź plik config.yml.',
+          loadingConfig: 'Ładowanie konfiguracji...',
+          waitingBackend: 'Oczekiwanie na backend...'
+        },
+        notFoundPage: {
+          header: 'Nie znaleziono'
+        }
+      },
+      collection: {
+        sidebar: {
+          collections: 'Kolekcje',
+          searchAll: 'Szukaj wszystkich'
+        },
+        collectionTop: {
+          sortBy: 'Sortuj według',
+          viewAs: 'Zobacz jako',
+          newButton: 'Nowy %{collectionLabel}',
+          ascending: 'Rosnąco',
+          descending: 'Malejąco'
+        },
+        entries: {
+          loadingEntries: 'Ładowanie wpisów...',
+          cachingEntries: 'Buforowanie wpisów...',
+          longerLoading: 'To może chwilę potrwać',
+          noEntries: 'Brak wpisów'
+        }
+      },
+      editor: {
+        editorControl: {
+          field: {
+            optional: 'opcjonalne'
+          }
+        },
+        editorControlPane: {
+          widget: {
+            required: '%{fieldLabel} jest wymagane.',
+            regexPattern: '%{fieldLabel} nie pasuje do wzorca: %{pattern}.',
+            processing: '%{fieldLabel} jest przetwarzane.',
+            range: '%{fieldLabel} musi być między %{minValue} a %{maxValue}.',
+            min: '%{fieldLabel} musi być przynajmniej %{minValue}.',
+            max: '%{fieldLabel} musi być %{maxValue} lub mniej.'
+          }
+        },
+        editor: {
+          onLeavePage: 'Czy na pewno chcesz opuścić tę stronę?',
+          onUpdatingWithUnsavedChanges: 'Masz niezapisane zmiany, zapisz je przed aktualizacją statusu.',
+          onPublishingNotReady: 'Proszę zaktualizować status na "Gotowe" przed publikacją.',
+          onPublishingWithUnsavedChanges: 'Masz niezapisane zmiany, zapisz je przed publikacją.',
+          onPublishing: 'Czy na pewno chcesz opublikować ten wpis?',
+          onUnpublishing: 'Czy na pewno chcesz cofnąć publikację tego wpisu?',
+          onDeleteWithUnsavedChanges: 'Czy na pewno chcesz usunąć ten opublikowany wpis oraz niezapisane zmiany z bieżącej sesji?',
+          onDeletePublishedEntry: 'Czy na pewno chcesz usunąć ten opublikowany wpis?',
+          onDeleteUnpublishedChangesWithUnsavedChanges: 'Spowoduje to usunięcie wszystkich nieopublikowanych zmian tego wpisu oraz niezapisanych zmian z bieżącej sesji. Czy nadal chcesz usunąć?',
+          onDeleteUnpublishedChanges: 'Wszystkie nieopublikowane zmiany tego wpisu zostaną usunięte. Czy nadal chcesz usunąć?',
+          loadingEntry: 'Ładowanie wpisu...',
+          confirmLoadBackup: 'Odzyskano lokalną kopię zapasową tego wpisu, czy chcesz jej użyć?'
+        },
+        editorToolbar: {
+          publishing: 'Publikowanie...',
+          publish: 'Opublikuj',
+          published: 'Opublikowano',
+          unpublish: 'Cofnij publikację',
+          duplicate: 'Duplikuj',
+          unpublishing: 'Cofanie publikacji...',
+          publishAndCreateNew: 'Opublikuj i utwórz nowy',
+          publishAndDuplicate: 'Opublikuj i duplikuj',
+          deleteUnpublishedChanges: 'Usuń nieopublikowane zmiany',
+          deleteUnpublishedEntry: 'Usuń nieopublikowany wpis',
+          deletePublishedEntry: 'Usuń opublikowany wpis',
+          deleteEntry: 'Usuń wpis',
+          saving: 'Zapisywanie...',
+          save: 'Zapisz',
+          deleting: 'Usuwanie...',
+          updating: 'Aktualizowanie...',
+          setStatus: 'Ustaw status',
+          backCollection: 'Pisanie w kolekcji %{collectionLabel}',
+          unsavedChanges: 'Niezapisane zmiany',
+          changesSaved: 'Zmiany zapisane',
+          draft: 'Szkic',
+          inReview: 'W recenzji',
+          ready: 'Gotowe',
+          publishNow: 'Opublikuj teraz',
+          deployPreviewPendingButtonLabel: 'Sprawdź podgląd',
+          deployPreviewButtonLabel: 'Zobacz podgląd',
+          deployButtonLabel: 'Zobacz na żywo'
+        },
+        editorWidgets: {
+          markdown: {
+            richText: 'Tekst sformatowany',
+            markdown: 'Markdown'
+          },
+          image: {
+            choose: 'Wybierz obraz',
+            chooseDifferent: 'Wybierz inny obraz',
+            remove: 'Usuń obraz'
+          },
+          file: {
+            choose: 'Wybierz plik',
+            chooseDifferent: 'Wybierz inny plik',
+            remove: 'Usuń plik'
+          },
+          unknownControl: {
+            noControl: "Brak kontrolki dla widgetu '%{widget}'."
+          },
+          unknownPreview: {
+            noPreview: "Brak podglądu dla widgetu '%{widget}'."
+          },
+          headingOptions: {
+            headingOne: 'Nagłówek 1',
+            headingTwo: 'Nagłówek 2',
+            headingThree: 'Nagłówek 3',
+            headingFour: 'Nagłówek 4',
+            headingFive: 'Nagłówek 5',
+            headingSix: 'Nagłówek 6'
+          }
+        }
+      },
+      mediaLibrary: {
+        mediaLibraryCard: {
+          draft: 'Szkic'
+        },
+        mediaLibrary: {
+          onDelete: 'Czy na pewno chcesz usunąć zaznaczone multimedia?',
+          fileTooLarge: 'Plik jest za duży.\nSkonfigurowany maksymalny rozmiar to %{size} kB.'
+        },
+        mediaLibraryModal: {
+          loading: 'Ładowanie...',
+          noResults: 'Brak wyników.',
+          noAssetsFound: 'Nie znaleziono zasobów.',
+          noImagesFound: 'Nie znaleziono obrazów.',
+          private: 'Prywatne ',
+          images: 'Obrazy',
+          mediaAssets: 'Zasoby multimedialne',
+          search: 'Szukaj...',
+          uploading: 'Przesyłanie...',
+          upload: 'Prześlij',
+          download: 'Pobierz',
+          deleting: 'Usuwanie...',
+          deleteSelected: 'Usuń zaznaczone',
+          chooseSelected: 'Wybierz zaznaczone'
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Regulamin świadczenia usług treningowych przez Eryk Jóskowski - Trener Personalny.">
+    <title>Regulamin | Eryk Jóskowski - Trener Personalny</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-green: #00ff88;
+            --dark-green: #00cc6a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #cccccc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        
+        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
+        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+        
+        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
+        .logo img { height: 45px; }
+        .back-button { color: var(--white); text-decoration: none; padding: 10px 25px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        .back-button:hover { background: rgba(0, 255, 136, 0.1); border-color: var(--neon-green); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 140px 50px 100px; }
+        h1 { font-size: 48px; margin-bottom: 40px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; }
+        h2 { color: var(--neon-green); font-size: 28px; margin: 40px 0 20px; }
+        h3 { color: var(--white); font-size: 22px; margin: 30px 0 15px; }
+        p { color: var(--gray); font-size: 17px; line-height: 1.8; margin-bottom: 20px; }
+        ul, ol { color: var(--gray); font-size: 17px; margin: 20px 0 20px 30px; }
+        li { margin-bottom: 12px; line-height: 1.8; }
+        strong { color: var(--neon-green); }
+        
+        footer { text-align: center; padding: 40px; background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(0, 255, 136, 0.2); color: var(--gray); margin-top: 80px; }
+        
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .content { padding: 100px 20px 60px; }
+            h1 { font-size: 32px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            p, ul, ol { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+    
+    <nav>
+        <a href="index.html"><img src="https://i.imgur.com/BHCySvx.png" alt="Logo" class="logo"></a>
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Powrót do strony głównej</span>
+        </a>
+    </nav>
+
+    <div class="content">
+        <h1>Regulamin</h1>
+        
+        <p><strong>Data ostatniej aktualizacji:</strong> 22 października 2025</p>
+
+        <h2>§1 Postanowienia Ogólne</h2>
+        <p>Niniejszy Regulamin określa zasady świadczenia usług treningowych przez Eryk Jóskowski, prowadzącego działalność gospodarczą pod nazwą "Eryk Jóskowski Trener Personalny".</p>
+
+        <h2>§2 Definicje</h2>
+        <p>Użyte w Regulaminie pojęcia oznaczają:</p>
+        <ul>
+            <li><strong>Trener</strong> - Eryk Jóskowski, świadczący usługi treningu personalnego</li>
+            <li><strong>Klient</strong> - osoba fizyczna korzystająca z usług Trenera</li>
+            <li><strong>Trening personalny</strong> - indywidualne zajęcia fitness prowadzone przez Trenera</li>
+            <li><strong>Pakiet treningowy</strong> - zbiór treningów personalnych zakupiony przez Klienta</li>
+        </ul>
+
+        <h2>§3 Rodzaje Usług</h2>
+        <p>Trener oferuje następujące usługi:</p>
+        <ul>
+            <li>Trening personalny indywidualny (1 osoba)</li>
+            <li>Konsultacja początkowa z oceną sprawności fizycznej</li>
+            <li>Doradztwo żywieniowe w ramach pakietów Standard i Premium</li>
+            <li>Współpraca online (plan treningowy i żywieniowy)</li>
+        </ul>
+
+        <h2>§4 Zasady Korzystania z Usług</h2>
+        <h3>4.1 Warunki Przystąpienia</h3>
+        <p>Przed rozpoczęciem treningów Klient zobowiązany jest do:</p>
+        <ul>
+            <li>Wypełnienia ankiety zdrowotnej</li>
+            <li>Poinformowania Trenera o ewentualnych schorzeniach, kontuzjach lub ograniczeniach zdrowotnych</li>
+            <li>Dostarczenia zaświadczenia lekarskiego o braku przeciwwskazań do uprawiania sportu (jeśli Trener uzna to za konieczne)</li>
+        </ul>
+
+        <h3>4.2 Miejsce Treningów</h3>
+        <p>Treningi personalne odbywają się w Klubie Well Fitness w Rumii. Klient zobowiązany jest do posiadania ważnego karnetu uprawniającego do korzystania z obiektu.</p>
+
+        <h2>§5 Rezerwacje i Odwoływanie Treningów</h2>
+        <h3>5.1 Rezerwacja</h3>
+        <p>Terminy treningów ustalane są indywidualnie między Trenerem a Klientem.</p>
+
+        <h3>5.2 Odwoływanie przez Klienta</h3>
+        <ul>
+            <li>Klient może odwołać trening z minimum <strong>24-godzinnym wyprzedzeniem</strong></li>
+            <li>Odwołanie treningu z mniejszym wyprzedzeniem skutkuje utratą treningu z pakietu</li>
+            <li>W przypadku choroby lub nagłych losowych wydarzeń, Trener może uznać odwołanie za uzasadnione</li>
+        </ul>
+
+        <h3>5.3 Odwoływanie przez Trenera</h3>
+        <p>W przypadku gdy Trener z uzasadnionych przyczyn musi odwołać trening, Klient otrzymuje prawo do treningu zastępczego w terminie uzgodnionym z Trenerem.</p>
+
+        <h2>§6 Płatności</h2>
+        <h3>6.1 Cennik</h3>
+        <p>Aktualne ceny usług dostępne są na stronie internetowej oraz w siedzibie Trenera.</p>
+
+        <h3>6.2 Forma Płatności</h3>
+        <p>Płatność za pakiety treningowe następuje:</p>
+        <ul>
+            <li>Przelewem na wskazane konto bankowe</li>
+            <li>Gotówką bezpośrednio u Trenera</li>
+            <li>Płatnością BLIK</li>
+        </ul>
+
+        <h3>6.3 Termin Płatności</h3>
+        <p>Pakiet treningowy należy opłacić przed rozpoczęciem pierwszego treningu z pakietu.</p>
+
+        <h3>6.4 Ważność Pakietów</h3>
+        <ul>
+            <li>Pakiet Starter - bez ograniczenia czasowego</li>
+            <li>Pakiet Standard (8 treningów) - ważny 8 tygodni od daty zakupu</li>
+            <li>Pakiet Premium (12 treningów) - ważny 12 tygodni od daty zakupu</li>
+        </ul>
+
+        <h2>§7 Rezygnacja i Zwroty</h2>
+        <h3>7.1 Rezygnacja z Pakietu</h3>
+        <p>Klient może zrezygnować z niewykorzystanego pakietu treningowego. Zwrot środków następuje proporcjonalnie do liczby niewykorzystanych treningów, pomniejszony o koszt administracyjny w wysokości 10% wartości pakietu.</p>
+
+        <h3>7.2 Brak Zwrotu</h3>
+        <p>Nie podlegają zwrotowi:</p>
+        <ul>
+            <li>Pojedyncze treningi</li>
+            <li>Treningi wykorzystane</li>
+            <li>Pakiety, których termin ważności upłynął</li>
+        </ul>
+
+        <h2>§8 Odpowiedzialność</h2>
+        <h3>8.1 Odpowiedzialność Klienta</h3>
+        <p>Klient ponosi pełną odpowiedzialność za:</p>
+        <ul>
+            <li>Prawidłowe wykonywanie ćwiczeń zgodnie z instrukcjami Trenera</li>
+            <li>Poinformowanie Trenera o wszelkich dolegliwościach podczas treningu</li>
+            <li>Swój stan zdrowia i sprawność fizyczną</li>
+        </ul>
+
+        <h3>8.2 Odpowiedzialność Trenera</h3>
+        <p>Trener zobowiązuje się do:</p>
+        <ul>
+            <li>Prowadzenia treningów z należytą starannością</li>
+            <li>Dostosowania intensywności treningu do możliwości Klienta</li>
+            <li>Zapewnienia bezpiecznych warunków treningowych</li>
+        </ul>
+
+        <h3>8.3 Wyłączenie Odpowiedzialności</h3>
+        <p>Trener nie ponosi odpowiedzialności za:</p>
+        <ul>
+            <li>Skutki zatajenia przez Klienta informacji o stanie zdrowia</li>
+            <li>Urazy powstałe wskutek nieprzestrzegania zaleceń Trenera</li>
+            <li>Szkody powstałe z winy obiektów, w których odbywają się treningi</li>
+        </ul>
+
+        <h2>§9 Ochrona Danych Osobowych</h2>
+        <p>Szczegółowe informacje dotyczące przetwarzania danych osobowych znajdują się w <a href="polityka-prywatnosci.html" style="color: var(--neon-green);">Polityce Prywatności</a>.</p>
+
+        <h2>§10 Postanowienia Końcowe</h2>
+        <p>1. Trener zastrzega sobie prawo do zmiany Regulaminu. O wszelkich zmianach Klienci zostaną poinformowani z 7-dniowym wyprzedzeniem.</p>
+        <p>2. W sprawach nieuregulowanych niniejszym Regulaminem mają zastosowanie przepisy Kodeksu Cywilnego.</p>
+        <p>3. Wszelkie spory rozstrzygane będą przez sąd właściwy dla siedziby Trenera.</p>
+
+        <h2>§11 Kontakt</h2>
+        <p><strong>Eryk Jóskowski - Trener Personalny</strong><br>
+        Email: kontakt@erykpersonalny.pl<br>
+        Tel: +48 577 243 692<br>
+        Miejsce treningu: Klub Well Fitness Rumia</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Eryk Jóskowski - Trener Personalny. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+</html>

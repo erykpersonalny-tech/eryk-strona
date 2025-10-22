@@ -188,11 +188,23 @@
         }
         @media (max-width: 768px) {
             nav { padding: 20px; }
-            .hero { padding: 120px 20px 50px; }
-            .hero-content h1 { font-size: 36px; }
-            .hero-image-bg-circle { width: 300px; height: 300px; }
-            .hero-image-wrapper { max-width: 350px; }
-            .hero-cta-primary { padding: 18px 40px; font-size: 16px; }
+            .hero { padding: 100px 20px 50px; min-height: auto; }
+            .hero-container { grid-template-columns: 1fr; gap: 30px; align-items: center; }
+            .hero-content { text-align: center; }
+            .hero-content h1 { font-size: 28px; margin-bottom: 25px; }
+            .hero-cta-primary { padding: 16px 35px; font-size: 15px; }
+            .hero-image-wrapper { max-width: 280px; margin: 0 auto; }
+            .hero-image-bg-circle { width: 250px; height: 250px; }
+            .hero-image-badge { 
+                position: relative;
+                right: auto;
+                bottom: auto;
+                transform: scale(0.85);
+                margin: 15px auto 0;
+                max-width: 90%;
+            }
+            .hero-glow-1, .hero-glow-2 { display: none; }
+            .hero-dots { display: none; }
             .nav-links { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: rgba(0, 0, 0, 0.98); flex-direction: column; justify-content: flex-start; padding-top: 50px; transition: left 0.3s; border-top: 1px solid rgba(0, 255, 136, 0.2); border-radius: 0; }
             .nav-links.active { left: 0; }
             .hamburger { display: flex; }
@@ -206,6 +218,15 @@
             .faq-question-text span { font-size: 16px; }
             .faq-item.active .faq-answer { padding: 0 20px 20px 20px; }
             .faq-answer p { font-size: 15px; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero { padding: 90px 15px 40px; }
+            .hero-content h1 { font-size: 24px; line-height: 1.2; }
+            .hero-cta-primary { padding: 14px 28px; font-size: 14px; gap: 8px; }
+            .hero-image-wrapper { max-width: 240px; }
+            .hero-image-bg-circle { width: 220px; height: 220px; }
+            .hero-image-badge { transform: scale(0.75); }
         }
     </style>
 </head>
@@ -263,8 +284,8 @@
 
     <div class="stats fade-in">
         <div class="stat-card"><div class="stat-number" data-target="100">0</div><div class="stat-label">Zadowolonych podopiecznych</div></div>
-        <div class="stat-card"><div class="stat-number" data-target="8000">0</div><div class="stat-label">Przeprowadzonych sesji treningowych</div></div>
-        <div class="stat-card"><div class="stat-number" data-target="10">0</div><div class="stat-label">Lat doświadczenia w sporcie</div></div>
+        <div class="stat-card"><div class="stat-number" data-target="8000">0</div><div class="stat-label">Przeprowadzonych sesji</div></div>
+        <div class="stat-card"><div class="stat-number" data-target="10">0</div><div class="stat-label">Lat doświadczenia</div></div>
     </div>
 
     <div class="section-divider temp-hide"><div class="divider-icon"><i class="fas fa-fire"></i></div></div>
@@ -798,18 +819,5 @@
             faqItem.classList.toggle('active');
         }
     </script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
-```
 </body>
 </html>

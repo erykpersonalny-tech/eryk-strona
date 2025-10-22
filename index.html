@@ -182,51 +182,56 @@
         .temp-hide { display: none !important; }
         
         @media (max-width: 1024px) {
-            .hero-container { grid-template-columns: 1fr; gap: 50px; }
+            .hero-container { grid-template-columns: 1fr; gap: 40px; }
             .hero-content h1 { font-size: 48px; }
             .hero-image-bg-circle { width: 350px; height: 350px; }
         }
         @media (max-width: 768px) {
-            nav { padding: 20px; }
-            .hero { padding: 100px 20px 50px; min-height: auto; }
-            .hero-container { grid-template-columns: 1fr; gap: 30px; align-items: center; }
-            .hero-content { text-align: center; }
-            .hero-content h1 { font-size: 28px; margin-bottom: 25px; }
-            .hero-cta-primary { padding: 16px 35px; font-size: 15px; }
-            .hero-image-wrapper { max-width: 280px; margin: 0 auto; }
-            .hero-image-bg-circle { width: 250px; height: 250px; }
+            nav { padding: 15px 20px; }
+            .logo img { height: 40px; }
+            .hero { padding: 90px 20px 40px; min-height: auto; display: flex; align-items: center; }
+            .hero-container { grid-template-columns: 1fr; gap: 35px; max-width: 500px; margin: 0 auto; }
+            .hero-content { text-align: center; order: 2; }
+            .hero-content h1 { font-size: 32px; margin-bottom: 20px; line-height: 1.2; }
+            .hero-cta-primary { padding: 16px 32px; font-size: 15px; }
+            .hero-image-container { order: 1; }
+            .hero-image-wrapper { max-width: 320px; margin: 0 auto; }
+            .hero-image-bg-circle { width: 280px; height: 280px; }
             .hero-image-badge { 
-                position: relative;
-                right: auto;
-                bottom: auto;
-                transform: scale(0.85);
-                margin: 15px auto 0;
-                max-width: 90%;
+                position: absolute;
+                right: -10px;
+                bottom: 30px;
+                transform: scale(0.8);
             }
-            .hero-glow-1, .hero-glow-2 { display: none; }
-            .hero-dots { display: none; }
+            .hero-glow-1, .hero-glow-2, .hero-dots { display: none; }
             .nav-links { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: rgba(0, 0, 0, 0.98); flex-direction: column; justify-content: flex-start; padding-top: 50px; transition: left 0.3s; border-top: 1px solid rgba(0, 255, 136, 0.2); border-radius: 0; }
             .nav-links.active { left: 0; }
             .hamburger { display: flex; }
             .section { padding: 50px 20px; }
-            .stats { padding: 50px 20px; }
-            .section-title { font-size: 36px; }
+            .stats { padding: 50px 20px; grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; gap: 25px; }
+            .section-title { font-size: 32px; }
             .price-card.featured { transform: scale(1); }
             .footer-content { text-align: center; }
             .social-links { justify-content: center; }
-            .faq-question { padding: 20px; }
-            .faq-question-text span { font-size: 16px; }
-            .faq-item.active .faq-answer { padding: 0 20px 20px 20px; }
+            .faq-question { padding: 18px; }
+            .faq-question-text span { font-size: 15px; }
+            .faq-item.active .faq-answer { padding: 0 18px 18px 18px; }
             .faq-answer p { font-size: 15px; }
+            .blog-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
         }
         
         @media (max-width: 480px) {
-            .hero { padding: 90px 15px 40px; }
-            .hero-content h1 { font-size: 24px; line-height: 1.2; }
-            .hero-cta-primary { padding: 14px 28px; font-size: 14px; gap: 8px; }
-            .hero-image-wrapper { max-width: 240px; }
-            .hero-image-bg-circle { width: 220px; height: 220px; }
-            .hero-image-badge { transform: scale(0.75); }
+            .hero { padding: 85px 15px 35px; }
+            .hero-container { gap: 30px; }
+            .hero-content h1 { font-size: 26px; }
+            .hero-cta-primary { padding: 14px 28px; font-size: 14px; }
+            .hero-image-wrapper { max-width: 280px; }
+            .hero-image-bg-circle { width: 240px; height: 240px; }
+            .hero-image-badge { 
+                right: 0;
+                bottom: 20px;
+                transform: scale(0.7);
+            }
         }
     </style>
 </head>

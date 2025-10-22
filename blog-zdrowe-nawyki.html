@@ -24,10 +24,18 @@
         .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
         @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
         
-        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
-        .logo img { height: 45px; }
-        .back-button { color: var(--white); text-decoration: none; padding: 10px 25px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        nav { position: fixed; width: 100%; padding: 12px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
+        .logo img { height: 40px; }
+        .back-button { color: var(--white); text-decoration: none; padding: 8px 20px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .back-button:hover { background: rgba(0, 255, 136, 0.1); border-color: var(--neon-green); }
+        
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .logo img { height: 35px; }
+            .back-button { padding: 7px 16px; font-size: 12px; gap: 6px; }
+            .back-button span { display: none; }
+            .back-button::after { content: 'Powrót'; }
+        }
         
         .article-header { padding: 140px 50px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
         .article-category { display: inline-block; padding: 8px 20px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 20px; color: var(--neon-green); font-size: 14px; margin-bottom: 20px; }

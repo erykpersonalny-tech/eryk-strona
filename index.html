@@ -823,6 +823,34 @@
             // Toggle aktualnego FAQ
             faqItem.classList.toggle('active');
         }
+
+        // Obsługa formularza Netlify z przekierowaniem
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Zbierz dane z formularza
+                    const formData = new FormData(form);
+                    
+                    // Wyślij formularz przez fetch
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(() => {
+                        // Przekieruj na stronę dziękuję
+                        window.location.href = '/dziekujemy.html';
+                    })
+                    .catch((error) => {
+                        alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.');
+                        console.error('Error:', error);
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>

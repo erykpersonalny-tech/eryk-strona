@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Polityka Prywatności - Eryk Jóskowski Trener Personalny. Dowiedz się jak przetwarzamy Twoje dane osobowe.">
-    <title>Polityka Prywatności | Eryk Jóskowski - Trener Personalny</title>
+    <title>Polityka Prywatności - Eryk Jóskowski</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,168 +14,274 @@
             --white: #ffffff;
             --gray: #cccccc;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--black); 
+            color: var(--white); 
+            line-height: 1.8; 
+            padding-top: 80px;
+        }
         
-        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        /* Minimalna nawigacja - tylko przycisk powrót */
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50px;
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+        }
+        
+        .back-button:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--neon-green);
+            transform: translateX(-5px);
+            box-shadow: 0 6px 30px rgba(0, 255, 136, 0.4);
+        }
+        
+        .back-button i {
+            font-size: 16px;
+        }
+        
+        /* Gradient tło */
+        .gradient-bg { 
+            position: fixed; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); 
+            z-index: -2; 
+        }
+        
+        /* Świecące kule */
         .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
-        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
-        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
-        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 400px; height: 400px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: 10%; right: 10%; }
+        .orb2 { width: 350px; height: 350px; background: linear-gradient(135deg, var(--dark-green), var(--neon-green)); bottom: 20%; left: 10%; animation-delay: 10s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(50px, -50px) scale(1.1); } }
         
-        nav { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 255, 136, 0.3); }
-        .logo img { height: 45px; }
-        .back-button { color: var(--white); text-decoration: none; padding: 10px 25px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-size: 14px; }
-        .back-button:hover { background: rgba(0, 255, 136, 0.1); border-color: var(--neon-green); }
+        /* Kontener dokumentu */
+        .document-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px 100px;
+            position: relative;
+            z-index: 1;
+        }
         
-        .content { max-width: 900px; margin: 0 auto; padding: 140px 50px 100px; }
-        h1 { font-size: 48px; margin-bottom: 40px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; }
-        h2 { color: var(--neon-green); font-size: 28px; margin: 40px 0 20px; }
-        h3 { color: var(--white); font-size: 22px; margin: 30px 0 15px; }
-        p { color: var(--gray); font-size: 17px; line-height: 1.8; margin-bottom: 20px; }
-        ul, ol { color: var(--gray); font-size: 17px; margin: 20px 0 20px 30px; }
-        li { margin-bottom: 12px; line-height: 1.8; }
-        strong { color: var(--neon-green); }
+        .document-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
         
-        footer { text-align: center; padding: 40px; background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(0, 255, 136, 0.2); color: var(--gray); margin-top: 80px; }
+        .document-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
         
+        .document-date {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .document-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray);
+        }
+        
+        .document-content h2 {
+            font-size: 28px;
+            margin: 50px 0 25px;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .document-content h3 {
+            font-size: 22px;
+            margin: 40px 0 20px;
+            color: var(--neon-green);
+            font-weight: 600;
+        }
+        
+        .document-content p {
+            margin-bottom: 20px;
+        }
+        
+        .document-content ul, .document-content ol {
+            margin: 25px 0;
+            padding-left: 30px;
+        }
+        
+        .document-content li {
+            margin-bottom: 15px;
+        }
+        
+        .document-content strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        /* Responsywność */
         @media (max-width: 768px) {
-            nav { padding: 20px; }
-            .content { padding: 100px 20px 60px; }
-            h1 { font-size: 32px; }
-            h2 { font-size: 24px; }
-            h3 { font-size: 20px; }
-            p, ul, ol { font-size: 16px; }
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .document-container {
+                padding: 40px 20px 80px;
+            }
+            
+            .document-title {
+                font-size: 32px;
+            }
+            
+            .document-content {
+                font-size: 15px;
+            }
+            
+            .document-content h2 {
+                font-size: 24px;
+            }
+            
+            .document-content h3 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="gradient-bg"></div>
-    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div></div>
-    
-    <nav>
-        <a href="index.html"><img src="https://i.imgur.com/BHCySvx.png" alt="Logo" class="logo"></a>
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            <span>Powrót do strony głównej</span>
-        </a>
-    </nav>
-
-    <div class="content">
-        <h1>Polityka Prywatności</h1>
-        
-        <p><strong>Data ostatniej aktualizacji:</strong> 22 października 2025</p>
-
-        <h2>§1 Postanowienia Ogólne</h2>
-        <p>Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych przekazanych przez Użytkowników w związku z korzystaniem z usług świadczonych przez Eryk Jóskowski prowadzącego działalność gospodarczą pod nazwą "Eryk Jóskowski Trener Personalny".</p>
-
-        <h2>§2 Administrator Danych Osobowych</h2>
-        <p>Administratorem danych osobowych jest:</p>
-        <p><strong>Eryk Jóskowski - Trener Personalny</strong><br>
-        Email: kontakt@erykpersonalny.pl<br>
-        Tel: +48 577 243 692</p>
-
-        <h2>§3 Rodzaje Przetwarzanych Danych</h2>
-        <p>Administrator przetwarza następujące kategorie danych osobowych:</p>
-        <ul>
-            <li><strong>Dane identyfikacyjne:</strong> imię, nazwisko</li>
-            <li><strong>Dane kontaktowe:</strong> adres email, numer telefonu</li>
-            <li><strong>Dane zdrowotne:</strong> informacje o stanie zdrowia, schorzeniach, kontuzjach (wyłącznie za zgodą osoby, której dane dotyczą)</li>
-            <li><strong>Dane treningowe:</strong> parametry fizyczne, postępy treningowe</li>
-        </ul>
-
-        <h2>§4 Cele i Podstawy Prawne Przetwarzania Danych</h2>
-        
-        <h3>4.1 Świadczenie Usług Treningowych</h3>
-        <p><strong>Podstawa prawna:</strong> Art. 6 ust. 1 lit. b) RODO - wykonanie umowy</p>
-        <p>Przetwarzanie danych jest niezbędne do realizacji umowy o świadczenie usług treningowych.</p>
-
-        <h3>4.2 Marketing Bezpośredni</h3>
-        <p><strong>Podstawa prawna:</strong> Art. 6 ust. 1 lit. f) RODO - prawnie uzasadniony interes Administratora</p>
-        <p>Dane mogą być przetwarzane w celu prowadzenia działań marketingowych dotyczących usług Administratora.</p>
-
-        <h3>4.3 Ochrona Zdrowia</h3>
-        <p><strong>Podstawa prawna:</strong> Art. 9 ust. 2 lit. a) RODO - zgoda</p>
-        <p>Dane dotyczące zdrowia są przetwarzane wyłącznie za wyraźną zgodą osoby, której dane dotyczą.</p>
-
-        <h3>4.4 Archiwizacja i Rozliczenia</h3>
-        <p><strong>Podstawa prawna:</strong> Art. 6 ust. 1 lit. c) RODO - obowiązek prawny</p>
-        <p>Dane są przechowywane dla celów księgowych i podatkowych zgodnie z obowiązującymi przepisami.</p>
-
-        <h2>§5 Odbiorcy Danych</h2>
-        <p>Dane osobowe mogą być udostępniane:</p>
-        <ul>
-            <li>Operatorom obiektów sportowych, w których odbywają się treningi</li>
-            <li>Dostawcom usług IT (hosting strony internetowej)</li>
-            <li>Organom państwowym na podstawie obowiązujących przepisów prawa</li>
-        </ul>
-
-        <h2>§6 Okres Przechowywania Danych</h2>
-        <p>Dane osobowe będą przechowywane:</p>
-        <ul>
-            <li><strong>Przez czas świadczenia usług</strong> oraz przez okres wymagany przepisami prawa (np. przepisy podatkowe - 5 lat)</li>
-            <li><strong>Do czasu wycofania zgody</strong> - w przypadku przetwarzania danych na podstawie zgody</li>
-            <li><strong>Do czasu wniesienia sprzeciwu</strong> - w przypadku marketingu bezpośredniego</li>
-        </ul>
-
-        <h2>§7 Prawa Osób, Których Dane Dotyczą</h2>
-        <p>Osobie, której dane dotyczą, przysługuje prawo do:</p>
-        <ul>
-            <li><strong>Dostępu do danych</strong> - otrzymania informacji o przetwarzanych danych</li>
-            <li><strong>Sprostowania danych</strong> - poprawiania nieprawidłowych danych</li>
-            <li><strong>Usunięcia danych</strong> - "prawo do bycia zapomnianym"</li>
-            <li><strong>Ograniczenia przetwarzania</strong> - w przypadkach określonych w RODO</li>
-            <li><strong>Przenoszenia danych</strong> - otrzymania danych w ustrukturyzowanym formacie</li>
-            <li><strong>Sprzeciwu</strong> - wobec przetwarzania danych na podstawie prawnie uzasadnionego interesu</li>
-            <li><strong>Cofnięcia zgody</strong> - w dowolnym momencie (nie wpływa to na zgodność z prawem przetwarzania dokonanego przed cofnięciem)</li>
-            <li><strong>Wniesienia skargi</strong> - do Prezesa Urzędu Ochrony Danych Osobowych</li>
-        </ul>
-
-        <h2>§8 Pliki Cookies</h2>
-        
-        <h3>8.1 Czym są Cookies?</h3>
-        <p>Pliki cookies to małe pliki tekstowe zapisywane na urządzeniu użytkownika podczas przeglądania stron internetowych.</p>
-
-        <h3>8.2 Rodzaje Używanych Cookies</h3>
-        <ul>
-            <li><strong>Cookies niezbędne</strong> - umożliwiające korzystanie z usług dostępnych na stronie</li>
-            <li><strong>Cookies analityczne</strong> - pozwalające na analizę sposobu korzystania ze strony</li>
-            <li><strong>Cookies funkcjonalne</strong> - zapamiętujące ustawienia użytkownika</li>
-        </ul>
-
-        <h3>8.3 Zarządzanie Cookies</h3>
-        <p>Użytkownik może w każdej chwili zmienić ustawienia dotyczące cookies w swojej przeglądarce internetowej. Wyłączenie cookies może wpłynąć na funkcjonalność strony.</p>
-
-        <h2>§9 Bezpieczeństwo Danych</h2>
-        <p>Administrator stosuje odpowiednie środki techniczne i organizacyjne zapewniające ochronę danych osobowych, w tym:</p>
-        <ul>
-            <li>Szyfrowanie połączeń (certyfikat SSL)</li>
-            <li>Regularne kopie zapasowe danych</li>
-            <li>Ograniczenie dostępu do danych osobowych</li>
-            <li>Przeszkolenie personelu w zakresie ochrony danych osobowych</li>
-        </ul>
-
-        <h2>§10 Zmiany Polityki Prywatności</h2>
-        <p>Administrator zastrzega sobie prawo do wprowadzania zmian w Polityce Prywatności. Aktualna wersja Polityki jest zawsze dostępna na stronie internetowej.</p>
-
-        <h2>§11 Kontakt w Sprawach Ochrony Danych</h2>
-        <p>W sprawach dotyczących przetwarzania danych osobowych oraz realizacji przysługujących praw można kontaktować się:</p>
-        <p><strong>Email:</strong> kontakt@erykpersonalny.pl<br>
-        <strong>Tel:</strong> +48 577 243 692</p>
-
-        <h2>§12 Postanowienia Końcowe</h2>
-        <p>W sprawach nieuregulowanych niniejszą Polityką Prywatności stosuje się przepisy:</p>
-        <ul>
-            <li>Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO)</li>
-            <li>Ustawy o ochronie danych osobowych</li>
-            <li>Ustawy o świadczeniu usług drogą elektroniczną</li>
-        </ul>
+    <div class="orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Eryk Jóskowski - Trener Personalny. Wszystkie prawa zastrzeżone.</p>
-    </footer>
+    <!-- Minimalistyczny przycisk powrotu -->
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Powrót
+    </a>
 
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Treść polityki prywatności -->
+    <div class="document-container">
+        <header class="document-header">
+            <h1 class="document-title">Polityka Prywatności</h1>
+            <p class="document-date">Obowiązuje od: 1 stycznia 2025</p>
+        </header>
+
+        <div class="document-content">
+            <h2>1. Informacje ogólne</h2>
+            <p>Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych przekazanych przez użytkowników w związku z korzystaniem z usług świadczonych przez Eryka Jóskowskiego.</p>
+
+            <h3>1.1 Administrator danych</h3>
+            <p>Administratorem danych osobowych jest:</p>
+            <ul>
+                <li><strong>Eryk Jóskowski</strong></li>
+                <li>Email: kontakt@erykpersonalny.pl</li>
+            </ul>
+
+            <h2>2. Rodzaje przetwarzanych danych</h2>
+            <p>Administrator może przetwarzać następujące dane osobowe:</p>
+            <ul>
+                <li>Imię i nazwisko</li>
+                <li>Adres e-mail</li>
+                <li>Numer telefonu</li>
+                <li>Dane dotyczące stanu zdrowia (w zakresie niezbędnym do prowadzenia treningów)</li>
+            </ul>
+
+            <h2>3. Cele i podstawy prawne przetwarzania danych</h2>
+            <h3>3.1 Cele przetwarzania</h3>
+            <p>Dane osobowe przetwarzane są w następujących celach:</p>
+            <ul>
+                <li>Świadczenie usług treningu personalnego</li>
+                <li>Kontakt z klientem</li>
+                <li>Realizacja zawartych umów</li>
+                <li>Marketing bezpośredni (po uzyskaniu zgody)</li>
+            </ul>
+
+            <h3>3.2 Podstawy prawne</h3>
+            <p>Przetwarzanie danych odbywa się na podstawie:</p>
+            <ul>
+                <li>Art. 6 ust. 1 lit. b RODO - wykonanie umowy</li>
+                <li>Art. 6 ust. 1 lit. a RODO - zgoda użytkownika</li>
+                <li>Art. 6 ust. 1 lit. f RODO - prawnie uzasadniony interes administratora</li>
+            </ul>
+
+            <h2>4. Okres przechowywania danych</h2>
+            <p>Dane osobowe będą przechowywane przez okres:</p>
+            <ul>
+                <li>Niezbędny do realizacji usług</li>
+                <li>Wymagany przepisami prawa (np. przepisy podatkowe)</li>
+                <li>Do momentu cofnięcia zgody (w przypadku przetwarzania na podstawie zgody)</li>
+            </ul>
+
+            <h2>5. Udostępnianie danych</h2>
+            <p>Dane osobowe mogą być udostępniane:</p>
+            <ul>
+                <li>Podmiotom świadczącym usługi techniczne (hosting, systemy mailingowe)</li>
+                <li>Organom uprawnionym na podstawie przepisów prawa</li>
+            </ul>
+            <p>Administrator nie przekazuje danych osobowych do państw trzecich ani organizacji międzynarodowych.</p>
+
+            <h2>6. Prawa użytkowników</h2>
+            <p>Użytkownikowi przysługują następujące prawa:</p>
+            <ul>
+                <li><strong>Prawo dostępu</strong> do swoich danych osobowych</li>
+                <li><strong>Prawo do sprostowania</strong> danych</li>
+                <li><strong>Prawo do usunięcia</strong> danych (prawo do bycia zapomnianym)</li>
+                <li><strong>Prawo do ograniczenia</strong> przetwarzania</li>
+                <li><strong>Prawo do przenoszenia</strong> danych</li>
+                <li><strong>Prawo do sprzeciwu</strong> wobec przetwarzania</li>
+                <li><strong>Prawo do cofnięcia zgody</strong> w dowolnym momencie</li>
+            </ul>
+
+            <h2>7. Bezpieczeństwo danych</h2>
+            <p>Administrator stosuje odpowiednie środki techniczne i organizacyjne zapewniające bezpieczeństwo przetwarzanych danych osobowych, w szczególności zabezpiecza dane przed nieuprawnionym dostępem, utratą czy uszkodzeniem.</p>
+
+            <h2>8. Pliki cookies</h2>
+            <p>Strona internetowa wykorzystuje pliki cookies w celu:</p>
+            <ul>
+                <li>Zapewnienia prawidłowego funkcjonowania strony</li>
+                <li>Prowadzenia analiz statystycznych</li>
+                <li>Dostosowania treści do preferencji użytkownika</li>
+            </ul>
+            <p>Użytkownik może w każdej chwili zmienić ustawienia dotyczące cookies w swojej przeglądarce.</p>
+
+            <h2>9. Prawo do skargi</h2>
+            <p>Użytkownikowi przysługuje prawo wniesienia skargi do organu nadzorczego - Prezesa Urzędu Ochrony Danych Osobowych.</p>
+
+            <h2>10. Kontakt</h2>
+            <p>W sprawach związanych z ochroną danych osobowych prosimy o kontakt:</p>
+            <ul>
+                <li><strong>Email:</strong> kontakt@erykpersonalny.pl</li>
+            </ul>
+
+            <h2>11. Zmiany w polityce prywatności</h2>
+            <p>Administrator zastrzega sobie prawo do wprowadzania zmian w niniejszej Polityce Prywatności. O wszelkich zmianach użytkownicy zostaną poinformowani poprzez stronę internetową.</p>
+        </div>
+    </div>
 </body>
 </html>

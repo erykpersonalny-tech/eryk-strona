@@ -317,9 +317,12 @@
   transition: all 0.3s;
 }
 .ba-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
+  transform: translateY(-8px) scale(1.2);
+  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.5);
   border-color: rgba(0, 255, 136, 0.5);
+  z-index: 10;
+  position: relative;
+}
 }
 .ba-photos {
   display: grid;
@@ -385,28 +388,49 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 20px;
-    padding-bottom: 16px;
-    /* ukryj scrollbar wizualnie */
+    /* padding-right odsłania kawałek kolejnej karty = sygnał "jest więcej" */
+    padding: 0 40px 16px 20px;
     scrollbar-width: none;
   }
   .ba-grid::-webkit-scrollbar { display: none; }
   .ba-card {
-    flex: 0 0 85vw;
-    max-width: 340px;
-    scroll-snap-align: center;
+    flex: 0 0 78vw;
+    max-width: 300px;
+    scroll-snap-align: start;
+    /* delikatne przyciemnienie kart w tle */
+    opacity: 0.92;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  /* aktywna karta (scroll snap) wyróżnia się jasnością */
+  .ba-card:focus-within,
+  .ba-card:hover {
+    opacity: 1;
+    transform: scale(1.02);
   }
   .ba-photo img { height: 240px; }
-  .ba-carousel-hint {
-    display: block;
-  }
+  .ba-carousel-hint { display: flex; }
 }
+
 .ba-carousel-hint {
   display: none;
-  text-align: center;
-  color: rgba(0,255,136,0.5);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(0, 255, 136, 0.6);
   font-size: 13px;
   margin-top: 16px;
   letter-spacing: 0.5px;
+}
+.ba-carousel-hint::before,
+.ba-carousel-hint::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,136,0.5));
+}
+.ba-carousel-hint::after {
+  transform: rotate(180deg);
 }
   </style>
 
@@ -547,7 +571,10 @@
       <div class="ba-name">Oskar</div>
     </div>
 
-  </div>
+ </div>
+
+  <p class="ba-carousel-hint">przesuń w bok</p>
+
 </section>
 
 </section>

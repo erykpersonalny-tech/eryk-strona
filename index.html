@@ -294,7 +294,7 @@
         <div class="stat-card"><div class="stat-number" data-target="10">0</div><div class="stat-label">Lat doświadczenia</div></div>
     </div>
 
-    <div class="section-divider"><div class="divider-icon"><i class="fas fa-fire"></i></div></div>
+   <div class="section-divider"><div class="divider-icon"><i class="fas fa-fire"></i></div></div>
 
 <section class="section fade-in" id="przemiany">
   <h2 class="section-title">Przemiany Moich Podopiecznych</h2>
@@ -303,190 +303,222 @@
   </p>
 
   <style>
-    .before-after-grid {
+    .ba-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 30px;
-      margin-top: 20px;
     }
-    .before-after-card {
-      position: relative;
+    .ba-card {
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(0, 255, 136, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s;
-      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       background: rgba(255,255,255,0.03);
+      transition: all 0.3s;
     }
-    .before-after-card:hover {
+    .ba-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
       border-color: rgba(0, 255, 136, 0.5);
     }
-    .before-after-card .img-wrapper {
+    .ba-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .ba-photo {
       position: relative;
+      overflow: hidden;
+    }
+    .ba-photo img {
       width: 100%;
-      height: 380px;
-    }
-    .before-after-card .img-before,
-    .before-after-card .img-after {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      height: 280px;
       object-fit: cover;
-      transition: opacity 0.4s ease;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
     }
-    .before-after-card .img-after {
-      opacity: 0;
+    .ba-card:hover .ba-photo img {
+      transform: scale(1.04);
     }
-    .before-after-card:hover .img-before {
-      opacity: 0;
-    }
-    .before-after-card:hover .img-after {
-      opacity: 1;
-    }
-    .before-after-label {
+    .ba-photo-label {
       position: absolute;
-      top: 14px;
-      left: 14px;
-      padding: 5px 14px;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 14px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      z-index: 2;
       pointer-events: none;
-      transition: opacity 0.3s;
     }
-    .label-before {
-      background: rgba(0,0,0,0.65);
+    .ba-photo-label.before {
+      background: rgba(0,0,0,0.6);
       color: #ccc;
       border: 1px solid rgba(255,255,255,0.2);
     }
-    .label-after {
+    .ba-photo-label.after {
       background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
       color: #0a0a0a;
-      opacity: 0;
     }
-    .before-after-card:hover .label-before { opacity: 0; }
-    .before-after-card:hover .label-after  { opacity: 1; }
-    .before-after-name {
-      padding: 16px 20px;
-      font-size: 16px;
+    .ba-divider {
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(0,255,136,0.4), transparent);
+      align-self: stretch;
+    }
+    .ba-name {
+      padding: 14px 20px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--white);
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-    }
-    .before-after-hint {
       text-align: center;
-      color: rgba(0,255,136,0.5);
-      font-size: 13px;
-      margin-top: 30px;
-      letter-spacing: 0.5px;
+      border-top: 1px solid rgba(0,255,136,0.15);
     }
-    @media (max-width: 768px) {
-      .before-after-card .img-wrapper { height: 300px; }
+    @media (max-width: 480px) {
+      .ba-photo img { height: 220px; }
     }
   </style>
 
-  <div class="before-after-grid">
+  <div class="ba-grid">
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Ariel/Ariel%20Before.png" alt="Ariel przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Ariel/Ariel%20After.png"  alt="Ariel po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Ariel/Ariel%20Before.png" alt="Ariel przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Ariel/Ariel%20After.png" alt="Ariel po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Ariel</div>
+      <div class="ba-name">Ariel</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Mateusz/Mateusz%20Before.png" alt="Mateusz przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Mateusz/Mateusz%20After%202.png"  alt="Mateusz po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Mateusz/Mateusz%20Before.png" alt="Mateusz przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Mateusz/Mateusz%20After%202.png" alt="Mateusz po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Mateusz</div>
+      <div class="ba-name">Mateusz</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Andrzej/Andrzej%20Before.png" alt="Andrzej przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Andrzej/Andrzej%20After.png"  alt="Andrzej po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Andrzej/Andrzej%20Before.png" alt="Andrzej przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Andrzej/Andrzej%20After.png" alt="Andrzej po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Andrzej</div>
+      <div class="ba-name">Andrzej</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Marcin/Marcin%20Before.png" alt="Marcin przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Marcin/Marcin%20After.png"  alt="Marcin po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Marcin/Marcin%20Before.png" alt="Marcin przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Marcin/Marcin%20After.png" alt="Marcin po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Marcin</div>
+      <div class="ba-name">Marcin</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Oliwier/Oliwier%20Before.png" alt="Oliwier przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Oliwier/Oliwier%20After.png"  alt="Oliwier po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Oliwier/Oliwier%20Before.png" alt="Oliwier przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Oliwier/Oliwier%20After.png" alt="Oliwier po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Oliwier</div>
+      <div class="ba-name">Oliwier</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/adam/Adam%20before.png" alt="Adam przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/adam/Adam%20after.png"  alt="Adam po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/adam/Adam%20before.png" alt="Adam przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/adam/Adam%20after.png" alt="Adam po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Adam</div>
+      <div class="ba-name">Adam</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Lukasz/Lukasz%20before.png" alt="Łukasz przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Lukasz/Lukasz%20after.png"  alt="Łukasz po"    loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Lukasz/Lukasz%20before.png" alt="Łukasz przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Lukasz/Lukasz%20after.png" alt="Łukasz po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Łukasz</div>
+      <div class="ba-name">Łukasz</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Tomek/Tomek%20Before.jpg" alt="Tomek przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Tomek/Tomek%20After.jpg"  alt="Tomek po"   loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Tomek/Tomek%20Before.jpg" alt="Tomek przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Tomek/Tomek%20After.jpg" alt="Tomek po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Tomek</div>
+      <div class="ba-name">Tomek</div>
     </div>
 
-    <div class="before-after-card">
-      <div class="img-wrapper">
-        <img class="img-before" src="https://erykjoskowski.pl/images/transformations/Oskar/Oskar%20Before.jpg" alt="Oskar przed" loading="lazy">
-        <img class="img-after"  src="https://erykjoskowski.pl/images/transformations/Oskar/Oskar%20After.jpg"  alt="Oskar po"   loading="lazy">
-        <span class="before-after-label label-before">Przed</span>
-        <span class="before-after-label label-after">Po</span>
+    <div class="ba-card">
+      <div class="ba-photos">
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Oskar/Oskar%20Before.jpg" alt="Oskar przed" loading="lazy">
+          <span class="ba-photo-label before">Przed</span>
+        </div>
+        <div class="ba-divider"></div>
+        <div class="ba-photo">
+          <img src="https://erykjoskowski.pl/images/transformations/Oskar/Oskar%20After.jpg" alt="Oskar po" loading="lazy">
+          <span class="ba-photo-label after">Po</span>
+        </div>
       </div>
-      <div class="before-after-name">Oskar</div>
+      <div class="ba-name">Oskar</div>
     </div>
 
   </div>
-
-  <p class="before-after-hint">↑ Najedź na zdjęcie, aby zobaczyć efekt</p>
+</section>
 
 </section>
 

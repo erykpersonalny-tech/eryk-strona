@@ -303,7 +303,7 @@
   </p>
 
   <style>
-    .ba-grid {
+.ba-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 30px;
@@ -315,14 +315,13 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   background: rgba(255,255,255,0.03);
   transition: all 0.3s;
+  position: relative;
 }
 .ba-card:hover {
   transform: translateY(-8px) scale(1.2);
   box-shadow: 0 20px 60px rgba(0, 255, 136, 0.5);
   border-color: rgba(0, 255, 136, 0.5);
   z-index: 10;
-  position: relative;
-}
 }
 .ba-photos {
   display: grid;
@@ -379,8 +378,6 @@
   text-align: center;
   border-top: 1px solid rgba(0,255,136,0.15);
 }
-
-/* ── MOBILE KARUZELA ── */
 @media (max-width: 768px) {
   .ba-grid {
     display: flex;
@@ -388,7 +385,6 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 20px;
-    /* padding-right odsłania kawałek kolejnej karty = sygnał "jest więcej" */
     padding: 0 40px 16px 20px;
     scrollbar-width: none;
   }
@@ -397,11 +393,9 @@
     flex: 0 0 78vw;
     max-width: 300px;
     scroll-snap-align: start;
-    /* delikatne przyciemnienie kart w tle */
     opacity: 0.92;
     transition: opacity 0.3s, transform 0.3s;
   }
-  /* aktywna karta (scroll snap) wyróżnia się jasnością */
   .ba-card:focus-within,
   .ba-card:hover {
     opacity: 1;
@@ -410,7 +404,6 @@
   .ba-photo img { height: 240px; }
   .ba-carousel-hint { display: flex; }
 }
-
 .ba-carousel-hint {
   display: none;
   align-items: center;
@@ -432,7 +425,7 @@
 .ba-carousel-hint::after {
   transform: rotate(180deg);
 }
-  </style>
+</style>
 
   <div class="ba-grid">
 

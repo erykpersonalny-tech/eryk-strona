@@ -304,80 +304,110 @@
 
   <style>
     .ba-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 30px;
-    }
-    .ba-card {
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 255, 136, 0.2);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      background: rgba(255,255,255,0.03);
-      transition: all 0.3s;
-    }
-    .ba-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
-      border-color: rgba(0, 255, 136, 0.5);
-    }
-    .ba-photos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    .ba-photo {
-      position: relative;
-      overflow: hidden;
-    }
-    .ba-photo img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .ba-card:hover .ba-photo img {
-      transform: scale(1.04);
-    }
-    .ba-photo-label {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-    .ba-photo-label.before {
-      background: rgba(0,0,0,0.6);
-      color: #ccc;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .ba-photo-label.after {
-      background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
-      color: #0a0a0a;
-    }
-    .ba-divider {
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, rgba(0,255,136,0.4), transparent);
-      align-self: stretch;
-    }
-    .ba-name {
-      padding: 14px 20px;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--white);
-      text-align: center;
-      border-top: 1px solid rgba(0,255,136,0.15);
-    }
-    @media (max-width: 480px) {
-      .ba-photo img { height: 220px; }
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+.ba-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.3s;
+}
+.ba-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
+  border-color: rgba(0, 255, 136, 0.5);
+}
+.ba-photos {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  align-items: stretch;
+}
+.ba-photo {
+  position: relative;
+  overflow: hidden;
+}
+.ba-photo img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ba-card:hover .ba-photo img {
+  transform: scale(1.04);
+}
+.ba-photo-label {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.ba-photo-label.before {
+  background: rgba(0,0,0,0.6);
+  color: #ccc;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.ba-photo-label.after {
+  background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
+  color: #0a0a0a;
+}
+.ba-divider {
+  background: linear-gradient(to bottom, transparent, rgba(0,255,136,0.5), transparent);
+  width: 2px;
+}
+.ba-name {
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  border-top: 1px solid rgba(0,255,136,0.15);
+}
+
+/* ── MOBILE KARUZELA ── */
+@media (max-width: 768px) {
+  .ba-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding-bottom: 16px;
+    /* ukryj scrollbar wizualnie */
+    scrollbar-width: none;
+  }
+  .ba-grid::-webkit-scrollbar { display: none; }
+  .ba-card {
+    flex: 0 0 85vw;
+    max-width: 340px;
+    scroll-snap-align: center;
+  }
+  .ba-photo img { height: 240px; }
+  .ba-carousel-hint {
+    display: block;
+  }
+}
+.ba-carousel-hint {
+  display: none;
+  text-align: center;
+  color: rgba(0,255,136,0.5);
+  font-size: 13px;
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+}
   </style>
 
   <div class="ba-grid">

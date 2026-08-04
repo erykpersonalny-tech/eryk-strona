@@ -1,0 +1,52 @@
+name: Generuj wpis na bloga
+
+on:
+  schedule:
+    # 08:00 UTC 1. i 15. dnia miesiąca ≈ co 2 tygodnie.
+    - cron: "0 8 1,15 * *"
+  workflow_dispatch: {}   # pozwala też odpalić ręcznie z zakładki Actions
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install anthropic
+
+      - name: Generate post
+        id: gen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: python blog-automation/generate_post.py
+
+      - name: Open Pull Request
+        if: steps.gen.outputs.created == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: blog/${{ steps.gen.outputs.slug }}
+          commit-message: "Nowy wpis: ${{ steps.gen.outputs.title }}"
+          title: "Nowy wpis do przejrzenia: ${{ steps.gen.outputs.title }}"
+          body: |
+            Automatycznie wygenerowany draft wpisu.
+
+            **Do sprawdzenia przed merge:**
+            - [ ] Ton i głos zgodne ze style guide
+            - [ ] Liczby i fakty poprawne (podpisujesz się swoim nazwiskiem)
+            - [ ] Zdjęcie pasuje (jeśli fallback — podmień URL w `blog-*.html` i karcie na `index.html`)
+            - [ ] Jedno podsumowanie, jedna ściągawka, jedno CTA
+
+            Merge = publikacja (Netlify wdroży automatycznie).
+          labels: blog, do-przejrzenia

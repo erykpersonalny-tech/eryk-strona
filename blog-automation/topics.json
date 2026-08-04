@@ -1,0 +1,17 @@
+{
+  "_komentarz": "Kolejka tematów. Automat bierze pierwszy z \"used\": false, generuje wpis i ustawia \"used\": true. Dopisuj nowe tematy na końcu. Kategoria musi być jedną z: Trening, Dieta, Motywacja. keyword = fraza, którą klient wpisuje w Google.",
+  "topics": [
+    { "id": 1,  "used": false, "category": "Motywacja", "topic": "Jak zacząć ćwiczyć, gdy wstydzisz się swojego ciała i siłowni", "keyword": "jak zacząć ćwiczyć gdy się wstydzę" },
+    { "id": 2,  "used": false, "category": "Trening",   "topic": "Trening w domu dla początkującego z nadwagą — od czego zacząć", "keyword": "trening w domu dla początkującego z nadwagą" },
+    { "id": 3,  "used": false, "category": "Trening",   "topic": "Pierwszy raz na siłowni — plan na pierwsze 4 tygodnie", "keyword": "pierwszy raz na siłowni plan" },
+    { "id": 4,  "used": false, "category": "Dieta",     "topic": "Ile realnie da się schudnąć w 3 miesiące", "keyword": "ile można schudnąć w 3 miesiące" },
+    { "id": 5,  "used": false, "category": "Dieta",     "topic": "Deficyt kaloryczny dla początkującego — jak policzyć bez aplikacji", "keyword": "jak policzyć deficyt kaloryczny" },
+    { "id": 6,  "used": false, "category": "Dieta",     "topic": "Co jeść, żeby schudnąć, gdy nie umiesz gotować", "keyword": "co jeść żeby schudnąć bez gotowania" },
+    { "id": 7,  "used": false, "category": "Dieta",     "topic": "Ile białka naprawdę potrzebujesz na redukcji i skąd je brać", "keyword": "ile białka na redukcji" },
+    { "id": 8,  "used": false, "category": "Trening",   "topic": "Jak schudnąć, mając tylko 3 godziny tygodniowo na trening", "keyword": "jak schudnąć mając mało czasu" },
+    { "id": 9,  "used": false, "category": "Trening",   "topic": "Cardio czy siłownia na redukcji — co wybrać przy braku czasu", "keyword": "cardio czy siłownia na redukcji" },
+    { "id": 10, "used": false, "category": "Motywacja", "topic": "Jak nie odpuścić po dwóch tygodniach — utrzymanie nawyku", "keyword": "jak nie odpuścić treningu" },
+    { "id": 11, "used": false, "category": "Dieta",     "topic": "Dlaczego diety-cud nie działają i co działa zamiast nich", "keyword": "dlaczego diety cud nie działają" },
+    { "id": 12, "used": false, "category": "Trening",   "topic": "Trening dla zapracowanego — minimum, które daje efekty", "keyword": "trening dla zapracowanych" }
+  ]
+}

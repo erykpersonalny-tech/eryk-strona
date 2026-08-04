@@ -49,25 +49,32 @@ OUTPUT_INSTRUCTIONS = """
 
 Napisz jeden wpis na bloga wg powyższego przewodnika. Najpierw zrób
 research (użyj web search, żeby liczby i fakty były aktualne i zgodne
-z mainstreamem nauki oraz z rosterem zaufanych źródeł). Potem zwróć
-WYŁĄCZNIE obiekt JSON — bez komentarza, bez ```-ów, bez żadnego tekstu
-przed ani po. Struktura:
+z mainstreamem nauki oraz z rosterem zaufanych źródeł).
 
-{
-  "title": "Tytuł wpisu (bez ' | Blog Eryk Jóskowski' — to dokleja szablon)",
-  "meta_description": "1 zdanie, 140-160 znaków, z frazą kluczową, bez clickbaitu",
-  "category": "Trening | Dieta | Motywacja (dokładnie jedna z tych trzech)",
-  "reading_time": 9,
-  "hero_query": "2-4 angielskie słowa do wyszukania zdjęcia, np. 'man gym workout'",
-  "hero_alt": "krótki polski opis zdjęcia (atrybut alt)",
-  "excerpt": "1-2 zdania zajawki na kartę na stronie głównej, zakończone wielokropkiem...",
-  "cta_heading": "Nagłówek sekcji CTA",
-  "cta_text": "1 zdanie zachęty pod nagłówkiem CTA",
-  "cta_button": "Tekst na przycisku (krótki)",
-  "content_html": "Treść artykułu jako HTML"
-}
+Potem zwróć odpowiedź DOKŁADNIE w tym formacie: najpierw pola metadanych
+(każde w jednej linii jako "KLUCZ: wartość"), potem osobna linia
+---CONTENT--- i pod nią treść artykułu jako czysty HTML. Żadnego tekstu
+przed TITLE ani po treści. Bez ```-ów.
 
-ZASADY dla content_html:
+TITLE: Tytuł wpisu (bez " | Blog Eryk Jóskowski" — to dokleja szablon)
+META: 1 zdanie, 140-160 znaków, z frazą kluczową, bez clickbaitu
+CATEGORY: Trening | Dieta | Motywacja (dokładnie jedna z tych trzech)
+READING_TIME: 9
+HERO_QUERY: 2-4 angielskie słowa do wyszukania zdjęcia, np. man gym workout
+HERO_ALT: krótki polski opis zdjęcia (atrybut alt)
+EXCERPT: 1-2 zdania zajawki na kartę na stronie głównej, zakończone wielokropkiem...
+CTA_HEADING: Nagłówek sekcji CTA
+CTA_TEXT: 1 zdanie zachęty pod nagłówkiem CTA
+CTA_BUTTON: Tekst na przycisku (krótki)
+---CONTENT---
+<p>Pierwszy akapit wpisu...</p>
+... dalsza treść artykułu ...
+
+ZASADY dla metadanych:
+- Każde pole w JEDNEJ linii, dokładnie z tymi kluczami (wielkie litery).
+- Nie pomijaj żadnego pola. READING_TIME to sama liczba.
+
+ZASADY dla treści (wszystko pod ---CONTENT---):
 - To ma być TYLKO wnętrze diva .article-content: znaczniki <p>, <h2>,
   <h3>, <strong>, <ul>/<ol>/<li> oraz komponenty highlight-box,
   tip-box, myth-box, reality-box (dokładnie jak w przewodniku).
@@ -148,12 +155,51 @@ def generate_article(topic: dict) -> dict:
         block.text for block in response.content if block.type == "text"
     ).strip()
 
-    # Zdejmij ewentualne ```json ... ``` i wytnij od pierwszego { do ostatniego }.
-    raw = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.MULTILINE).strip()
-    start, end = raw.find("{"), raw.rfind("}")
-    if start == -1 or end == -1:
-        raise ValueError(f"Brak JSON w odpowiedzi modelu:\n{raw[:500]}")
-    return json.loads(raw[start:end + 1])
+    return parse_output(raw)
+
+
+META_KEYS = {
+    "TITLE": "title",
+    "META": "meta_description",
+    "CATEGORY": "category",
+    "READING_TIME": "reading_time",
+    "HERO_QUERY": "hero_query",
+    "HERO_ALT": "hero_alt",
+    "EXCERPT": "excerpt",
+    "CTA_HEADING": "cta_heading",
+    "CTA_TEXT": "cta_text",
+    "CTA_BUTTON": "cta_button",
+}
+
+
+def parse_output(raw: str) -> dict:
+    """Rozbija odpowiedź na metadane (KLUCZ: wartość) + treść HTML.
+
+    Odporne na cudzysłowy w HTML: treść bierzemy dosłownie, nic nie
+    escape'ujemy (w przeciwieństwie do JSON, gdzie każdy " w HTML psuł parsowanie).
+    """
+    marker = "---CONTENT---"
+    if marker not in raw:
+        raise ValueError(f"Brak znacznika ---CONTENT--- w odpowiedzi modelu:\n{raw[:500]}")
+    head, content = raw.split(marker, 1)
+
+    article = {}
+    for line in head.splitlines():
+        key, sep, value = line.partition(":")
+        if not sep:
+            continue
+        mapped = META_KEYS.get(key.strip().upper())
+        if mapped:
+            article[mapped] = value.strip()
+
+    missing = [v for v in META_KEYS.values() if v not in article]
+    if missing:
+        raise ValueError(f"Brak pól metadanych: {missing}\nGłowa odpowiedzi:\n{head[:500]}")
+
+    # Treść: zdejmij ewentualne ```html ... ``` i białe znaki na brzegach.
+    content = re.sub(r"^```(?:html)?\s*|\s*```$", "", content.strip()).strip()
+    article["content_html"] = content
+    return article
 
 
 def fill_template(article: dict, hero_1200: str) -> str:

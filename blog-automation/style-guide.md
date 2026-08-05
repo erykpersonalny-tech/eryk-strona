@@ -23,6 +23,7 @@ Zasada nadrzędna: **piszesz jak człowiek, który sam przez to przeszedł, do o
 - Nie obiecuj cudów ani szybkich efektów (to podważa wiarygodność i szkodzi SEO w kategorii zdrowotnej).
 - Nie lej wody. Każdy akapit musi coś wnosić.
 - Nie używaj zapożyczeń z angielskiego — WYJĄTEK: utrwalone terminy treningowe/dietetyczne bez dobrego polskiego odpowiednika (np. plank, deadlift, cardio, deficyt). Zwykłe angielskie ozdobniki („spoiler", „easy", „it's physics not magic") dalej odpadają.
+- Nie pisz „pod facetów". Wpisy są dla kobiet i mężczyzn — unikaj domyślnego „facet/chłop" i przykładów zakładających płeć. „Ty" jest neutralne, opieraj się na nim; gdy potrzebujesz przykładu osoby, balansuj płcie albo trzymaj się neutralnego opisu. Historie z własnego doświadczenia mogą zostać osobiste, ale reszta treści ma być otwarta dla obu płci.
 
 ---
 
@@ -44,7 +45,7 @@ Długość docelowa: **8-10 min czytania (~1500-2400 słów).** Zgodna z istniej
 - **`<meta name="description">`**: 1 zdanie, 140-160 znaków, zawiera frazę kluczową, mówi co czytelnik zyska. Bez clickbaitu.
 - **`article-category`**: jedna z: `Trening`, `Dieta`, `Motywacja` (dodawaj nowe tylko świadomie — kategorie to nawigacja).
 - **`article-meta`**: `[X] min czytania · Eryk Jóskowski` — czas czytania liczony realnie (~200 słów/min).
-- **Fraza kluczowa** = pytanie, które klient (facet 20-30, nadwaga, wstyd, ma 3-5 h/tydzień) wpisuje w Google. Fraza pada w tytule, w pierwszym akapicie, w jednym `<h2>` i w meta description — naturalnie, bez upychania.
+- **Fraza kluczowa** = pytanie, które wpisuje w Google osoba początkująca (20-45, nadwaga lub brak pewności siebie, mało czasu — kobieta albo mężczyzna). Fraza pada w tytule, w pierwszym akapicie, w jednym `<h2>` i w meta description — naturalnie, bez upychania.
 
 ---
 

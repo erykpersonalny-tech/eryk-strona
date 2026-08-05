@@ -155,7 +155,42 @@ def generate_article(topic: dict) -> dict:
         block.text for block in response.content if block.type == "text"
     ).strip()
 
-    return parse_output(raw)
+    article = parse_output(raw)
+    article["sources"] = extract_sources(response)
+    return article
+
+
+def extract_sources(response) -> list:
+    """Wyciąga PRAWDZIWE źródła z cytowań web search (nie zmyślone przez model).
+
+    Web search dokleja do bloków tekstu obiekty citation z realnym url/title
+    stron, które faktycznie wyszukał. Bierzemy je, deduplikujemy po URL.
+    """
+    seen = {}
+    for block in response.content:
+        for c in getattr(block, "citations", None) or []:
+            url = getattr(c, "url", None)
+            if url and url not in seen:
+                seen[url] = getattr(c, "title", None) or url
+    return [{"url": u, "title": t} for u, t in seen.items()]
+
+
+def build_sources_html(sources: list) -> str:
+    """Sekcja 'Źródła' na końcu wpisu. Pusta lista -> nic nie dodaje."""
+    if not sources:
+        return ""
+    items = "\n".join(
+        f'            <li><a href="{s["url"]}" target="_blank" rel="noopener">{s["title"]}</a></li>'
+        for s in sources
+    )
+    return "\n\n        <h2>Źródła</h2>\n        <ul>\n" + items + "\n        </ul>"
+
+
+def format_sources_md(sources: list) -> str:
+    """Lista źródeł do opisu PR-a (Markdown)."""
+    if not sources:
+        return "_Brak — model nie skorzystał z web search. Sprawdź, czy statystyki mają pokrycie._"
+    return "\n".join(f"- [{s['title']}]({s['url']})" for s in sources)
 
 
 META_KEYS = {
@@ -270,6 +305,9 @@ def main() -> None:
     slug = slugify(article["title"])
     hero_1200, hero_400 = fetch_hero(article.get("hero_query", topic["category"]))
 
+    # Doklej sekcję "Źródła" (z prawdziwych cytowań web search) na koniec treści.
+    article["content_html"] += build_sources_html(article["sources"])
+
     post_path = os.path.join(REPO_ROOT, f"blog-{slug}.html")
     with open(post_path, "w", encoding="utf-8") as f:
         f.write(fill_template(article, hero_1200))
@@ -278,9 +316,11 @@ def main() -> None:
     mark_used(topics_data, topic["id"])
 
     print(f"Gotowe: blog-{slug}.html + karta na index.html")
+    print(f"Źródeł z web search: {len(article['sources'])}")
     _set_output("created", "true")
     _set_output("title", article["title"])
     _set_output("slug", slug)
+    _set_output_multiline("sources", format_sources_md(article["sources"]))
 
 
 def _set_output(key: str, value: str) -> None:
@@ -289,6 +329,16 @@ def _set_output(key: str, value: str) -> None:
     if out:
         with open(out, "a", encoding="utf-8") as f:
             f.write(f"{key}={value}\n")
+
+
+def _set_output_multiline(key: str, value: str) -> None:
+    """Wieloliniowa wartość do GITHUB_OUTPUT (składnia z separatorem)."""
+    out = os.environ.get("GITHUB_OUTPUT")
+    if out:
+        import uuid
+        delim = f"EOF_{uuid.uuid4().hex}"
+        with open(out, "a", encoding="utf-8") as f:
+            f.write(f"{key}<<{delim}\n{value}\n{delim}\n")
 
 
 if __name__ == "__main__":

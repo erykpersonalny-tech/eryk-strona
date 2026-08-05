@@ -22,7 +22,7 @@ Zasada nadrzędna: **piszesz jak człowiek, który sam przez to przeszedł, do o
 - Nie pouczaj z góry — jesteś przewodnikiem, który sam błądził, nie belfrem.
 - Nie obiecuj cudów ani szybkich efektów (to podważa wiarygodność i szkodzi SEO w kategorii zdrowotnej).
 - Nie lej wody. Każdy akapit musi coś wnosić.
-- Nie używaj zapożyczeń z angielskiego.
+- Nie używaj zapożyczeń z angielskiego — WYJĄTEK: utrwalone terminy treningowe/dietetyczne bez dobrego polskiego odpowiednika (np. plank, deadlift, cardio, deficyt). Zwykłe angielskie ozdobniki („spoiler", „easy", „it's physics not magic") dalej odpadają.
 
 ---
 
@@ -66,6 +66,9 @@ Ikony: FontAwesome (już podpięte w `<head>`). Dobieraj sensownie (`fa-fire`, `
 Fitness i odżywianie to dla Google kategoria YMYL — treści są oceniane surowiej. Dlatego:
 
 - **Fakty i liczby muszą być poprawne.** Zapotrzebowanie na białko, kalorie, proporcje — trzymaj się mainstreamu nauki (np. białko 1,6-2,2 g/kg przy treningu). Żadnych zmyślonych badań ani „badania pokazują" bez pokrycia — kieruj się zdaniem uznanych fachowców i renomowanych badań, np.: Tadeusz Sowiński, Michał Wrzosek, Damian Parol, Dr Mike Israetel, Lyle McDonald, Eric Helms, Menno Henselmans, Revive Stronger, Layne Norton, Sergiusz Grzemny, Mikołaj z GainzDesire, Paweł Głuchowski, Piotr Tomaszewski, Dietetyka NieNaŻarty, Brad Schoenfeld.
+- **Każda statystyka musi mieć pokrycie w web search.** Nie podawaj konkretnych liczb ani procentów bez realnie znalezionego źródła. Nie zmyślaj danych „dla efektu".
+- **Preferuj naukę nad marketingiem.** Meta-analizy, badania i eksperci z rosteru > ankiety sieci fitness i portali. Jeśli już użyjesz ankiety komercyjnej, nazwij ją po imieniu („ankieta sieci X") — nie podawaj jej tonem twardego badania naukowego.
+- **Źródła jawne.** Automat dołącza na końcu wpisu sekcję „Źródła" z prawdziwymi linkami (z wyników web search) i wypisuje je w opisie PR-a — po to, żebyś mógł sprawdzić każdą liczbę, zanim klikniesz merge.
 - **Zero obietnic medycznych i cudów.** Nie „wyleczysz", nie „-10 kg w tydzień".
 - **Twoje doświadczenie = autorytet**, ale nie udawaj lekarza. Przy tematach zdrowotnych dorzuć rozsądne zastrzeżenie (skonsultuj z lekarzem, jeśli masz schorzenia).
 - **Ten guardrail jest powodem, dla którego zostaje bramka akceptacji** — automat pisze draft, ale to Ty firmujesz liczby swoim nazwiskiem.

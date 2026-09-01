@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trening w domu dla początkującego z nadwagą: konkretny plan na start, bez katowania się i bez wstydu przed lustrem.">
+    <title>Trening w domu dla początkującego z nadwagą — od czego zacząć | Blog Eryk Jóskowski</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-green: #00ff88;
+            --dark-green: #00cc6a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #cccccc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+        .gradient-bg { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%); z-index: -2; }
+        .orbs { position: fixed; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite ease-in-out; }
+        .orb1 { width: 600px; height: 600px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); top: -200px; left: -200px; }
+        .orb2 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--neon-green), #66ffaa); bottom: -150px; right: -150px; animation-delay: 7s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-100px, 100px) scale(0.9); } }
+
+        .back-button { position: fixed; top: 30px; left: 30px; z-index: 1000; display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; color: var(--neon-green); text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2); }
+        .back-button:hover { background: rgba(0, 255, 136, 0.1); border-color: var(--neon-green); transform: translateX(-5px); box-shadow: 0 6px 30px rgba(0, 255, 136, 0.4); }
+        .back-button i { font-size: 16px; }
+        @media (max-width: 768px) { .back-button { top: 20px; left: 20px; padding: 10px 20px; font-size: 13px; } }
+
+        .article-header { padding: 100px 50px 60px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .article-category { display: inline-block; padding: 8px 20px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 20px; color: var(--neon-green); font-size: 14px; margin-bottom: 20px; }
+        .article-title { font-size: 48px; margin-bottom: 20px; background: linear-gradient(135deg, var(--white), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; line-height: 1.2; }
+        .article-meta { color: var(--gray); font-size: 16px; }
+
+        .article-image { max-width: 1200px; margin: 40px auto; border-radius: 20px; overflow: hidden; }
+        .article-image img { width: 100%; height: auto; display: block; }
+
+        .article-content { max-width: 800px; margin: 0 auto; padding: 40px 50px 100px; }
+        .article-content p { color: var(--gray); font-size: 18px; line-height: 1.9; margin-bottom: 25px; }
+        .article-content h2 { color: var(--white); font-size: 32px; margin: 50px 0 20px; background: linear-gradient(135deg, var(--neon-green), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .article-content h3 { color: var(--neon-green); font-size: 24px; margin: 35px 0 15px; }
+        .article-content strong { color: var(--neon-green); font-weight: 600; }
+        .article-content a { color: var(--neon-green); text-decoration: underline; word-break: break-word; }
+        .article-content ul, .article-content ol { margin: 20px 0 25px 30px; color: var(--gray); font-size: 18px; }
+        .article-content li { margin-bottom: 12px; line-height: 1.8; }
+
+        .highlight-box { background: rgba(0, 255, 136, 0.05); border-left: 4px solid var(--neon-green); padding: 25px 30px; margin: 35px 0; border-radius: 10px; }
+        .highlight-box p { color: var(--white); margin-bottom: 0; font-size: 17px; }
+
+        .tip-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 255, 136, 0.2); padding: 25px 30px; margin: 35px 0; border-radius: 15px; }
+        .tip-box h4 { color: var(--neon-green); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .tip-box p { margin-bottom: 0; }
+
+        .myth-box { background: rgba(255, 50, 50, 0.05); border: 1px solid rgba(255, 50, 50, 0.3); padding: 25px 30px; margin: 35px 0; border-radius: 15px; }
+        .myth-box h4 { color: #ff3232; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .myth-box p { margin-bottom: 0; }
+
+        .reality-box { background: rgba(255, 150, 0, 0.05); border: 1px solid rgba(255, 150, 0, 0.3); padding: 25px 30px; margin: 35px 0; border-radius: 15px; }
+        .reality-box h4 { color: #ff9600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .reality-box p { margin-bottom: 0; }
+
+        .cta-section { text-align: center; padding: 60px 40px; background: rgba(0, 255, 136, 0.03); border-radius: 20px; margin: 60px 0; border: 1px solid rgba(0, 255, 136, 0.2); }
+        .cta-section h3 { font-size: 32px; margin-bottom: 15px; color: var(--white); }
+        .cta-section p { color: var(--gray); margin-bottom: 25px; font-size: 18px; }
+        .cta-button { display: inline-block; padding: 18px 45px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: var(--black); text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; transition: all 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5); }
+
+        footer { text-align: center; padding: 40px; background: rgba(0, 0, 0, 0.8); border-top: 1px solid rgba(0, 255, 136, 0.2); color: var(--gray); }
+
+        @media (max-width: 768px) {
+            .article-header { padding: 80px 20px 40px; }
+            .article-title { font-size: 32px; }
+            .article-content { padding: 30px 20px 60px; }
+            .article-content h2 { font-size: 26px; }
+            .article-content p, .article-content ul, .article-content ol { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+
+    <a href="index.html#blog" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Powrót
+    </a>
+
+    <div class="article-header">
+        <span class="article-category">Trening</span>
+        <h1 class="article-title">Trening w domu dla początkującego z nadwagą — od czego zacząć</h1>
+        <div class="article-meta">
+            <i class="far fa-clock"></i> 9 min czytania · Eryk Jóskowski
+        </div>
+    </div>
+
+    <div class="article-image">
+        <!-- Sugerowane zapytanie do zdjęcia: overweight person home workout -->
+        <img src="https://images.unsplash.com/photo-1683758575782-a632dbbe9eed?ixid=M3wxMDE2ODIxfDB8MXxzZWFyY2h8MXx8b3ZlcndlaWdodCUyMHBlcnNvbiUyMGhvbWUlMjB3b3Jrb3V0fGVufDB8MHx8fDE3ODgyNjcwNjR8MA&ixlib=rb-4.1.0&w=1200" alt="Osoba w trakcie treningu w domu na macie do jogi">
+    </div>
+
+    <div class="article-content">
+        <p>Stoisz w salonie, telefon w ręku, na ekranie piąty film z tytułem „trening spalający tłuszcz w 15 minut". Instruktor robi burpees jak maszyna, Ty próbujesz jednego przysiadu i po trzydziestej sekundzie serce wali jak młotem, kolana protestują, a w głowie pojawia się myśl: „to nie dla mnie". Zamykasz aplikację. Kolejny dzień bez treningu.</p>
+
+<p>Znam ten moment. Nie dlatego, że czytałem o nim w książce, ale dlatego, że sam w nim stałem — po drugiej stronie ekranu, próbując dogonić ludzi, którzy trenują od lat, mając ciało i doświadczenie zupełnie inne od mojego wtedy. Popełniałem błędy, które teraz widzę u każdej osoby zaczynającej z nadwagą: zbyt trudny plan, zbyt szybkie tempo, zero planu na to, co robić, gdy coś zaboli.</p>
+
+<p>Dobra wiadomość: <strong>trening w domu dla początkującego z nadwagą</strong> może być prosty, bezpieczny i realny do wykonania już dziś, bez sprzętu, bez siłowni i bez poczucia, że musisz najpierw „dojść do jakiegoś poziomu", żeby zacząć.</p>
+
+<h2>To nie brak silnej woli. To brak dobrego punktu startowego</h2>
+
+<p>Większość osób, które rzucają trening po tygodniu, nie rzuca go z lenistwa. Rzuca go, bo zaczęła od planu zaprojektowanego dla kogoś innego — sprawniejszego, lżejszego, z innym doświadczeniem stawów i układu krążenia. Efekt: zniechęcenie, zakwasy nie do przejścia, czasem ból stawu, który odstrasza na miesiące.</p>
+
+<p>Zmiana myślenia, którą musisz zrobić na starcie, jest prosta: nie potrzebujesz motywacji na poziomie sportowca. Potrzebujesz planu, który dopasowuje się do Ciebie takiej/takiego, jaka/jaki jesteś dzisiaj — nie do wersji z przyszłości.</p>
+
+<div class="reality-box">
+<h4><i class="fas fa-brain"></i> Zmiana myślenia</h4>
+<p>„Muszę się zakatować, żeby to zadziałało" → „Muszę wytrzymać ten trening na tyle, żeby chcieć wrócić do niego pojutrze." Konsekwencja bije intensywność na głowę, zwłaszcza w pierwszych tygodniach.</p>
+</div>
+
+<h2>1. Sama nadwaga nie jest przeciwwskazaniem — ale zrób rozeznanie</h2>
+
+<p>Sama nadwaga nie jest przeciwwskazaniem do aktywności fizycznej. To ważne, bo wiele osób odkłada pierwszy trening, czekając na „lepszy moment" po utracie kilogramów — a to działa odwrotnie: ruch jest jednym z narzędzi, które do tego prowadzą, nie nagrodą za dotarcie do celu.</p>
+
+<p>Zanim zaczniesz, zrób jednak rzecz, którą wielu ignoruje: krótką inwentaryzację. Plan powinien uwzględniać aktualną sprawność, dotychczasowy poziom ruchu, choroby przewlekłe, wcześniejsze kontuzje, masę ciała i występujące dolegliwości bólowe. Jeśli masz nadciśnienie, cukrzycę, problemy ortopedyczne albo dawno nie byłasz/eś na badaniach kontrolnych — krótka rozmowa z lekarzem przed startem to nie przesada, to standard bezpieczeństwa.</p>
+
+<h3>Jak to zrobić w praktyce?</h3>
+<ul>
+<li>Zapisz, jak długo potrafisz iść marszem bez zadyszki.</li>
+<li>Zapisz, czy masz ból w kolanach, biodrach albo lędźwiach przy codziennych czynnościach (wchodzenie po schodach, wstawanie z krzesła).</li>
+<li>Jeśli odpowiedź na powyższe brzmi „tak, boli" — zacznij od wersji ćwiczeń bez obciążania tego miejsca (patrz punkt 2) i rozważ konsultację z fizjoterapeutą.</li>
+</ul>
+
+<h2>2. Trening w domu dla początkującego z nadwagą powinien być low-impact</h2>
+
+<p>Low-impact nie znaczy „słaby" ani „dla osób, które się boją". Ćwiczenia low impact to ćwiczenia o niskim wpływie na stawy, więzadła lub ścięgna, co zmniejsza ryzyko późniejszych urazów związanych ze zużyciem stawów i pozwala na trening o wysokiej intensywności bez nadmiernego obciążania tych struktur. To dlatego jest to lepsza opcja dla początkujących, osób w trakcie rekonwalescencji lub osób z nadwagą.</p>
+
+<p>Praktycznie: zamiast wyskoków, sprintów i skakania na skakance na starcie — wybierasz przysiady do krzesła, marsz w miejscu z wysokim unoszeniem kolan, pompki z kolan albo o ściankę, plank na przedramionach z kolanami na podłodze. Niski wpływ z pewnością nie oznacza niskiej intensywności — dowolny z tych treningów można dostosować do aktualnego poziomu sprawności i swoich celów.</p>
+
+<div class="myth-box">
+<h4><i class="fas fa-times-circle"></i> Mit vs fakt</h4>
+<p><strong>MIT:</strong> Jeśli trening nie boli i nie kończy się zakwasami na trzy dni, to nic nie robisz.<br>
+<strong>FAKT:</strong> Cel pierwszych tygodni to nauka ruchu i budowanie tolerancji na wysiłek, nie masakra mięśni. Trening powinien kończyć się z poczuciem wykonanej pracy, ale nie może powodować wyczerpania, ostrego bólu ani problemów z normalnym funkcjonowaniem następnego dnia.</p>
+</div>
+
+<h2>3. Ile ruchu naprawdę potrzebujesz w tygodniu?</h2>
+
+<p>Tu dobra wiadomość — liczby są niższe, niż myślisz. Według aktualnych rekomendacji osobom dorosłym (18–64 lat) zaleca się tygodniowo 150–300 minut aktywności fizycznej o umiarkowanej intensywności lub 75–150 minut aktywności o dużej intensywności, a dodatkowo co najmniej 2 razy w tygodniu ćwiczenia wzmacniające mięśnie.</p>
+
+<p>150 minut w tygodniu to np. pięć sesji po 30 minut albo trzy sesje po 20 minut plus kilka dłuższych spacerów. Nie musisz wyciskać z siebie godziny dziennie od pierwszego tygodnia. I jeszcze jedno — jakakolwiek aktywność fizyczna, nawet o bardzo niskiej intensywności, jest lepsza niż żadna. Ten spacer, na który nie masz „w pełni ochoty", nadal się liczy.</p>
+
+<div class="highlight-box">
+<p><strong>Złota zasada na start:</strong> lepiej 20 minut cztery razy w tygodniu przez miesiąc, niż 90 minut raz, po którym nie ruszysz się przez tydzień. Konsekwencja > intensywność.</p>
+</div>
+
+<h2>4. Konkretny plan na pierwsze 2–4 tygodnie</h2>
+
+<p>Zamiast szukać kolejnego planu na YouTube, zacznij od czegoś prostego, które robisz w domu, w dowolnej kolejności, bez sprzętu:</p>
+
+<ul>
+<li><strong>Marsz w miejscu / spacer</strong> — 10-20 minut, umiarkowane tempo (możesz rozmawiać, ale trochę Cię to zbija z tchu).</li>
+<li><strong>Przysiad do krzesła</strong> — 2-3 serie po 8-12 powtórzeń. Siadasz na krzesło i wstajesz, kontrolując ruch.</li>
+<li><strong>Pompka o ścianę lub z kolan</strong> — 2-3 serie po 6-10 powtórzeń.</li>
+<li><strong>Plank na kolanach</strong> — 2-3 serie, 15-30 sekund.</li>
+<li><strong>Unoszenie bioder (mostek) leżąc na podłodze</strong> — 2-3 serie po 10-12 powtórzeń.</li>
+</ul>
+
+<p>To wystarczy na 2 sesje treningowe w tygodniu, plus 2-3 spacery. W pierwszych czterech tygodniach najważniejsze są: nauka techniki, ochrona stawów, dopasowanie obciążenia, poprawa tolerancji wysiłku i stopniowa progresja. Nie skomplikowana sylwetka na Instagramie — technika i regularność.</p>
+
+<div class="tip-box">
+<h4><i class="fas fa-list-check"></i> Jak sprawdzić, że to dobre tempo?</h4>
+<p>Podczas ćwiczenia powinieneś/powinnaś być w stanie powiedzieć krótkie zdanie bez łapania powietrza między słowami. Jeśli nie potrafisz wydusić słowa — zwolnij. To prosty, domowy odpowiednik skali odczuwanego wysiłku (RPE), który sprawdza się bez żadnego sprzętu.</p>
+</div>
+
+<h2>5. Dlaczego low-impact to nie oznacza „bez efektów"?</h2>
+
+<p>Bo trening siłowy — nawet w wersji domowej, z masą własnego ciała — działa na organizm szerzej, niż myślisz. Zwiększa wytrzymałość kości, więzadeł i ścięgien, wzmacnia stawy i zapewnia ich stabilizację, zmniejszając ryzyko wystąpienia urazów w życiu codziennym. Do tego korzystnie wpływa na układ sercowo-naczyniowy, prowadząc do zmniejszenia ciśnienia tętniczego, zarówno w spoczynku, jak i podczas wysiłku.</p>
+
+<p>Efekty na poziomie „łatwiej mi wstać z kanapy" i „schody już mnie tak nie męczą" pojawiają się szybciej, niż zmiana widoczna w zwierciadle. Efekty na stawach widać najczęściej po kilku tygodniach systematycznej pracy, nawet jeśli waga na początku spada powoli, a sygnałem, że mięśnie przejmują część obciążeń, jest łatwiejsze wykonywanie codziennych zadań.</p>
+
+<h2>6. Jedzenie ma znaczenie — ale nie musisz od razu liczyć każdego grama</h2>
+
+<p>Trening w domu bez zmiany sposobu jedzenia da Ci siłę i lepszą wydolność, ale efekty w składzie ciała przyjdą wolniej. Nie musisz od razu wchodzić w liczenie makroskładników — jedna zmiana robi realną różnicę: więcej białka w talerzu.</p>
+
+<p>Większość aktualnych rekomendacji sugeruje spożycie około 1,2–1,6 g białka na kilogram masy ciała dziennie u osób z nadwagą lub otyłością prowadzących niewielką lub umiarkowaną aktywność fizyczną. W praktyce dla osoby o masie 85 kg to około 100-135 g białka dziennie — czyli np. porcja jajek na śniadanie, kurczak lub ryba na obiad, jogurt naturalny albo twaróg na kolację.</p>
+
+<div class="highlight-box">
+<p><strong>Dlaczego to działa?</strong> U osób odchudzających się odpowiednia podaż białka pomaga ograniczyć utratę masy mięśniowej, zwiększa sytość i może ułatwiać utrzymanie zaleceń dietetycznych. Mniej głodu, mniej podjadania, łatwiej wytrzymać deficyt kaloryczny.</p>
+</div>
+
+<h2>7. Progresja: kiedy i jak zrobić „więcej"?</h2>
+
+<p>Po 3-4 tygodniach ten sam zestaw ćwiczeń zacznie być zauważalnie łatwiejszy. To sygnał, nie przypadek — Twoje ciało adaptuje się do nowego bodźca. Wtedy, a nie wcześniej, dodajesz jeden z elementów:</p>
+
+<ul>
+<li>Więcej powtórzeń w serii (np. z 10 na 14).</li>
+<li>Wolniejsze tempo ruchu (np. 3 sekundy w dół podczas przysiadu).</li>
+<li>Trudniejszy wariant (pompka z kolan → pompka z wyprostowanymi nogami).</li>
+<li>Dodatkowa, trzecia sesja treningowa w tygodniu.</li>
+</ul>
+
+<p>Dodawaj jedną rzecz na raz. Zmiana wszystkiego naraz to najszybsza droga do przeciążenia i zniechęcenia w tygodniu piątym, kiedy wydawało się, że już „jest łatwo".</p>
+
+<h2>8. Najczęstsze błędy początkujących z nadwagą — i jak ich uniknąć</h2>
+
+<h3>Kopiowanie planu „na już" z internetu</h3>
+<p>Plan zrobiony dla kogoś po dwóch latach treningów nie jest planem dla Ciebie w tygodniu pierwszym. Lepszy jest prostszy plan, który wykonasz konsekwentnie, niż imponujący plan, który odpuścisz po trzech dniach.</p>
+
+<h3>Porównywanie się z wersją z internetu, nie z sobą z zeszłego tygodnia</h3>
+<p>Jedynym sensownym porównaniem jest to, ile powtórzeń zrobiłeś/zrobiłaś dziś, a ile miesiąc temu. Cudza sylwetka na filmie nic Ci o Twoim postępie nie powie.</p>
+
+<h3>Zero dnia odpoczynku</h3>
+<p>Ciało buduje siłę i tolerancję na wysiłek również w dniach bez treningu. Dwa dni siłowe i kilka dni ruchu (spacer, prace w ogrodzie, zabawa z dzieckiem) w tygodniu to solidny start — nie musisz „trenować codziennie", żeby to zadziałało.</p>
+
+<div class="tip-box">
+<h4><i class="fas fa-triangle-exclamation"></i> Kiedy przerwać i skonsultować się z lekarzem?</h4>
+<p>Ostry, kłujący ból stawu (inny niż zwykłe zakwasy), zawroty głowy, ból w klatce piersiowej albo duszność nieproporcjonalna do wysiłku — to sygnały, żeby zatrzymać trening i porozmawiać ze specjalistą, zanim wrócisz do ćwiczeń.</p>
+</div>
+
+<h2>Podsumowanie</h2>
+
+<p>Trening w domu dla początkującego z nadwagą nie wymaga siłowni, drogiego sprzętu ani heroizmu. Wymaga planu dopasowanego do punktu, w którym jesteś dzisiaj, i konsekwencji większej niż intensywność. Zacznij od małych kroków, które realnie wykonasz — resztę dobuduje czas.</p>
+
+<div class="highlight-box">
+<p><strong>Ściągawka na start:</strong></p>
+<p>✓ Sprawdź punkt startowy (kondycja, bóle, choroby) i skonsultuj się z lekarzem, jeśli masz schorzenia<br>
+✓ Wybieraj ćwiczenia low-impact: marsz, przysiad do krzesła, pompka z kolan, plank na kolanach<br>
+✓ Cel: 150-300 minut umiarkowanej aktywności tygodniowo + 2 sesje siłowe<br>
+✓ Jedz więcej białka — ok. 1,2-1,6 g/kg masy ciała dziennie<br>
+✓ Progresja: dodawaj jeden element na raz, nie wszystko naraz<br>
+✓ Trening ma kończyć się zmęczeniem, nie wyczerpaniem czy bólem</p>
+</div>
+
+        <h2>Źródła</h2>
+        <ul>
+            <li><a href="https://trenerpersonalnywroclaw.pl/centrum-wiedzy/trening-dla-osoby-z-nadwag%C4%85-%E2%80%93-bezpieczny-plan-na-4-tygodnie/" target="_blank" rel="noopener">Trening dla osoby z nadwagą – bezpieczny plan na 4 tygodnie</a></li>
+            <li><a href="https://vilgain.pl/cwiczenia-low-impact-delikatny-i-skuteczny-sposob-na-wzmocnienie-ciala-i-poprawe-kondycji" target="_blank" rel="noopener">Ćwiczenia low impact: delikatny i skuteczny sposób na wzmocnienie ciała i poprawę kondycji | Vilgain</a></li>
+            <li><a href="https://www.mp.pl/pacjent/dieta/sport/256434,kazdy-ruch-sie-liczy-nowe-wytyczne-who-dotyczace-aktywnosci-fizycznej" target="_blank" rel="noopener">Każdy ruch się liczy! Nowe wytyczne WHO dotyczące aktywności fizycznej | Dieta i ruch - mp.pl</a></li>
+            <li><a href="https://hpba.pl/ile-ruchu-potrzebujemy/" target="_blank" rel="noopener">Aktywność fizyczna według WHO - ile ruchu potrzebujemy? - Anna Lewandowska - healthy plan by Ann</a></li>
+            <li><a href="https://www.mp.pl/pacjent/dieta/sport/77292,trening-silowy-wskazowki-dla-poczatkujacych" target="_blank" rel="noopener">Trening siłowy – wskazówki dla początkujących | Dieta i ruch - mp.pl</a></li>
+            <li><a href="https://www.gallaxysport.pl/trening-silowy-nadwaga.html" target="_blank" rel="noopener">Trening siłowy dla osób z nadwagą: bezpieczne ćwiczenia, modyfikacje i tempo pracy dla ochrony kolan, bioder i kręgosłupa</a></li>
+            <li><a href="https://www.klinikaholi.pl/blogpost/bialko-a-odchudzanie----rola-dawkowanie-i-praktyczne-wskazowki" target="_blank" rel="noopener">Białko a odchudzanie — ile białka na redukcji i jak je stosować - Holi</a></li>
+        </ul>
+
+        <div class="cta-section">
+            <h3>Nie wiesz, jak zacząć bezpiecznie?</h3>
+            <p>Umów się na darmową konsultację i ułożymy plan dopasowany do Twojego ciała, a nie do zdjęcia z Instagrama.</p>
+            <a href="index.html#kontakt" class="cta-button">Umów darmową konsultację</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Eryk Jóskowski - Trener Personalny</p>
+    </footer>
+</body>
+</html>

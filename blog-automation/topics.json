@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "used": false,
+      "used": true,
       "category": "Trening",
       "topic": "Trening w domu dla początkującego z nadwagą — od czego zacząć",
       "keyword": "trening w domu dla początkującego z nadwagą"

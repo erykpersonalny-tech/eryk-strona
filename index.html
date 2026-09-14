@@ -584,9 +584,6 @@
 
 <section class="section fade-in" id="kalkulator">
   <h2 class="section-title">Oblicz Swoje Zapotrzebowanie Kaloryczne</h2>
-  <p style="text-align: center; color: var(--gray); margin-bottom: 50px;">
-    Wzór Mifflina-St Jeor — najdokładniejszy dostępny kalkulator CPM
-  </p>
 
   <style>
     .calc-wrapper {
@@ -771,8 +768,8 @@
     <div style="margin-bottom: 20px;">
       <label style="font-size:13px; font-weight:600; color:var(--neon-green); letter-spacing:0.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Płeć</label>
       <div class="calc-gender">
-        <div class="calc-gender-btn active" id="btn-m" onclick="setGender('m')">♂ Mężczyzna</div>
-        <div class="calc-gender-btn" id="btn-k" onclick="setGender('k')">♀ Kobieta</div>
+        <div class="calc-gender-btn active" id="btn-m" onclick="setGender('m')">Mężczyzna</div>
+        <div class="calc-gender-btn" id="btn-k" onclick="setGender('k')">Kobieta</div>
       </div>
     </div>
 
@@ -795,11 +792,10 @@
       <div class="calc-field">
         <label>Aktywność fizyczna</label>
         <select id="calc-activity">
-          <option value="1.2">Siedząca (brak ruchu)</option>
-          <option value="1.375">Lekka (1–2x/tydzień)</option>
-          <option value="1.55" selected>Umiarkowana (3–4x/tydzień)</option>
-          <option value="1.725">Wysoka (5–6x/tydzień)</option>
-          <option value="1.9">Bardzo wysoka (2x dziennie)</option>
+          <option value="1.35">Aktywność fizyczna niska</option>
+          <option value="1.55" selected>Aktywność fizyczna umiarkowana</option>
+          <option value="1.725">Aktywny tryb życia</option>
+          <option value="1.9">Bardzo aktywny tryb życia</option>
         </select>
       </div>
     </div>
@@ -815,7 +811,7 @@
       <div class="calc-result-breakdown">
         <div class="calc-breakdown-item">
           <div class="bd-val" id="result-redukcja">—</div>
-          <div class="bd-lbl">Redukcja<br>(-500 kcal)</div>
+          <div class="bd-lbl">Redukcja<br>(-20% CPM)</div>
         </div>
         <div class="calc-breakdown-item">
           <div class="bd-val" id="result-utrzymanie">—</div>
@@ -823,12 +819,12 @@
         </div>
         <div class="calc-breakdown-item">
           <div class="bd-val" id="result-masa">—</div>
-          <div class="bd-lbl">Budowa masy<br>(+300 kcal)</div>
+          <div class="bd-lbl">Budowa masy<br>(+10% CPM)</div>
         </div>
       </div>
       <p class="calc-result-cta">
-        Chcesz wiedzieć <strong>co konkretnie jeść</strong>, żeby osiągnąć swój cel?<br>
-        Pobierz mój bezpłatny jadłospis — dopasowany do Twojego poziomu kalorii.
+        Chcesz zobaczyć jak mogą wyglądać twoje posiłki?<br>
+        <strong>Pobierz moje bezpłatne jadłospisy na 1800 oraz 2500 kcal.</strong>
       </p>
       <button class="calc-result-btn" onclick="scrollToLeadMagnet()">
         <i class="fas fa-download"></i> Pobierz bezpłatny jadłospis
@@ -877,16 +873,6 @@
       text-transform: uppercase;
       margin-bottom: 24px;
     }
-    .lm-title {
-      font-size: 36px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--white), var(--neon-green));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
     .lm-subtitle {
       color: var(--gray);
       font-size: 16px;
@@ -918,12 +904,13 @@
     }
     .lm-form {
       display: flex;
+      flex-direction: column;
       gap: 12px;
       max-width: 480px;
       margin: 0 auto;
     }
     .lm-form input {
-      flex: 1;
+      width: 100%;
       padding: 16px 20px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(0,255,136,0.25);
@@ -932,10 +919,12 @@
       font-size: 15px;
       outline: none;
       transition: border-color 0.3s;
+      box-sizing: border-box;
     }
     .lm-form input::placeholder { color: rgba(255,255,255,0.3); }
     .lm-form input:focus { border-color: rgba(0,255,136,0.6); }
     .lm-form button {
+      width: 100%;
       padding: 16px 28px;
       background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
       color: #0a0a0a;
@@ -944,7 +933,6 @@
       font-weight: 700;
       font-size: 15px;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.3s;
       box-shadow: 0 8px 30px rgba(0,255,136,0.35);
     }
@@ -971,17 +959,13 @@
     }
     @media (max-width: 768px) {
       .lm-wrapper { padding: 36px 20px; }
-      .lm-title { font-size: 26px; }
-      .lm-form { flex-direction: column; }
-      .lm-form button { width: 100%; }
     }
   </style>
 
   <div class="lm-wrapper">
     <div class="lm-badge">🎁 Bezpłatny jadłospis</div>
-    <h2 class="lm-title">Jedz więcej.<br>Ważyć mniej.</h2>
     <p class="lm-subtitle">
-      Pobierz mój jadłospis i przepisy — gotowe menu na 7 dni, które możesz wdrożyć od jutra. Bez głodzenia, bez liczenia każdego grama.
+      Pobierz mój jadłospis i przepisy — gotowe menu na 7 dni, które możesz wdrożyć od jutra w 2 wariantach kalorycznych (1800 oraz 2500).
     </p>
     <div class="lm-bullets">
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> 7-dniowe menu z przepisami</div>
@@ -990,6 +974,7 @@
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> Wysyłam na maila w ciągu 5 minut</div>
     </div>
     <div class="lm-form" id="lm-form">
+      <input type="text" id="lm-name" placeholder="Imię i nazwisko">
       <input type="email" id="lm-email" placeholder="Twój adres e-mail">
       <button onclick="submitLeadMagnet()">
         <i class="fas fa-download"></i> Pobierz
@@ -1003,7 +988,6 @@
 </section>
 
 <script>
-  // ── Kalkulator ──
   let selectedGender = 'm';
 
   function setGender(g) {
@@ -1032,9 +1016,9 @@
     const cpm = Math.round(bmr * activity);
 
     document.getElementById('result-cpm').textContent        = cpm;
-    document.getElementById('result-redukcja').textContent   = cpm - 500;
+    document.getElementById('result-redukcja').textContent   = Math.round(cpm * 0.8);
     document.getElementById('result-utrzymanie').textContent = cpm;
-    document.getElementById('result-masa').textContent       = cpm + 300;
+    document.getElementById('result-masa').textContent       = Math.round(cpm * 1.1);
 
     const resultEl = document.getElementById('calc-result');
     resultEl.style.display = 'block';
@@ -1043,12 +1027,17 @@
 
   function scrollToLeadMagnet() {
     document.getElementById('lead-magnet').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => document.getElementById('lm-email').focus(), 600);
+    setTimeout(() => document.getElementById('lm-name').focus(), 600);
   }
 
-  // ── Lead magnet — integracja MailerLite ──
   async function submitLeadMagnet() {
+    const name  = document.getElementById('lm-name').value.trim();
     const email = document.getElementById('lm-email').value.trim();
+
+    if (!name) {
+      alert('Wpisz imię i nazwisko.');
+      return;
+    }
     if (!email || !email.includes('@')) {
       alert('Wpisz poprawny adres e-mail.');
       return;
@@ -1062,7 +1051,7 @@
       const res = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, name })
       });
 
       if (res.ok) {

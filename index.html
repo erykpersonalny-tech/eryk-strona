@@ -176,6 +176,10 @@
         .floating-whatsapp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); cursor: pointer; transition: all 0.3s; z-index: 999; text-decoration: none; }
         .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7); }
         .floating-whatsapp i { color: var(--white); font-size: 28px; }
+        .whatsapp-cta { position: fixed; bottom: 41px; right: 102px; padding: 9px 16px; background: rgba(10, 10, 10, 0.95); border: 1px solid #25D366; border-radius: 50px; color: var(--white); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.35); z-index: 999; transition: all 0.3s; }
+        .whatsapp-cta::after { content: ''; position: absolute; right: -6px; top: 50%; width: 10px; height: 10px; background: rgba(10, 10, 10, 0.95); border-top: 1px solid #25D366; border-right: 1px solid #25D366; transform: translateY(-50%) rotate(45deg); }
+        .whatsapp-cta:hover { background: #25D366; color: var(--black); }
+        .whatsapp-cta:hover::after { background: #25D366; }
         
         .scroll-to-top { position: fixed; bottom: 100px; right: 30px; width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
@@ -190,6 +194,10 @@
         /* TEMPORARY HIDE - Remove this class when ready to show */
         .temp-hide { display: none !important; }
         
+        @media (min-width: 769px) and (max-width: 1280px) {
+            nav, nav.scrolled { padding-left: 20px; padding-right: 20px; }
+            .nav-links a { padding: 8px 11px; font-size: 13px; }
+        }
         @media (max-width: 1024px) {
             .hero-container { grid-template-columns: 1fr; gap: 40px; }
             .hero-content h1 { font-size: 48px; }
@@ -227,6 +235,7 @@
             .faq-item.active .faq-answer { padding: 0 18px 18px 18px; }
             .faq-answer p { font-size: 15px; }
             .blog-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .whatsapp-cta { bottom: 44px; right: 98px; font-size: 12px; padding: 7px 12px; }
         }
         
         @media (max-width: 480px) {
@@ -260,6 +269,8 @@
             <a href="#uslugi" onclick="event.preventDefault(); scrollToSection('uslugi')">Usługi</a>
             <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
             <a href="#blog" onclick="event.preventDefault(); scrollToSection('blog')">Blog</a>
+            <a href="kalkulator.html">Kalkulator</a>
+            <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Newsletter</a>
             <a href="#faq" onclick="event.preventDefault(); scrollToSection('faq')">FAQ</a>
             <a href="#kontakt" class="nav-cta" onclick="event.preventDefault(); scrollToSection('kontakt')">Kontakt</a>
         </div>
@@ -588,264 +599,11 @@
 
 </section>
 
-<!-- ═══════════ KALKULATOR CPM ═══════════ -->
-<div class="section-divider"><div class="divider-icon"><i class="fas fa-calculator"></i></div></div>
+<!-- ═══════════ NEWSLETTER ═══════════ -->
+<div class="section-divider"><div class="divider-icon"><i class="fas fa-envelope-open-text"></i></div></div>
 
-<section class="section fade-in" id="kalkulator">
-  <h2 class="section-title">Oblicz Swoje Zapotrzebowanie Kaloryczne</h2>
-
-  <style>
-    .calc-wrapper {
-      max-width: 680px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0,255,136,0.2);
-      border-radius: 24px;
-      padding: 48px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-    .calc-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .calc-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .calc-field label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--neon-green);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .calc-field input,
-    .calc-field select {
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,255,136,0.2);
-      border-radius: 12px;
-      color: var(--white);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.3s;
-      -webkit-appearance: none;
-    }
-    .calc-field input:focus,
-    .calc-field select:focus {
-      border-color: rgba(0,255,136,0.6);
-      box-shadow: 0 0 0 3px rgba(0,255,136,0.08);
-    }
-    .calc-field select option {
-      background: #1a1a1a;
-      color: var(--white);
-    }
-    .calc-gender {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .calc-gender-btn {
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,255,136,0.2);
-      background: rgba(255,255,255,0.03);
-      color: var(--gray);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-align: center;
-    }
-    .calc-gender-btn.active {
-      background: rgba(0,255,136,0.12);
-      border-color: var(--neon-green);
-      color: var(--neon-green);
-    }
-    .calc-submit {
-      width: 100%;
-      padding: 18px;
-      margin-top: 10px;
-      background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
-      color: #0a0a0a;
-      border: none;
-      border-radius: 50px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 8px 30px rgba(0,255,136,0.35);
-    }
-    .calc-submit:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,255,136,0.55);
-    }
-    .calc-result {
-      display: none;
-      margin-top: 36px;
-      padding: 32px;
-      background: rgba(0,255,136,0.05);
-      border: 1px solid rgba(0,255,136,0.3);
-      border-radius: 20px;
-      text-align: center;
-      animation: fadeIn 0.5s ease;
-    }
-    .calc-result-label {
-      font-size: 13px;
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    .calc-result-cpm {
-      font-size: 64px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--neon-green), var(--white));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .calc-result-unit {
-      font-size: 16px;
-      color: var(--gray);
-      margin-bottom: 24px;
-    }
-    .calc-result-breakdown {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-    .calc-breakdown-item {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0,255,136,0.15);
-      border-radius: 12px;
-      padding: 14px 10px;
-    }
-    .calc-breakdown-item .bd-val {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--neon-green);
-    }
-    .calc-breakdown-item .bd-lbl {
-      font-size: 11px;
-      color: var(--gray);
-      margin-top: 4px;
-    }
-    .calc-result-cta {
-      font-size: 15px;
-      color: var(--gray);
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-    .calc-result-cta strong {
-      color: var(--white);
-    }
-    .calc-result-btn {
-      display: inline-block;
-      padding: 16px 36px;
-      background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
-      color: #0a0a0a;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.3s;
-      box-shadow: 0 8px 30px rgba(0,255,136,0.35);
-    }
-    .calc-result-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,255,136,0.55);
-    }
-    @media (max-width: 768px) {
-      .calc-wrapper { padding: 28px 20px; }
-      .calc-row { grid-template-columns: 1fr; }
-      .calc-result-breakdown { grid-template-columns: 1fr; }
-      .calc-result-cpm { font-size: 48px; }
-    }
-  </style>
-
-  <div class="calc-wrapper">
-    <div style="margin-bottom: 20px;">
-      <label style="font-size:13px; font-weight:600; color:var(--neon-green); letter-spacing:0.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Płeć</label>
-      <div class="calc-gender">
-        <div class="calc-gender-btn active" id="btn-m" onclick="setGender('m')">Mężczyzna</div>
-        <div class="calc-gender-btn" id="btn-k" onclick="setGender('k')">Kobieta</div>
-      </div>
-    </div>
-
-    <div class="calc-row">
-      <div class="calc-field">
-        <label>Wiek (lata)</label>
-        <input type="number" id="calc-age" placeholder="np. 28" min="10" max="100">
-      </div>
-      <div class="calc-field">
-        <label>Waga (kg)</label>
-        <input type="number" id="calc-weight" placeholder="np. 80" min="30" max="300">
-      </div>
-    </div>
-
-    <div class="calc-row">
-      <div class="calc-field">
-        <label>Wzrost (cm)</label>
-        <input type="number" id="calc-height" placeholder="np. 178" min="100" max="250">
-      </div>
-      <div class="calc-field">
-        <label>Aktywność fizyczna</label>
-        <select id="calc-activity">
-          <option value="1.35">Aktywność fizyczna niska</option>
-          <option value="1.55" selected>Aktywność fizyczna umiarkowana</option>
-          <option value="1.725">Aktywny tryb życia</option>
-          <option value="1.9">Bardzo aktywny tryb życia</option>
-        </select>
-      </div>
-    </div>
-
-    <button class="calc-submit" onclick="calculateCPM()">
-      <i class="fas fa-bolt"></i> Oblicz moje CPM
-    </button>
-
-    <div class="calc-result" id="calc-result">
-      <div class="calc-result-label">Twoje dzienne zapotrzebowanie kaloryczne</div>
-      <div class="calc-result-cpm" id="result-cpm">—</div>
-      <div class="calc-result-unit">kcal / dzień</div>
-      <div class="calc-result-breakdown">
-        <div class="calc-breakdown-item">
-          <div class="bd-val" id="result-redukcja">—</div>
-          <div class="bd-lbl">Redukcja<br>(-20% CPM)</div>
-        </div>
-        <div class="calc-breakdown-item">
-          <div class="bd-val" id="result-utrzymanie">—</div>
-          <div class="bd-lbl">Utrzymanie<br>wagi</div>
-        </div>
-        <div class="calc-breakdown-item">
-          <div class="bd-val" id="result-masa">—</div>
-          <div class="bd-lbl">Budowa masy<br>(+10% CPM)</div>
-        </div>
-      </div>
-      <p class="calc-result-cta">
-        Chcesz zobaczyć jak mogą wyglądać twoje posiłki?<br>
-        <strong>Pobierz moje bezpłatne jadłospisy na 1800 oraz 2500 kcal.</strong>
-      </p>
-      <button class="calc-result-btn" onclick="scrollToLeadMagnet()">
-        <i class="fas fa-download"></i> Pobierz bezpłatny jadłospis
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ LEAD MAGNET ═══════════ -->
-<div class="section-divider"><div class="divider-icon"><i class="fas fa-gift"></i></div></div>
-
-<section class="section fade-in" id="lead-magnet">
+<section class="section fade-in" id="newsletter">
+  <h2 class="section-title">Newsletter</h2>
 
   <style>
     .lm-wrapper {
@@ -972,73 +730,33 @@
   </style>
 
   <div class="lm-wrapper">
-    <div class="lm-badge">🎁 Bezpłatny jadłospis</div>
+    <div class="lm-badge">📬 Zapisz się do newslettera</div>
     <p class="lm-subtitle">
-      Pobierz mój jadłospis i przepisy — gotowe menu na 7 dni, które możesz wdrożyć od jutra w 2 wariantach kalorycznych (1800 oraz 2500).
+      Zapisz się do mojego newslettera i regularnie otrzymuj porady treningowe, żywieniowe i motywacyjne prosto na maila.<br>
+      <strong style="color: var(--white);">Na start w prezencie:</strong> mój jadłospis i przepisy — gotowe menu na 7 dni, które możesz wdrożyć od jutra w 2 wariantach kalorycznych (1800 oraz 2500).
     </p>
     <div class="lm-bullets">
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> 7-dniowe menu z przepisami</div>
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> Dopasowane do różnych poziomów kalorii</div>
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> Proste składniki, krótki czas przygotowania</div>
       <div class="lm-bullet"><i class="fas fa-check-circle"></i> Wysyłam na maila w ciągu 5 minut</div>
+      <div class="lm-bullet"><i class="fas fa-check-circle"></i> Regularne wskazówki w newsletterze</div>
     </div>
     <div class="lm-form" id="lm-form">
       <input type="text" id="lm-name" placeholder="Imię i nazwisko">
       <input type="email" id="lm-email" placeholder="Twój adres e-mail">
       <button onclick="submitLeadMagnet()">
-        <i class="fas fa-download"></i> Pobierz
+        <i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis
       </button>
     </div>
-    <p class="lm-disclaimer">Bez spamu. Możesz wypisać się w każdej chwili.</p>
+    <p class="lm-disclaimer">Zapisując się, dołączasz do mojego newslettera. Bez spamu — możesz wypisać się w każdej chwili.</p>
     <div class="lm-success" id="lm-success">
-      ✅ Gotowe! Sprawdź skrzynkę — jadłospis już leci do Ciebie.
+      ✅ Gotowe! Jesteś zapisany/a do newslettera — sprawdź skrzynkę, jadłospis już leci do Ciebie.
     </div>
   </div>
 </section>
 
 <script>
-  let selectedGender = 'm';
-
-  function setGender(g) {
-    selectedGender = g;
-    document.getElementById('btn-m').classList.toggle('active', g === 'm');
-    document.getElementById('btn-k').classList.toggle('active', g === 'k');
-  }
-
-  function calculateCPM() {
-    const age      = parseFloat(document.getElementById('calc-age').value);
-    const weight   = parseFloat(document.getElementById('calc-weight').value);
-    const height   = parseFloat(document.getElementById('calc-height').value);
-    const activity = parseFloat(document.getElementById('calc-activity').value);
-
-    if (!age || !weight || !height) {
-      alert('Uzupełnij wszystkie pola.');
-      return;
-    }
-
-    let bmr;
-    if (selectedGender === 'm') {
-      bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-    } else {
-      bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-    }
-    const cpm = Math.round(bmr * activity);
-
-    document.getElementById('result-cpm').textContent        = cpm;
-    document.getElementById('result-redukcja').textContent   = Math.round(cpm * 0.8);
-    document.getElementById('result-utrzymanie').textContent = cpm;
-    document.getElementById('result-masa').textContent       = Math.round(cpm * 1.1);
-
-    const resultEl = document.getElementById('calc-result');
-    resultEl.style.display = 'block';
-    resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function scrollToLeadMagnet() {
-    document.getElementById('lead-magnet').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => document.getElementById('lm-name').focus(), 600);
-  }
-
   async function submitLeadMagnet() {
     const name  = document.getElementById('lm-name').value.trim();
     const email = document.getElementById('lm-email').value.trim();
@@ -1074,18 +792,17 @@
         }, 500);
       } else {
         alert('Coś poszło nie tak. Spróbuj ponownie.');
-        btn.innerHTML = '<i class="fas fa-download"></i> Pobierz';
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis';
         btn.disabled = false;
       }
     } catch (e) {
       alert('Błąd połączenia. Spróbuj ponownie.');
-      btn.innerHTML = '<i class="fas fa-download"></i> Pobierz';
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis';
       btn.disabled = false;
     }
   }
 </script>
 
-</section>
 
     <div class="section-divider"><div class="divider-icon"><i class="fas fa-star"></i></div></div>
 
@@ -1408,8 +1125,8 @@
                     <input type="email" id="email" name="email" required style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
                 </div>
                 <div style="margin-bottom: 25px;">
-                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Telefon</label>
-                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Telefon *</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9+ ()\-]{9,}" title="Podaj poprawny numer telefonu (min. 9 cyfr)" style="width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); border-radius: 10px; color: var(--white); font-size: 16px;">
                 </div>
                 <div style="margin-bottom: 25px;">
                     <label style="display: block; margin-bottom: 8px; color: var(--neon-green); font-weight: 500;">Wiadomość *</label>
@@ -1444,6 +1161,8 @@
                 <a href="#uslugi" onclick="event.preventDefault(); scrollToSection('uslugi')">Usługi</a>
                 <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
                 <a href="#blog" onclick="event.preventDefault(); scrollToSection('blog')">Blog</a>
+                <a href="kalkulator.html">Kalkulator kalorii</a>
+                <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Newsletter</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1458,6 +1177,7 @@
     <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="floating-whatsapp" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+    <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="whatsapp-cta" target="_blank">Napisz do mnie na WhatsApp!</a>
     <div class="scroll-to-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
 
     <script>
@@ -1605,6 +1325,16 @@
             if (form) {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
+
+                    // Każde pole jest wymagane (odrzuć też same spacje)
+                    const emptyField = ['name', 'email', 'phone', 'message']
+                        .map(id => document.getElementById(id))
+                        .find(field => !field.value.trim());
+                    if (emptyField) {
+                        alert('Uzupełnij wszystkie pola formularza.');
+                        emptyField.focus();
+                        return;
+                    }
                     
                     // Zbierz dane z formularza
                     const formData = new FormData(form);

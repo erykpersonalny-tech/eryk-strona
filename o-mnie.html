@@ -110,6 +110,10 @@
         .floating-whatsapp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); cursor: pointer; transition: all 0.3s; z-index: 999; text-decoration: none; }
         .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7); }
         .floating-whatsapp i { color: var(--white); font-size: 28px; }
+        .whatsapp-cta { position: fixed; bottom: 41px; right: 102px; padding: 9px 16px; background: rgba(10, 10, 10, 0.95); border: 1px solid #25D366; border-radius: 50px; color: var(--white); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.35); z-index: 999; transition: all 0.3s; }
+        .whatsapp-cta::after { content: ''; position: absolute; right: -6px; top: 50%; width: 10px; height: 10px; background: rgba(10, 10, 10, 0.95); border-top: 1px solid #25D366; border-right: 1px solid #25D366; transform: translateY(-50%) rotate(45deg); }
+        .whatsapp-cta:hover { background: #25D366; color: var(--black); }
+        .whatsapp-cta:hover::after { background: #25D366; }
         
         .scroll-to-top { position: fixed; bottom: 100px; right: 30px; width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
@@ -117,6 +121,10 @@
         .scroll-to-top:hover i { color: var(--black); }
         .scroll-to-top i { color: var(--neon-green); font-size: 20px; transition: color 0.3s; }
         
+        @media (min-width: 769px) and (max-width: 1280px) {
+            nav, nav.scrolled { padding-left: 20px; padding-right: 20px; }
+            .nav-links a { padding: 8px 11px; font-size: 13px; }
+        }
         @media (max-width: 1024px) {
             .about-content { grid-template-columns: 1fr; gap: 40px; }
             .hero-image-bg-circle { width: 350px; height: 350px; }
@@ -135,6 +143,7 @@
             .hamburger { display: flex; }
             .footer-content { text-align: center; }
             .social-links { justify-content: center; }
+            .whatsapp-cta { bottom: 44px; right: 98px; font-size: 12px; padding: 7px 12px; }
         }
     </style>
 </head>
@@ -153,6 +162,8 @@
             <a href="index.html#uslugi">Usługi</a>
             <a href="index.html#cennik">Cennik</a>
             <a href="index.html#blog">Blog</a>
+            <a href="kalkulator.html">Kalkulator</a>
+            <a href="index.html#newsletter">Newsletter</a>
             <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
         </div>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -272,6 +283,7 @@
     <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="floating-whatsapp" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+    <a href="https://wa.me/48577243692?text=Cześć! Chciałbym zapytać o trening personalny." class="whatsapp-cta" target="_blank">Napisz do mnie na WhatsApp!</a>
     <div class="scroll-to-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
 
     <script>

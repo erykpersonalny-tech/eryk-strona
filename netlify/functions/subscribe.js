@@ -5,11 +5,13 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  let email, name;
+  let email, name, list, hp;
   try {
     const body = JSON.parse(event.body);
     email = body.email;
     name = body.name;
+    list = body.list || 'jadlospis';
+    hp = body.hp;
   } catch (e) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowe dane' }) };
   }
@@ -18,10 +20,26 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowy email' }) };
   }
 
+  // honeypot – boty wypełniają ukryte pole
+  if (hp) {
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
+  }
+
+  // Każdy lead magnet = osobna grupa w MailerLite (wyzwala swoją automatyzację).
+  const GROUPS = {
+    jadlospis: '198572466364220944',
+    '4tygodnie': process.env.MAILERLITE_GROUP_4TYGODNIE,
+  };
+  const groupId = GROUPS[list];
+  if (!groupId) {
+    console.log('subscribe: brak grupy dla listy', list);
+    return { statusCode: 503, body: JSON.stringify({ error: 'Zapis chwilowo niedostępny' }) };
+  }
+
   const payload = JSON.stringify({
     email: email,
     fields: { name: name },
-    groups: ['198572466364220944']
+    groups: [groupId]
   });
 
   return new Promise((resolve) => {

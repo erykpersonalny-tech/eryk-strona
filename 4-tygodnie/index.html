@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5EYVELC4XH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5EYVELC4XH');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pierwsze 4 tygodnie na siłowni – darmowy plan | Eryk Jóskowski</title>
+<meta name="description" content="Darmowy plan dla początkujących: checklista pierwszej wizyty, 2 treningi całego ciała, rozpiska na 4 tygodnie i dziennik. Od trenera personalnego z Rumii.">
+<meta property="og:title" content="Pierwsze 4 tygodnie na siłowni – darmowy plan">
+<meta property="og:description" content="Wiesz, co robić, zanim przekroczysz próg siłowni. Plan od trenera personalnego.">
+<meta property="og:image" content="https://erykpersonalny.pl/images/lm-4tyg-cover.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --neon: #00ff88; --neon-dark: #00cc6a; --black: #0a0a0a; --white: #fff; --gray: #c9ccca; --muted: #8c948e; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+  a { color: var(--neon); }
+  .glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(10px); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header.top { padding: 18px 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .24em; font-weight: 700; color: var(--neon); text-transform: uppercase; text-decoration: none; }
+  .brand i { width: 6px; height: 20px; border-radius: 2px; background: linear-gradient(180deg, var(--neon), var(--neon-dark)); display: block; }
+  .top-link { color: var(--gray); font-size: 13px; text-decoration: none; }
+
+  .hero { position: relative; padding: 28px 0 56px; overflow: hidden; }
+  .hero .glow { width: 520px; height: 520px; right: -160px; top: -140px; background: radial-gradient(circle, rgba(0,255,136,.22), transparent 70%); }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; position: relative; }
+  .tag { display: inline-block; padding: 6px 16px; border: 1px solid rgba(0,255,136,.35); background: rgba(0,255,136,.08); color: var(--neon);
+         border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.02; font-weight: 900; text-transform: uppercase; margin: 18px 0 16px; letter-spacing: -.01em; }
+  h1 span { color: var(--neon); }
+  .sub { font-size: 18px; color: var(--gray); max-width: 560px; }
+  .bullets { list-style: none; display: grid; gap: 10px; margin: 24px 0 28px; }
+  .bullets li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
+  .bullets li::before { content: "✓"; color: var(--black); background: var(--neon); width: 20px; height: 20px; border-radius: 6px; flex: none;
+                        display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; margin-top: 2px; }
+
+  .form { background: rgba(255,255,255,.04); border: 1px solid rgba(0,255,136,.28); border-radius: 18px; padding: 20px; display: grid; gap: 10px; max-width: 520px; }
+  .form input[type=text], .form input[type=email] { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 12px; padding: 14px;
+          color: #fff; font-size: 16px; font-family: inherit; width: 100%; }
+  .form input:focus { outline: 2px solid var(--neon); outline-offset: 1px; }
+  .btn { border: 0; border-radius: 12px; padding: 16px 20px; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; cursor: pointer;
+         background: linear-gradient(135deg, var(--neon), var(--neon-dark)); color: var(--black); font-family: inherit; }
+  .btn:disabled { opacity: .6; cursor: default; }
+  .consent { display: flex; gap: 10px; font-size: 12.5px; color: var(--gray); line-height: 1.45; align-items: flex-start; }
+  .consent input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--neon); flex: none; }
+  .err { color: #ff9a7a; font-size: 13px; min-height: 0; }
+  .ok { display: none; background: rgba(0,255,136,.1); border: 1px solid rgba(0,255,136,.4); border-radius: 16px; padding: 20px; max-width: 520px; }
+  .ok h3 { color: var(--neon); font-size: 20px; margin-bottom: 6px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .mock { position: relative; height: 470px; }
+  .mock img { position: absolute; width: 62%; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.08); }
+  .mock .p1 { left: 0; top: 40px; transform: rotate(-6deg); }
+  .mock .p2 { right: 0; top: 70px; transform: rotate(5deg); }
+  .mock .p3 { left: 19%; top: 0; z-index: 2; }
+
+  section.block { padding: 56px 0; border-top: 1px solid rgba(255,255,255,.06); }
+  h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 900; text-transform: uppercase; margin-bottom: 22px; }
+  h2 span { color: var(--neon); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 20px; }
+  .card b { display: block; font-size: 17px; margin-bottom: 6px; }
+  .card p { color: var(--gray); font-size: 14.5px; }
+  .about { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; }
+  .about .bar { width: 6px; height: 100%; min-height: 90px; border-radius: 3px; background: linear-gradient(180deg, var(--neon), var(--neon-dark)); }
+  .about p { color: var(--gray); font-size: 16px; max-width: 760px; }
+  .cta2 { text-align: center; }
+  .cta2 .btn { display: inline-block; text-decoration: none; margin-top: 8px; }
+  footer { padding: 24px 0 36px; color: var(--muted); font-size: 12.5px; border-top: 1px solid rgba(255,255,255,.06); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 28px; }
+    .mock { height: 300px; max-width: 380px; width: 100%; margin: 0 auto; }
+    .hero { padding-top: 8px; }
+    .bullets { margin: 18px 0 20px; }
+    .cards { grid-template-columns: 1fr; }
+    .sub { font-size: 16.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><i></i>Eryk Jóskowski</a>
+  <a class="top-link" href="/">erykpersonalny.pl</a>
+</div></header>
+
+<section class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="tag">Darmowy plan PDF</span>
+      <h1>Pierwsze 4 tygodnie <span>na siłowni</span></h1>
+      <p class="sub">Dla osób, które zaczynają od zera – albo boją się, że wszyscy będą patrzeć. Wiesz, co robić, zanim przekroczysz próg.</p>
+      <ul class="bullets">
+        <li>Checklista przed pierwszą wizytą i niepisane zasady sali</li>
+        <li>2 treningi całego ciała na maszynach – z opisem techniki</li>
+        <li>Jak dobrać ciężar bez zgadywania i kiedy go zwiększać</li>
+        <li>Rozpiska tydzień po tygodniu + dziennik do wydruku</li>
+      </ul>
+
+      <form class="form" id="lm" novalidate>
+        <input type="text" id="lm-name" placeholder="Imię" autocomplete="given-name" required>
+        <input type="email" id="lm-email" placeholder="Twój e-mail" autocomplete="email" inputmode="email" required>
+        <input type="text" id="lm-hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent"><input type="checkbox" id="lm-consent">
+          <span>Chcę otrzymać plan i zapisuję się do newslettera Eryka Jóskowskiego (porady treningowe i żywieniowe, max. kilka maili w miesiącu). Możesz wypisać się w każdej chwili. <a href="/polityka-prywatnosci.html" target="_blank">Polityka prywatności</a>.</span></label>
+        <div class="err" id="lm-err"></div>
+        <button class="btn" type="submit" id="lm-btn">Wyślij mi plan</button>
+      </form>
+      <div class="ok" id="lm-ok">
+        <h3>Gotowe! Sprawdź skrzynkę 📬</h3>
+        <p>Plan wyślę w ciągu kilku minut. Nie widzisz maila? Zajrzyj do zakładek <b>Oferty</b> lub <b>Spam</b> i przenieś go do głównej skrzynki – kolejne wskazówki do planu też tam trafią.</p>
+      </div>
+    </div>
+    <div class="mock" aria-hidden="true">
+      <img class="p1" src="/images/lm-4tyg-plan.jpg" alt="">
+      <img class="p2" src="/images/lm-4tyg-trening.jpg" alt="">
+      <img class="p3" src="/images/lm-4tyg-cover.jpg" alt="Okładka planu Pierwsze 4 tygodnie na siłowni">
+    </div>
+  </div>
+</section>
+
+<section class="block"><div class="wrap">
+  <h2>Dla kogo <span>jest ten plan</span></h2>
+  <div class="cards">
+    <div class="card"><b>Zaczynasz od zera</b><p>Nigdy nie ćwiczyłeś/aś na siłowni albo wracasz po długiej przerwie i nie wiesz, od czego zacząć.</p></div>
+    <div class="card"><b>Stresuje Cię sala</b><p>Masz w głowie „wszyscy będą patrzeć”. Plan daje gotową listę: co spakować, gdzie iść, co zrobić.</p></div>
+    <div class="card"><b>Masz mało czasu</b><p>2–3 treningi po 45–60 minut w tygodniu. Bez codziennego katowania się i bez diety cud.</p></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="about">
+    <div class="bar"></div>
+    <div>
+      <h2 style="margin-bottom:10px">Kto <span>stoi za planem</span></h2>
+      <p>Nazywam się Eryk Jóskowski, jestem trenerem personalnym z Rumii. Zaczynałem jako chudy chłopak bez grama pewności siebie – wiem, jak wygląda pierwsze wejście na siłownię z tej drugiej strony. Od ponad 10 lat pomagam ludziom zacząć i wytrwać. Ten plan to dokładnie to, co pokazuję moim podopiecznym w pierwszym miesiącu.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="block cta2"><div class="wrap">
+  <h2>Zacznij od <span>pierwszego treningu</span></h2>
+  <p style="color:var(--gray); margin-bottom:14px">Plan jest darmowy. Wystarczy imię i e-mail.</p>
+  <a class="btn" href="#lm" onclick="setTimeout(()=>document.getElementById('lm-name').focus(),400)">Chcę plan</a>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© Eryk Jóskowski · Trener personalny · Rumia</span>
+  <span><a href="/polityka-prywatnosci.html">Polityka prywatności</a> · <a href="/regulamin.html">Regulamin</a> · <a href="mailto:kontakt@erykpersonalny.pl">kontakt@erykpersonalny.pl</a></span>
+</div></footer>
+
+<script>
+(function () {
+  var f = document.getElementById('lm'), err = document.getElementById('lm-err'), btn = document.getElementById('lm-btn');
+  var params = new URLSearchParams(location.search);
+  var source = (params.get('utm_source') || params.get('src') || document.referrer.split('/')[2] || 'bezposrednio').slice(0, 40);
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('lm-name').value.trim();
+    var email = document.getElementById('lm-email').value.trim();
+    err.textContent = '';
+    if (!name) { err.textContent = 'Wpisz imię.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Wpisz poprawny adres e-mail.'; return; }
+    if (!document.getElementById('lm-consent').checked) { err.textContent = 'Zaznacz zgodę, żebym mógł wysłać Ci plan.'; return; }
+    btn.disabled = true; btn.textContent = 'Wysyłam…';
+    fetch('/.netlify/functions/subscribe', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, list: '4tygodnie', source: source, hp: document.getElementById('lm-hp').value })
+    }).then(function (r) {
+      if (!r.ok) throw new Error();
+      f.style.display = 'none'; document.getElementById('lm-ok').style.display = 'block';
+      if (window.gtag) gtag('event', 'generate_lead', { lead_magnet: '4tygodnie', source: source });
+    }).catch(function () {
+      err.textContent = 'Coś poszło nie tak. Spróbuj ponownie za chwilę albo napisz na kontakt@erykpersonalny.pl.';
+      btn.disabled = false; btn.textContent = 'Wyślij mi plan';
+    });
+  });
+})();
+</script>
+</body>
+</html>

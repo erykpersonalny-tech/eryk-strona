@@ -1,0 +1,138 @@
+"""Treść jadłospisów 1800 i 2500 kcal – przepisana 1:1 z PDF-ów Eryka (MailerLite, 14.09.2026)."""
+
+SALT = "wg własnego uznania"
+
+PLANS = {
+"1800": {
+  "kcal": 1800, "targets": {"B": (113, 450), "T": (60, 540), "W": (203, 810)},
+  "summary": [("Dzień 1–2", 1799, 118, 208, 55), ("Dzień 3–4", 1803, 119, 199, 59),
+              ("Dzień 5–6", 1810, 122, 200, 58), ("Dzień 7", 1837, 121, 201, 61)],
+  "days": [
+   {"title": "Dzień 1–2", "block": "Blok A", "note": "Przygotuj wieczorem przed dniem 1 — starczy na oba dni",
+    "total": (1799, 118, 208, 55),
+    "meals": [
+     ("Śniadanie", "Owsianka z malinami i migdałami", 429, (17, 61, 13),
+      ["50 g płatków owsianych", "200 ml mleka 2%", "100 g malin (mogą być mrożone)", "10 g płatków migdałowych", "10 g miodu"],
+      ["Zagotuj mleko w rondlu.", "Dodaj płatki owsiane, gotuj ok. 5 min, mieszając.", "Przełóż do miski, dodaj maliny, migdały i miód."]),
+     ("Obiad", "Dorsz pieczony z ziemniakami i brokułem", 553, (44, 65, 13),
+      ["180 g filetu z dorsza", "300 g ziemniaków", "200 g brokuła", "10 ml oliwy z oliwek", f"sól, pieprz, cytryna — {SALT}"],
+      ["Nagrzej piekarnik do 200°C.", "Ułóż dorsza na blaszce, skrop oliwą, dopraw, piecz 15 min.", "Ugotuj ziemniaki, brokuł ugotuj na parze 5 min.", "Złóż na talerzu, skrop sokiem z cytryny."]),
+     ("Kolacja", "Kanapki z szynką z indyka i serkiem wiejskim", 511, (37, 57, 15),
+      ["3 kromki chleba pełnoziarnistego (105 g)", "80 g szynki z indyka", "100 g serka wiejskiego", "150 g pomidora i ogórka", "5 ml oliwy z oliwek", f"sól, pieprz, szczypiorek — {SALT}"],
+      ["Serek wiejski dopraw i wymieszaj z oliwą.", "Pokrój pomidora i ogórka.", "Nałóż serek na pieczywo, ułóż szynkę i warzywa."]),
+    ],
+    "shake": ("20 g odżywki białkowej, 100 g banana, 20 g orzechów włoskich — zblenduj z 250 ml wody.", 306, (20, 25, 14), 20)},
+   {"title": "Dzień 3–4", "block": "Blok B", "note": "Przygotuj wieczorem przed dniem 3 — starczy na oba dni",
+    "total": (1803, 119, 199, 59),
+    "meals": [
+     ("Śniadanie", "Omlet ze szpinakiem i pieczywem", 460, (27, 34, 24),
+      ["2 jajka (110 g)", "80 g świeżego szpinaku", "20 g sera żółtego", "2 kromki chleba pełnoziarnistego (70 g)", "5 ml oliwy z oliwek", f"sól, pieprz — {SALT}"],
+      ["Rozgrzej oliwę na patelni, poduś szpinak, aż zwiędnie.", "Ubij jajka, dopraw, wlej na patelnię, posyp startym serem.", "Smaż pod przykryciem, aż omlet się zetnie. Podawaj z pieczywem."]),
+     ("Obiad", "Gulasz z indyka z kaszą jaglaną", 530, (34, 58, 18),
+      ["130 g mielonego mięsa z indyka", "60 g kaszy jaglanej (surowa)", "150 g passaty pomidorowej", "100 g papryki", "5 ml oliwy z oliwek", f"sól, pieprz, papryka, czosnek — {SALT}"],
+      ["Ugotuj kaszę jaglaną według instrukcji na opakowaniu.", "Rozgrzej oliwę, podsmaż mięso, rozdrabniając łyżką.", "Dodaj pokrojoną paprykę, smaż 3 min.", "Wlej passatę, dopraw, gotuj 10 min. Podawaj z kaszą."]),
+     ("Kolacja", "Sałatka z ciecierzycą i tuńczykiem", 501, (37, 59, 13),
+      ["150 g ciecierzycy z puszki (odsączona)", "80 g tuńczyka w sosie własnym (odsączony)", "200 g warzyw (sałata, pomidor, ogórek)", "8 ml oliwy z oliwek", "1 bułka grahamka (60 g)", f"sól, pieprz, sok z cytryny — {SALT}"],
+      ["Odsącz i przepłucz ciecierzycę, odsącz tuńczyka.", "Pokrój warzywa, przełóż do miski.", "Dodaj ciecierzycę i tuńczyka, skrop oliwą i cytryną, dopraw.", "Podawaj z bułką."]),
+    ],
+    "shake": ("15 g odżywki białkowej, 150 g mango, 50 g jogurtu greckiego, 25 g płatków owsianych, 10 g miodu — zblenduj z 200 ml wody.", 312, (21, 48, 4), 15)},
+   {"title": "Dzień 5–6", "block": "Blok C", "note": "Przygotuj wieczorem przed dniem 5 — starczy na oba dni",
+    "total": (1810, 122, 200, 58),
+    "meals": [
+     ("Śniadanie", "Serek wiejski z borówkami i płatkami", 470, (30, 47, 18),
+      ["200 g serka wiejskiego", "100 g borówek", "30 g płatków owsianych", "10 g orzechów włoskich", "10 g miodu"],
+      ["Przełóż serek do miski, wmieszaj miód.", "Dodaj borówki, płatki owsiane i posiekane orzechy."]),
+     ("Obiad", "Kurczak z kuskusem i warzywami", 513, (44, 55, 13),
+      ["140 g piersi z kurczaka", "60 g kuskusu (suchy)", "200 g mrożonych warzyw", "8 ml oliwy z oliwek", f"przyprawy do smaku — {SALT}"],
+      ["Kuskus zalej wrzątkiem 1:1, przykryj na 5 min.", "Pokrój kurczaka w kostkę, przypraw, usmaż na oliwie 8–10 min.", "Dodaj warzywa, smaż 5–7 min.", "Wymieszaj z kuskusem."]),
+     ("Kolacja", "Tortilla z jajkiem i hummusem", 440, (24, 41, 20),
+      ["1 tortilla pełnoziarnista (60 g)", "2 jajka (110 g)", "40 g hummusu", "150 g warzyw (sałata, pomidor, ogórek)", f"sól, pieprz — {SALT}"],
+      ["Ugotuj jajka na twardo (8 min) lub usmaż na patelni bez tłuszczu.", "Podgrzej tortillę na suchej patelni ok. 30 sekund.", "Posmaruj hummusem, ułóż pokrojone jajka i warzywa, zawiń."]),
+    ],
+    "shake": ("15 g odżywki białkowej, 100 g banana, 100 g truskawek, 200 ml kefiru, 30 g płatków owsianych — zblenduj.", 387, (24, 57, 7), 15)},
+   {"title": "Dzień 7", "block": "Dzień 7", "note": "Dzień samodzielny — wszystko na świeżo",
+    "total": (1837, 121, 201, 61),
+    "meals": [
+     ("Śniadanie", "Owsianka nocna z jabłkiem i cynamonem", 461, (26, 69, 9),
+      ["55 g płatków owsianych", "150 g skyra naturalnego", "150 g jabłka", "10 g płatków migdałowych", "10 g miodu", f"cynamon — {SALT}"],
+      ["Wymieszaj płatki ze skyrem, miodem, cynamonem i 100 ml wody.", "Przełóż do słoika, wstaw do lodówki na noc.", "Rano dodaj starte lub pokrojone jabłko i migdały."]),
+     ("Obiad", "Łosoś z ryżem brązowym i szpinakiem", 519, (33, 45, 23),
+      ["120 g filetu z łososia", "60 g ryżu brązowego (surowy)", "150 g świeżego szpinaku", "5 ml oliwy z oliwek", f"sól, pieprz, czosnek, cytryna — {SALT}"],
+      ["Ugotuj ryż brązowy według instrukcji na opakowaniu.", "Usmaż łososia na patelni po 4 min z każdej strony.", "Na oliwie poduś szpinak z czosnkiem.", "Złóż na talerzu, skrop cytryną."]),
+     ("Kolacja", "Pieczone bataty z kurczakiem i jogurtem", 490, (38, 62, 10),
+      ["300 g batatów", "120 g piersi z kurczaka", "60 g jogurtu greckiego", "6 ml oliwy z oliwek", f"sól, pieprz, papryka — {SALT}"],
+      ["Bataty pokrój w słupki, skrop oliwą, piecz 25 min w 200°C.", "Przypraw kurczaka i upiecz razem z batatami lub usmaż na patelni.", "Podawaj z jogurtem greckim doprawionym solą i pieprzem."]),
+    ],
+    "shake": ("15 g odżywki białkowej, 10 g kakao, 200 ml mleka 2%, 20 g orzechów włoskich, 15 g miodu — zblenduj.", 367, (24, 25, 19), 15)},
+  ]},
+"2500": {
+  "kcal": 2500, "targets": {"B": (156, 625), "T": (83, 750), "W": (281, 1125)},
+  "summary": [("Dzień 1–2", 2505, 160, 275, 85), ("Dzień 3–4", 2501, 160, 283, 81),
+              ("Dzień 5–6", 2494, 156, 274, 86), ("Dzień 7", 2483, 160, 283, 79)],
+  "days": [
+   {"title": "Dzień 1–2", "block": "Blok A", "note": "Przygotuj wieczorem przed dniem 1 — starczy na oba dni",
+    "total": (2505, 160, 275, 85),
+    "meals": [
+     ("Śniadanie", "Jajecznica z awokado i pieczywem", 621, (31, 50, 33),
+      ["3 jajka (165 g)", "3 kromki chleba pełnoziarnistego (105 g)", "60 g awokado", "5 g masła", f"sól, pieprz, szczypiorek — {SALT}"],
+      ["Roztrzep jajka, dopraw solą i pieprzem.", "Rozgrzej masło na patelni, wlej jajka, smaż, mieszając na małym ogniu.", "Podawaj z pieczywem i plastrami awokado."]),
+     ("Obiad", "Kurczak z kaszą gryczaną i warzywami", 680, (57, 68, 20),
+      ["180 g piersi z kurczaka", "90 g kaszy gryczanej (surowa)", "200 g mrożonych warzyw", "12 ml oliwy z oliwek", f"przyprawy do smaku — {SALT}"],
+      ["Ugotuj kaszę według instrukcji na opakowaniu.", "Pokrój kurczaka w kostkę, przypraw, usmaż na oliwie 8–10 min.", "Dodaj warzywa mrożone, smaż 5–7 min.", "Wymieszaj z ugotowaną kaszą."]),
+     ("Kolacja", "Makaron z mielonym indykiem i passatą", 731, (48, 74, 27),
+      ["100 g makaronu pełnoziarnistego (surowy)", "150 g mielonego mięsa z indyka", "150 g passaty pomidorowej", "8 ml oliwy z oliwek", "15 g parmezanu", f"sól, pieprz, oregano, czosnek — {SALT}"],
+      ["Ugotuj makaron.", "Rozgrzej oliwę, podsmaż mięso, rozdrabniając łyżką.", "Wlej passatę, dopraw, gotuj 10 min na małym ogniu.", "Podawaj z makaronem, posyp parmezanem."]),
+    ],
+    "shake": ("20 g odżywki białkowej, 120 g banana, 150 g mango, 40 g płatków owsianych, 10 g miodu — zblenduj z 300 ml wody.", 473, (24, 83, 5), 20)},
+   {"title": "Dzień 3–4", "block": "Blok B", "note": "Przygotuj wieczorem przed dniem 3 — starczy na oba dni",
+    "total": (2501, 160, 283, 81),
+    "meals": [
+     ("Śniadanie", "Skyr z ananasem, płatkami i migdałami", 542, (33, 71, 14),
+      ["200 g skyra naturalnego", "150 g ananasa (świeży lub z puszki bez cukru)", "50 g płatków owsianych", "20 g płatków migdałowych", "15 g miodu"],
+      ["Przełóż skyr do miski, wmieszaj miód.", "Dodaj pokrojonego ananasa i płatki owsiane.", "Posyp migdałami."]),
+     ("Obiad", "Kurczak curry z ryżem", 733, (50, 77, 25),
+      ["180 g piersi z kurczaka", "90 g ryżu (surowy)", "150 ml mleczka kokosowego light", "20 g pasty curry", "8 ml oleju do smażenia", f"przyprawy do smaku — {SALT}"],
+      ["Ugotuj ryż według instrukcji na opakowaniu.", "Pokrój kurczaka w kostkę, usmaż na oleju.", "Dodaj pastę curry, smaż 1 min.", "Wlej mleczko kokosowe, gotuj 10 min na małym ogniu."]),
+     ("Kolacja", "Tortilla z tuńczykiem i kukurydzą", 617, (40, 76, 17),
+      ["2 tortille pełnoziarniste (120 g)", "90 g tuńczyka w sosie własnym (odsączony)", "60 g kukurydzy z puszki", "150 g warzyw (sałata, pomidor, ogórek)", "50 g jogurtu greckiego", "6 ml oliwy z oliwek"],
+      ["Odsącz tuńczyka, wymieszaj z jogurtem i oliwą, dopraw.", "Podgrzej tortille na suchej patelni po ok. 30 sekund.", "Nałóż farsz, kukurydzę i pokrojone warzywa, zawiń."]),
+    ],
+    "shake": ("25 g odżywki białkowej, 250 ml mleka 2%, 150 g borówek, 25 g orzechów włoskich, 25 g płatków owsianych, 10 g miodu — zblenduj.", 609, (37, 59, 25), 25)},
+   {"title": "Dzień 5–6", "block": "Blok C", "note": "Przygotuj wieczorem przed dniem 5 — starczy na oba dni",
+    "total": (2494, 156, 274, 86),
+    "meals": [
+     ("Śniadanie", "Kanapki z pastą jajeczną i awokado", 616, (36, 55, 28),
+      ["3 jajka (165 g)", "3 kromki chleba pełnoziarnistego (105 g)", "40 g jogurtu greckiego", "50 g awokado", "100 g pomidora", f"sól, pieprz, szczypiorek — {SALT}"],
+      ["Ugotuj jajka na twardo (8 min), ostudź i obierz.", "Rozgnieć widelcem, wymieszaj z jogurtem, dopraw.", "Nałóż pastę na pieczywo, ułóż plastry awokado i pomidora."]),
+     ("Obiad", "Łosoś z batatami i brokułem", 743, (41, 84, 27),
+      ["150 g filetu z łososia", "350 g batatów", "200 g brokuła", "6 ml oliwy z oliwek", f"sól, pieprz, cytryna — {SALT}"],
+      ["Nagrzej piekarnik do 200°C.", "Bataty pokrój w słupki, skrop oliwą, piecz 25 min.", "Dołóż łososia na blaszkę na ostatnie 15 min pieczenia.", "Brokuł ugotuj na parze 5 min, skrop cytryną."]),
+     ("Kolacja", "Smażony ryż z jajkiem i warzywami", 563, (23, 75, 19),
+      ["80 g ryżu (surowy)", "2 jajka (110 g)", "200 g mrożonych warzyw", "6 ml oleju do smażenia", f"sos sojowy i przyprawy — {SALT}"],
+      ["Ugotuj ryż (najlepiej dzień wcześniej — lepiej się smaży).", "Rozgrzej olej, wrzuć warzywa, smaż 5 min.", "Dodaj ryż, wlej roztrzepane jajka, smaż, mieszając 2–3 min.", "Dopraw sosem sojowym."]),
+    ],
+    "shake": ("40 g odżywki białkowej, 150 g skyra, 150 g truskawek, 100 g banana, 30 g płatków owsianych, 10 g orzechów włoskich — zblenduj z 250 ml wody.", 572, (56, 60, 12), 40)},
+   {"title": "Dzień 7", "block": "Dzień 7", "note": "Dzień samodzielny — wszystko na świeżo",
+    "total": (2483, 160, 283, 79),
+    "meals": [
+     ("Śniadanie", "Omlet z papryką i serem", 598, (34, 39, 34),
+      ["3 jajka (165 g)", "100 g papryki", "25 g sera żółtego", "2 kromki chleba pełnoziarnistego (70 g)", "8 ml oliwy z oliwek", f"sól, pieprz — {SALT}"],
+      ["Pokrój paprykę, podsmaż na oliwie 3–4 min.", "Ubij jajka, dopraw, wlej na patelnię.", "Posyp startym serem, smaż pod przykryciem, aż omlet się zetnie.", "Podawaj z pieczywem."]),
+     ("Obiad", "Kurczak z pieczonymi ziemniakami i surówką", 652, (51, 76, 16),
+      ["180 g piersi z kurczaka", "400 g ziemniaków", "200 g warzyw na surówkę (marchew, kapusta, ogórek)", "12 ml oliwy z oliwek", f"sól, pieprz, papryka, zioła — {SALT}"],
+      ["Ziemniaki pokrój w ćwiartki, skrop połową oliwy, piecz 30 min w 200°C.", "Przypraw kurczaka i upiecz razem z ziemniakami (ostatnie 20 min).", "Warzywa zetrzyj lub pokrój, skrop resztą oliwy, dopraw."]),
+     ("Kolacja", "Twarożek z pieczywem i warzywami", 617, (47, 60, 21),
+      ["200 g twarogu półtłustego", "3 kromki chleba pełnoziarnistego (105 g)", "150 g rzodkiewki i ogórka", "8 ml oliwy z oliwek", f"sól, pieprz, szczypiorek — {SALT}"],
+      ["Rozgnieć twaróg widelcem, wmieszaj oliwę, dopraw.", "Pokrój rzodkiewkę i ogórka, dodaj do twarożku.", "Podawaj z pieczywem."]),
+    ],
+    "shake": ("15 g odżywki białkowej, 250 ml kefiru, 200 g mango, 120 g banana, 40 g płatków owsianych, 20 g miodu — zblenduj.", 616, (28, 108, 8), 15)},
+  ]},
+}
+
+# Sprawdzenie: suma posiłków + szejk = suma dnia (kcal)
+if __name__ == "__main__":
+    for k, p in PLANS.items():
+        for d in p["days"]:
+            s = sum(m[2] for m in d["meals"]) + d["shake"][1]
+            b = sum(m[3][0] for m in d["meals"]) + d["shake"][2][0]
+            print(k, d["title"], s, d["total"][0], "OK" if s == d["total"][0] else "RÓŻNICA", "| B", b, d["total"][1])

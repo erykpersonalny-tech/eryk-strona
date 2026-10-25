@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Pierwsze 4 tygodnie na siłowni – Eryk Jóskowski</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --black: #0a0a0a; --ink: #141614; --green: #00ff88; --green-ink: #0a9d5a; --mint: #bff5dc; --mint-bg: #ecfdf4;
+    --grey: #5c625e; --line: #e3e7e4; --soft: #f4f6f5; --warn: #d9480f; --warn-bg: #fff3ec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); font-size: 10.6px; line-height: 1.5;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  b, strong { font-weight: 700; }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+  .body { flex: 1; padding: 12mm 11.5mm 0; display: flex; flex-direction: column; gap: 11px; zoom: var(--z, 1.3); }
+  .foot { height: 13mm; padding: 0 15mm; display: flex; align-items: center; justify-content: space-between;
+          font-size: 7px; letter-spacing: .22em; color: #8b918d; text-transform: uppercase; }
+  .eyebrow { font-size: 7.5px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--green-ink); }
+  h2 { font-size: 21px; font-weight: 900; letter-spacing: -.01em; line-height: 1.12; text-transform: uppercase; }
+  h2 em { font-style: normal; color: var(--green-ink); }
+  h3 { font-size: 12.5px; font-weight: 800; }
+  .lead { font-size: 11.5px; color: #333836; max-width: 150mm; }
+  .head { display: flex; flex-direction: column; gap: 6px; padding-bottom: 9px; border-bottom: 2.5px solid var(--black); }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .card.mint { background: var(--mint-bg); border-color: var(--mint); }
+  .card.dark { background: var(--black); color: #fff; border: 0; position: relative; overflow: hidden; }
+  .card.dark::after { content: ""; position: absolute; right: -40px; top: -60px; width: 240px; height: 180px;
+    background: radial-gradient(closest-side, rgba(0,255,136,.25), rgba(0,255,136,0)); }
+  .card.dark > * { position: relative; z-index: 1; }
+  .card.dark .eyebrow { color: var(--green); }
+  .card.warn { background: var(--warn-bg); border-color: #f6c9b0; }
+  .card.warn .eyebrow { color: var(--warn); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  ul.check { list-style: none; display: grid; gap: 6px; margin-top: 7px; }
+  ul.check li { display: flex; gap: 9px; align-items: flex-start; }
+  ul.check li::before { content: ""; flex: none; width: 11px; height: 11px; margin-top: 2px; border: 1.6px solid #6b706c; border-radius: 3px; }
+  ul.dots { list-style: none; display: grid; gap: 5px; margin-top: 6px; }
+  ul.dots li { position: relative; padding-left: 11px; }
+  ul.dots li::before { content: ""; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--green-ink); }
+  .card.dark ul.dots li::before { background: var(--green); }
+  .num { width: 22px; height: 22px; border-radius: 7px; background: var(--black); color: var(--green); font-weight: 800; font-size: 11px;
+         display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .row { display: flex; gap: 10px; align-items: flex-start; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  th { font-size: 7.5px; letter-spacing: .16em; text-transform: uppercase; color: #fff; background: var(--black); text-align: left; padding: 7px 9px; font-weight: 800; }
+  th:first-child { border-top-left-radius: 9px; } th:last-child { border-top-right-radius: 9px; }
+  td { padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  .tbl { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .pill { display: inline-block; border: 1px solid var(--mint); background: var(--mint-bg); color: var(--green-ink); border-radius: 999px;
+          padding: 2px 9px; font-size: 7.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+  .ex { border: 1px solid var(--line); border-radius: 11px; overflow: hidden; break-inside: avoid; }
+  .ex-head { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--soft); }
+  .ex-head h3 { flex: 1; font-size: 11.5px; }
+  .ex-head .sets { font-weight: 800; font-size: 10.5px; color: var(--green-ink); white-space: nowrap; }
+  .ex-body { display: grid; grid-template-columns: 1fr 1.15fr; gap: 14px; padding: 9px 12px 10px; }
+  .ex-body .muted { color: var(--grey); }
+  .muted { color: var(--grey); }
+  a.vid { display: inline-block; margin-top: 6px; font-size: 9px; font-weight: 800; color: var(--green-ink); text-decoration: none; border: 1px solid var(--mint); background: var(--mint-bg); border-radius: 999px; padding: 2px 9px; }
+  .small { font-size: 9px; }
+
+  /* okładka */
+  .cover { background: var(--black); color: #fff; }
+  .cover::before { content: ""; position: absolute; right: -120px; top: -140px; width: 620px; height: 560px;
+    background: radial-gradient(closest-side, rgba(0,255,136,.32), rgba(0,255,136,0)); }
+  .cover::after { content: ""; position: absolute; left: -160px; bottom: -200px; width: 520px; height: 480px;
+    background: radial-gradient(closest-side, rgba(0,255,136,.12), rgba(0,255,136,0)); }
+  .cover .inner { position: relative; z-index: 1; padding: 22mm 18mm 18mm; display: flex; flex-direction: column; height: 100%; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 9px; font-weight: 800; letter-spacing: .3em; color: var(--green); }
+  .bar { width: 6px; height: 20px; border-radius: 3px; background: var(--green); }
+  .cover h1 { font-size: 54px; font-weight: 900; line-height: .98; letter-spacing: -.02em; margin-top: 46mm; text-transform: uppercase; }
+  .cover h1 em { font-style: normal; color: var(--green); }
+  .cover .sub { font-size: 15px; color: #d9dedb; margin-top: 16px; max-width: 135mm; line-height: 1.45; }
+  .cover .inside { margin-top: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px 18px; font-size: 11px; color: #e8ebe9; }
+  .cover .inside div { display: flex; gap: 9px; align-items: center; }
+  .cover .inside div::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--green); flex: none; }
+  .cover .who { margin-top: 14mm; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.18); display: flex; justify-content: space-between;
+                font-size: 9px; letter-spacing: .2em; color: #a4aaa6; text-transform: uppercase; }
+
+  .weekgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .wk { border: 1px solid var(--line); border-radius: 11px; padding: 10px 11px; }
+  .wk .big { font-size: 17px; font-weight: 900; margin: 3px 0 2px; }
+  .wk.on { border-color: var(--mint); background: var(--mint-bg); }
+
+  .log td, .log th { text-align: center; padding: 6px 4px; }
+  .log td:first-child, .log th:first-child { text-align: left; padding-left: 9px; }
+  .log td { height: 26px; font-size: 9.5px; }
+  .log .cell { border-left: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<!-- 1. OKŁADKA -->
+<section class="page cover">
+  <div class="inner">
+    <div class="brand"><span class="bar"></span>ERYK JÓSKOWSKI · TRENER PERSONALNY</div>
+    <h1>Pierwsze<br>4 tygodnie<br><em>na siłowni</em></h1>
+    <p class="sub">Gotowy plan dla osób, które zaczynają od zera – albo boją się, że wszyscy będą patrzeć. Wiesz, co robić, zanim przekroczysz próg.</p>
+    <div class="inside">
+      <div>Checklista przed pierwszą wizytą</div>
+      <div>2 treningi całego ciała (A i B)</div>
+      <div>Jak dobrać ciężar – bez zgadywania</div>
+      <div>Rozpisany plan tydzień po tygodniu</div>
+      <div>Dziennik do wydruku</div>
+      <div>3 zasady jedzenia na start</div>
+    </div>
+    <div class="who"><span>erykpersonalny.pl</span><span>Trener personalny · Rumia</span></div>
+  </div>
+</section>
+
+<!-- 2. ZANIM ZACZNIESZ -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Zanim zaczniesz</div>
+      <h2>Siłownia nie jest <em>dla wybranych</em></h2>
+    </div>
+    <p class="lead">Zaczynałem jako chudy chłopak bez grama pewności siebie. Pamiętam pierwsze wejście na salę: nie wiedziałem, do czego służy połowa sprzętu, i byłem przekonany, że wszyscy to widzą. Po wielu latach treningów wiem jedno – <b>każdy kiedyś był nowy</b>, a większość osób na siłowni skupia się wyłącznie na sobie.</p>
+    <p class="lead">Ten plan powstał po to, żeby pierwsze tygodnie były proste: wiesz, co robisz, w jakiej kolejności i z jakim ciężarem. Bez kombinowania i niepotrzebnego stresu.</p>
+
+    <div class="grid3" style="margin-top:4px">
+      <div class="card mint"><div class="eyebrow">Ile razy w tygodniu</div><h3 style="margin-top:4px">2–3 treningi</h3><p class="muted" style="margin-top:3px">3 to ideał. 2 też dają efekty – ważniejsza jest regularność niż liczba.</p></div>
+      <div class="card mint"><div class="eyebrow">Ile trwa trening</div><h3 style="margin-top:4px">45–60 minut</h3><p class="muted" style="margin-top:3px">Z rozgrzewką. Nie musisz spędzać na sali dwóch godzin.</p></div>
+      <div class="card mint"><div class="eyebrow">Na czym ćwiczysz</div><h3 style="margin-top:4px">Proste wyposażenie</h3><p class="muted" style="margin-top:3px">Plan jest ułożony z takiego sprzętu, że zrobisz go na 90% siłowni.</p></div>
+    </div>
+
+    <div class="card">
+      <h3>Jak korzystać z tego planu</h3>
+      <div style="display:grid; gap:8px; margin-top:8px">
+        <div class="row"><span class="num">1</span><div><b>Przeczytaj checklistę</b> (str. 3) – dzień przed pierwszą wizytą.</div></div>
+        <div class="row"><span class="num">2</span><div><b>Zrób zdjęcie stron z treningami A i B</b> (str. 6–7) albo wydrukuj je. Na sali nie musisz niczego pamiętać.</div></div>
+        <div class="row"><span class="num">3</span><div><b>Trzymaj się rozpiski tygodni</b> (str. 5). Pierwszy tydzień jest celowo lekki – uczysz się ruchu, nie bijesz rekordów.</div></div>
+        <div class="row"><span class="num">4</span><div><b>Zapisuj ciężary w dzienniku</b> (str. 8). Progres siłowy jest ważny, przychodzi stosunkowo szybko i daje super motywację!</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Czego NIE potrzebujesz na start</h3>
+      <div class="grid2" style="margin-top:6px">
+        <ul class="dots" style="margin-top:0"><li>Suplementów i „spalaczy”.</li><li>Specjalnych butów, pasa i rękawiczek.</li><li>Formy „na siłownię” – po nią się tam chodzi.</li></ul>
+        <ul class="dots" style="margin-top:0"><li>Treningu codziennie do upadku.</li><li>Diety z listą zakazanych produktów.</li><li>Wiedzy o wszystkich maszynach na sali.</li></ul>
+      </div>
+    </div>
+    <div class="card warn">
+      <div class="eyebrow">Ważne</div>
+      <p style="margin-top:4px">Jeśli masz chorobę przewlekłą, jesteś w ciąży, po operacji albo coś Cię boli na co dzień – zanim zaczniesz, skonsultuj się z lekarzem lub fizjoterapeutą. Plan jest ogólny i nie zastępuje indywidualnej oceny.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>2</span></div>
+</section>
+
+<!-- 3. CHECKLISTA -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Przed pierwszą wizytą</div>
+      <h2>Checklista <em>spokojnej głowy</em></h2>
+      <p class="lead">Najwięcej stresu daje niewiadoma. Odhacz te punkty, a na salę wejdziesz z planem.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Spakuj</h3>
+        <ul class="check">
+          <li>Wygodny strój, w którym swobodnie zrobisz przysiad</li>
+          <li>Buty z płaską, stabilną podeszwą (nie muszą być „specjalne”)</li>
+          <li>Ręcznik – kładzie się go na ławkach i siedziskach</li>
+          <li>Butelkę wody</li>
+          <li>Kłódkę do szafki (w części klubów potrzebna)</li>
+          <li>Telefon ze zdjęciem treningu A</li>
+          <li>Słuchawki – pomagają się „odciąć”</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Zaplanuj</h3>
+        <ul class="check">
+          <li>Godzinę, kiedy jest luźniej – zapytaj na recepcji, kiedy klub jest najmniej oblegany</li>
+          <li>Posiłek 1,5–3 h przed treningiem (nie na pusty żołądek, nie tuż po obiedzie)</li>
+          <li>Pierwszy trening = trening A</li>
+          <li>Dni treningów w kalendarzu na cały tydzień (np. pon–śr–pt)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Na miejscu</h3>
+        <ul class="check">
+          <li>Obejdź salę i znajdź maszyny z treningu A, zanim zaczniesz</li>
+          <li>Poproś pracownika lub trenera dyżurnego, żeby pokazał Ci ustawienie maszyny – to normalne i nikt się nie dziwi</li>
+          <li>Zapisz ustawienia (wysokość siedziska, numer otworu) – następnym razem oszczędzisz czas</li>
+          <li>Po każdym ćwiczeniu wpisz ciężar do dziennika</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Niepisane zasady sali</h3>
+        <ul class="dots">
+          <li>Odkładaj sprzęt na miejsce i wycieraj siedzisko po sobie.</li>
+          <li>Maszyna zajęta? Zapytaj: <b>„Ile serii jeszcze?”</b> albo <b>„Mogę się dołączyć na zmianę?”</b>.</li>
+          <li>Telefon na przerwę, nie na zajętej maszynie przez 10 minut.</li>
+          <li>Nie stawaj tuż przed kimś, kto ćwiczy przy lustrze.</li>
+          <li>Nikt nie ocenia Twojego ciężaru. Serio.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card dark">
+      <div class="eyebrow">Głowa</div>
+      <h3 style="margin-top:4px; font-size:13px">„A jeśli wszyscy będą się gapić?”</h3>
+      <p style="margin-top:5px; color:#dfe3e0">Ludzie na siłowni patrzą głównie w lustro – na siebie. Ci, którzy trenują dłużej, zwykle szanują każdego, kto przyszedł. Pierwsze 2–3 wizyty są najtrudniejsze. Potem siłownia staje się po prostu miejscem, w którym wiesz, co robisz.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>3</span></div>
+</section>
+
+<!-- 4. CIĘŻAR + ROZGRZEWKA -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Zasady treningu</div>
+      <h2>Jaki ciężar <em>wziąć?</em></h2>
+      <p class="lead">Najczęstsze pytanie początkujących. Odpowiedź: taki, przy którym kończysz serię z kilkoma powtórzeniami <b>w zapasie</b>.</p>
+    </div>
+
+    <div class="card mint">
+      <h3>Powtórzenia w zapasie – Twój najważniejszy wskaźnik</h3>
+      <p style="margin-top:5px">Po skończonej serii zadaj sobie pytanie: <b>„Ile jeszcze powtórzeń zrobił(a)bym czysto technicznie?”</b>. To jest Twój zapas.</p>
+      <div class="grid3" style="margin-top:9px">
+        <div class="card" style="background:#fff"><div class="eyebrow">Zapas 4+</div><p style="margin-top:3px"><b>Za lekko</b> – w następnej serii dołóż ciężar.</p></div>
+        <div class="card" style="background:#fff"><div class="eyebrow">Zapas 2–3</div><p style="margin-top:3px"><b>W sam raz</b> – tak trenujesz przez te 4 tygodnie.</p></div>
+        <div class="card" style="background:#fff"><div class="eyebrow">Zapas 0–1</div><p style="margin-top:3px"><b>Za ciężko na start</b> – zmniejsz ciężar.</p></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Kiedy dokładać ciężar</h3>
+        <p style="margin-top:5px">Stosujesz prostą zasadę <b>„najpierw powtórzenia, potem ciężar”</b>:</p>
+        <ul class="dots">
+          <li>Masz zakres, np. <b>10–12 powtórzeń</b>.</li>
+          <li>Gdy we <b>wszystkich seriach</b> robisz 12 z zadanym zapasem – na następnym treningu dołóż najmniejszy możliwy ciężar.</li>
+          <li>Po dołożeniu znów robisz ok. 10 powtórzeń i budujesz do 12.</li>
+        </ul>
+        <p class="muted small" style="margin-top:6px">Ciężar nie musi rosnąć co trening. Liczy się kierunek w skali tygodni.</p>
+      </div>
+      <div class="card">
+        <h3>Technika i tempo</h3>
+        <ul class="dots">
+          <li>Ruch w dół (opuszczanie) wolno, ok. <b>2–3 sekund</b>. W górę płynnie.</li>
+          <li>Pełny zakres ruchu, na jaki pozwala Twoje ciało – bez szarpania.</li>
+          <li>Oddychaj: wydech przy wysiłku, nie wstrzymuj oddechu długo.</li>
+          <li><b>Przerwa między seriami: minimum 2 minuty.</b> Krótsza nie znaczy lepsza.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card dark">
+      <div class="eyebrow">Rozgrzewka – 7 minut przed każdym treningiem</div>
+      <div class="grid3" style="margin-top:8px">
+        <div><b style="color:var(--green)">1.</b> 5 min rowerka, orbitreka lub szybkiego marszu na bieżni – spokojnie, do lekkiego ciepła.</div>
+        <div><b style="color:var(--green)">2.</b> Po 10 powtórzeń: krążenia ramion, przysiady bez obciążenia, wymachy nóg.</div>
+        <div><b style="color:var(--green)">3.</b> Przed każdym ćwiczeniem wykonaj 1 serię rozgrzewkową na mniejszym ciężarze niż planujesz używać w seriach głównych (nie liczysz jej do ogólnej liczby serii).</div>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <div class="eyebrow">Co jest normalne, a co nie</div>
+      <div class="grid2" style="margin-top:5px">
+        <p><b>Normalne:</b> „zakwasy” (tępa bolesność mięśni) 1–3 dni po treningu, zmęczenie, drżenie mięśni pod koniec serii.</p>
+        <p><b>Przerwij ćwiczenie:</b> ostry, kłujący ból, ból w stawie, zawroty głowy, ból w klatce piersiowej, duszność nieproporcjonalna do wysiłku.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>4</span></div>
+</section>
+
+<!-- 5. PLAN 4 TYGODNI -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Plan</div>
+      <h2>4 tygodnie <em>krok po kroku</em></h2>
+      <p class="lead">Trenujesz na zmianę dwa treningi całego ciała: <b>A</b> i <b>B</b>. Nie robisz tego samego dzień po dniu – między treningami jest co najmniej jeden dzień przerwy.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card mint">
+        <div class="eyebrow">Wariant 3 × w tygodniu</div>
+        <p style="margin-top:5px">Tydzień 1 i 3: <b>A – B – A</b><br>Tydzień 2 i 4: <b>B – A – B</b></p>
+        <p class="muted small" style="margin-top:4px">np. poniedziałek – środa – piątek</p>
+      </div>
+      <div class="card mint">
+        <div class="eyebrow">Wariant 2 × w tygodniu</div>
+        <p style="margin-top:5px">Każdy tydzień: <b>A – B</b></p>
+        <p class="muted small" style="margin-top:4px">np. wtorek – piątek (min. 2 dni przerwy)</p>
+      </div>
+    </div>
+
+    <div class="weekgrid">
+      <div class="wk on"><div class="eyebrow">Tydzień 1</div><div class="big">2 serie</div><div>zapas <b>4</b></div><p class="muted small" style="margin-top:5px">Nauka ruchu i ustawień maszyn. Ma być wyraźnie lekko.</p></div>
+      <div class="wk"><div class="eyebrow">Tydzień 2</div><div class="big">2 serie</div><div>zapas <b>3</b></div><p class="muted small" style="margin-top:5px">Pierwsze dokładanie ciężaru tam, gdzie było za lekko.</p></div>
+      <div class="wk"><div class="eyebrow">Tydzień 3</div><div class="big">3 serie</div><div>zapas <b>2–3</b></div><p class="muted small" style="margin-top:5px">Więcej pracy. Trening może trwać ok. 10 min dłużej.</p></div>
+      <div class="wk"><div class="eyebrow">Tydzień 4</div><div class="big">3 serie</div><div>zapas <b>2</b></div><p class="muted small" style="margin-top:5px">Najmocniejszy tydzień. Porównaj ciężary z tygodniem 1.</p></div>
+    </div>
+
+    <div class="card">
+      <h3>Poza siłownią</h3>
+      <div class="grid2" style="margin-top:6px">
+        <p><b>Kroki: 7–8 tys. dziennie.</b> Jeśli dziś robisz mniej, dokładaj ok. 1 tys. co tydzień. To najprostszy sposób, żeby spalać więcej bez dodatkowych treningów.</p>
+        <p><b>Sen: minimum 7 godzin.</b> Mięśnie i siła rosną między treningami, nie w trakcie. Krótki sen = gorsza regeneracja i większy apetyt.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>5 błędów, które najczęściej kończą przygodę z siłownią</h3>
+      <div style="display:grid; gap:7px; margin-top:8px">
+        <div class="row"><span class="num">1</span><div><b>Za dużo, za szybko.</b> Codzienne treningi w pierwszym tygodniu kończą się zakwasami, które zniechęcają na miesiąc.</div></div>
+        <div class="row"><span class="num">2</span><div><b>Ciągła zmiana planu.</b> Efekty daje powtarzanie tych samych ćwiczeń i stopniowe dokładanie ciężaru.</div></div>
+        <div class="row"><span class="num">3</span><div><b>Ciężar „na oko”.</b> Bez zapisu nie wiesz, czy robisz postęp – stąd dziennik.</div></div>
+        <div class="row"><span class="num">4</span><div><b>Ocenianie efektów po tygodniu.</b> Pierwsze widoczne zmiany przychodzą zwykle po 8–12 tygodniach. Siła rośnie szybciej – patrz w dziennik.</div></div>
+        <div class="row"><span class="num">5</span><div><b>Wszystko albo nic.</b> Gorszy tydzień to nie porażka. Zrób chociaż jeden trening i wracasz do rytmu.</div></div>
+      </div>
+    </div>
+    <div class="card dark">
+      <div class="eyebrow">Opuszczony trening?</div>
+      <p style="margin-top:5px; color:#dfe3e0">Nic się nie stało. Nie nadrabiaj dwóch treningów jednego dnia – po prostu zrób kolejny z kolei, gdy tylko możesz. Plan liczy się w tygodniach, nie w pojedynczych dniach.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>5</span></div>
+</section>
+
+<!-- 6. TRENING A -->
+<section class="page" style="--z:1.06">
+  <div class="body">
+    <div class="head" style="flex-direction:row; align-items:flex-end; justify-content:space-between">
+      <div><div class="eyebrow">Trening całego ciała</div><h2>Trening <em>A</em></h2></div>
+      <span class="pill">ok. 45–60 min</span>
+    </div>
+    <p>Plan obejmuje <b>trening całego ciała 2–3 razy w tygodniu</b> i jest przygotowany z myślą o osobach początkujących. To <b>przykładowy plan</b> – nie uwzględnia szczególnych przypadków, takich jak choroby czy kontuzje. Jeśli zmagasz się z problemami zdrowotnymi, lepszym rozwiązaniem będzie zgłoszenie się do specjalisty po spersonalizowany plan.</p>
+
+    <div class="ex"><div class="ex-head"><span class="num">1</span><h3>Wypychanie nogami na suwnicy (leg press)</h3><span class="sets">2–3 × 6–8</span></div>
+      <div class="ex-body"><div><p class="muted">Uda, pośladki.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/machine-leg-press">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Stopy na szerokość bioder, na środku platformy.</li><li>Nie dopuszczaj podczas opuszczania do odrywania się dołu pleców od oparcia.</li><li>Przez cały zakres ruchu kontroluj ciężar.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">2</span><h3>Wyciskanie hantli leżąc na ławce</h3><span class="sets">2–3 × 8–10</span></div>
+      <div class="ex-body"><div><p class="muted">Klatka piersiowa, przód barków, triceps.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-bench-press">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Usiądź z hantlami na udach, połóż się i ustaw je nad klatką.</li><li>Łopatki ściągnięte, stopy stabilnie na podłodze. Opuszczaj do boków klatki, łokcie ok. 45° od tułowia.</li><li>Po serii odłóż hantle na uda i usiądź – nie upuszczaj ich na boki.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">3</span><h3>Ściąganie drążka wyciągu górnego do klatki</h3><span class="sets">2–3 × 8–10</span></div>
+      <div class="ex-body"><div><p class="muted">Mięśnie pleców, biceps.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/machine-pulldown">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Chwyt trochę szerszy niż barki, uda zablokowane pod wałkiem.</li><li>Ciągnij łokciami w dół, do górnej części klatki.</li><li>Bez odchylania się mocno do tyłu i bujania.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">4</span><h3>Uginanie nóg na maszynie (siedząc lub leżąc)</h3><span class="sets">2 × 10–12</span></div>
+      <div class="ex-body"><div><p class="muted">Tył uda.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/machine-seated-leg-curl">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Oś maszyny na wysokości kolana.</li><li>Biodra przyklejone do siedziska / ławki.</li><li>Ruch w obie strony kontrolowany, bez wyrzucania ciężaru.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">5</span><h3>Naprzemienne uginanie ramion z hantlami</h3><span class="sets">2 × 10–12 na rękę</span></div>
+      <div class="ex-body"><div><p class="muted">Biceps.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-curl">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Stań prosto, łokcie blisko tułowia.</li><li>Uginaj ręce na zmianę, obracając dłoń wnętrzem do góry.</li><li>Opuszczaj wolno, bez bujania tułowiem i odchylania się.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">6</span><h3>Martwy robak (dead bug)</h3><span class="sets">2 × 20–60 s</span></div>
+      <div class="ex-body"><div><p class="muted">Brzuch i stabilizacja tułowia. Leżysz na plecach.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dead-bug">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Ręce w górze, nogi zgięte pod kątem prostym.</li><li>Prostuj na zmianę przeciwną rękę i nogę, spokojnie przez cały czas serii.</li><li>Dół pleców cały czas dociśnięty do podłogi.</li></ul></div></div>
+
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>6</span></div>
+</section>
+
+<!-- 7. TRENING B -->
+<section class="page" style="--z:1.06">
+  <div class="body">
+    <div class="head" style="flex-direction:row; align-items:flex-end; justify-content:space-between">
+      <div><div class="eyebrow">Trening całego ciała</div><h2>Trening <em>B</em></h2></div>
+      <span class="pill">ok. 45–60 min</span>
+    </div>
+
+    <div class="ex"><div class="ex-head"><span class="num">1</span><h3>Przysiad z hantlą przy klatce do ławki (goblet squat)</h3><span class="sets">2–3 × 8–10</span></div>
+      <div class="ex-body"><div><p class="muted">Uda, pośladki, tułów. Ławka za Tobą daje poczucie bezpieczeństwa i stałą głębokość.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-goblet-squat">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Hantla trzymana pionowo przy mostku.</li><li>Siadaj biodrami w tył i w dół, aż dotkniesz ławki – bez siadania całym ciężarem.</li><li>Kolana idą w tym samym kierunku co palce stóp.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">2</span><h3>Wiosłowanie siedząc na wyciągu dolnym</h3><span class="sets">2–3 × 8–10</span></div>
+      <div class="ex-body"><div><p class="muted">Mięśnie pleców, biceps.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/machine-seated-cable-row">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Klatka do przodu, plecy proste.</li><li>Przyciągaj uchwyt do brzucha, łokcie blisko tułowia.</li><li>Na końcu ruchu „wypchnij” klatkę lekko ku górze.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">3</span><h3>Wyciskanie półsztangi jednorącz w półklęku</h3><span class="sets">2–3 × 6–8 na rękę</span></div>
+      <div class="ex-body"><div><p class="muted">Barki, triceps, górna część klatki i stabilizacja tułowia.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/landmine-half-kneeling-single-arm-overhead-press">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Klęknij na kolano po stronie ręki, która pracuje; druga noga z przodu.</li><li>Koniec sztangi przy barku, łokieć lekko przed tułowiem.</li><li>Wypychaj w górę i lekko do przodu, bez wyginania się w lędźwiach.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">4</span><h3>Wypychanie bioder (hip thrust) z ciężarem</h3><span class="sets">2–3 × 6–8</span></div>
+      <div class="ex-body"><div><p class="muted">Pośladki, tył uda. Sztanga, kettlebell lub hantel na biodrach (pod sztangę podłóż nakładkę).</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/barbell-hip-thrust">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Łopatki na ławce, stopy na szerokość bioder.</li><li>Wypychaj biodra, aż tułów i uda będą w jednej linii.</li><li>Na górze zatrzymaj się na sekundę, opuszczaj kontrolowanie.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">5</span><h3>Face pull z liną na wyciągu (siedząc)</h3><span class="sets">2 × 10–12</span></div>
+      <div class="ex-body"><div><p class="muted">Tylna część barków i górna część pleców – dobre dla postawy.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/cable-seated-rope-face-pull">▶ Zobacz wideo</a></div>
+      <ul class="dots" style="margin-top:0"><li>Usiądź przodem do wyciągu, lina na wysokości twarzy, chwyt kciukami do tyłu.</li><li>Przyciągaj linę do twarzy, rozciągając jej końce na boki; łokcie szeroko i wysoko.</li><li>Na końcu ruchu krótka pauza, wracaj powoli.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">6</span><h3>Plank boczny na kolanach</h3><span class="sets">2 × 15–45 s na stronę</span></div>
+      <div class="ex-body"><div><p class="muted">Mięśnie skośne brzucha i stabilizacja tułowia.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/elbow-side-plank">▶ Zobacz wideo (wersja z prostymi nogami)</a></div>
+      <ul class="dots" style="margin-top:0"><li>Połóż się na boku, łokieć pod barkiem, kolana ugięte.</li><li>Unieś biodra – ciało w jednej linii od kolan do głowy.</li><li>Nie zapadaj się w barku. Gdy będzie łatwo – wyprostuj nogi.</li></ul></div></div>
+
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>7</span></div>
+</section>
+
+<!-- 8. DZIENNIK -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Do wydruku</div>
+      <h2>Dziennik <em>treningowy</em></h2>
+      <p class="lead">Wideo do każdego ćwiczenia otworzysz, klikając „Zobacz wideo” w pliku PDF. W każdą kratkę wpisz ciężar × powtórzenia z ostatniej serii, np. <b>40 × 12</b>. Po 4 tygodniach porównaj pierwszą i ostatnią kolumnę.</p>
+    </div>
+    <div class="tbl"><table class="log">
+      <tr><th style="width:34%">Trening A</th><th>Tydz. 1</th><th>Tydz. 1</th><th>Tydz. 2</th><th>Tydz. 2</th><th>Tydz. 3</th><th>Tydz. 3</th><th>Tydz. 4</th><th>Tydz. 4</th></tr>
+      <tr><td>Data</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Suwnica</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Wyciskanie hantli</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Wyciąg górny</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Uginanie nóg</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Uginanie ramion</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Martwy robak (s)</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+    </table></div>
+    <div class="tbl"><table class="log">
+      <tr><th style="width:34%">Trening B</th><th>Tydz. 1</th><th>Tydz. 1</th><th>Tydz. 2</th><th>Tydz. 2</th><th>Tydz. 3</th><th>Tydz. 3</th><th>Tydz. 4</th><th>Tydz. 4</th></tr>
+      <tr><td>Data</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Goblet squat</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Wiosłowanie</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Półsztanga w półklęku</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Hip thrust</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Face pull</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+      <tr><td>Plank boczny (s)</td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+    </table></div>
+    <div class="grid2">
+      <div class="card"><h3>Ustawienia maszyn</h3><p class="muted small" style="margin-top:3px">Wysokość siedziska, numer otworu, pozycja oparcia.</p>
+        <div style="margin-top:8px; display:grid; gap:12px">
+          <div style="border-bottom:1px solid var(--line); height:14px"></div><div style="border-bottom:1px solid var(--line); height:14px"></div><div style="border-bottom:1px solid var(--line); height:14px"></div><div style="border-bottom:1px solid var(--line); height:14px"></div>
+        </div></div>
+      <div class="card mint"><h3>Moje „przed” – dzień 1</h3><p class="muted small" style="margin-top:3px">Zapisz teraz, porównaj za 4 tygodnie.</p>
+        <div style="margin-top:8px; display:grid; gap:7px">
+          <div>Masa ciała: ______________ kg</div><div>Obwód w pasie: __________ cm</div><div>Średnio kroków: _________ / dzień</div><div>Samopoczucie (1–10): _______</div>
+        </div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>8</span></div>
+</section>
+
+<!-- 9. JEDZENIE + CO DALEJ -->
+<section class="page">
+  <div class="body">
+    <div class="head">
+      <div class="eyebrow">Jedzenie</div>
+      <h2>3 zasady <em>na start</em></h2>
+      <p class="lead">Nie potrzebujesz diety, żeby zacząć. Te trzy nawyki robią największą różnicę – niezależnie od tego, czy chcesz schudnąć, czy zbudować mięśnie.</p>
+    </div>
+    <div class="grid3">
+      <div class="card mint"><span class="num">1</span><h3 style="margin-top:7px">Białko w każdym posiłku</h3><p style="margin-top:4px">Mięso, ryba, jajka, twaróg, skyr, serek wiejski, tofu, strączki. Syci i pomaga budować mięśnie.</p></div>
+      <div class="card mint"><span class="num">2</span><h3 style="margin-top:7px">Warzywo lub owoc w każdym posiłku</h3><p style="margin-top:4px">Świeże, mrożone lub kiszone. Dużo błonnika i witamin, a niewiele kalorii – łatwiej się najeść.</p></div>
+      <div class="card mint"><span class="num">3</span><h3 style="margin-top:7px">Woda zamiast słodkich napojów</h3><p style="margin-top:4px">Ok. 40 ml na kg masy ciała dziennie (przy 70 kg to ok. 2,8 l). Słodzone napoje to kalorie, które nie sycą.</p></div>
+    </div>
+
+    <div class="card dark" style="margin-top:6px">
+      <div class="eyebrow">Co po 4 tygodniach?</div>
+      <h3 style="margin-top:5px; font-size:15px">Masz za sobą najtrudniejszy etap – start.</h3>
+      <p style="margin-top:6px; color:#dfe3e0">Po miesiącu znasz salę, sprzęt i swoje ciężary. To moment, w którym warto przejść na plan dopasowany do Twojego celu, sylwetki i kalendarza – i zacząć świadomie pracować nad jedzeniem.</p>
+      <ul class="dots" style="color:#e8ebe9; margin-top:8px">
+        <li><b>Trenujesz w Rumii lub okolicy?</b> Odbierz <b>pierwszy trening ze mną za darmo</b> – sprawdzimy Twoją technikę i ułożymy kolejne kroki.</li>
+        <li><b>Mieszkasz dalej?</b> Poprowadzę Cię <b>online</b> – indywidualny plan treningowy i żywieniowy, stały kontakt i cotygodniowe podsumowania w aplikacji.</li>
+        <li><b>Zostań w newsletterze</b> – w kolejnych mailach dostaniesz wskazówki do tego planu i mój jadłospis na 7 dni.</li>
+      </ul>
+      <p style="margin-top:10px; font-weight:800; color:var(--green); letter-spacing:.04em">erykpersonalny.pl · kontakt@erykpersonalny.pl · +48 577 243 692</p>
+    </div>
+
+    <div class="card">
+      <h3>Masz pytanie do planu?</h3>
+      <p style="margin-top:4px">Odpisz na dowolnego maila ode mnie – czytam i odpowiadam osobiście. Brakuje w Twoim klubie którejś maszyny? Napisz, jaką masz do dyspozycji, a podpowiem zamiennik.</p>
+    </div>
+
+    <p class="muted small" style="margin-top:auto; margin-bottom:6px">Materiał ma charakter edukacyjny i nie zastępuje porady lekarskiej ani indywidualnie dobranego planu. © Eryk Jóskowski. Udostępnianie dalej bez zgody autora – niedozwolone.</p>
+  </div>
+  <div class="foot"><span>Eryk Jóskowski · Pierwsze 4 tygodnie na siłowni</span><span>9</span></div>
+</section>
+
+</body>
+</html>

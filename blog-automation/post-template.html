@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5EYVELC4XH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5EYVELC4XH');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{META_DESCRIPTION}}">
@@ -102,6 +110,8 @@
 
     <div class="article-content">
         {{CONTENT}}
+
+        <div id="lm4-box"></div><script src="/lm4-box.js" defer></script>
 
         <div class="cta-section">
             <h3>{{CTA_HEADING}}</h3>

@@ -273,7 +273,7 @@
             <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
             <a href="#blog" onclick="event.preventDefault(); scrollToSection('blog')">Blog</a>
             <a href="kalkulator.html">Kalkulator</a>
-            <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Newsletter</a>
+            <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Darmowy plan</a>
             <a href="#faq" onclick="event.preventDefault(); scrollToSection('faq')">FAQ</a>
             <a href="#kontakt" class="nav-cta" onclick="event.preventDefault(); scrollToSection('kontakt')">Kontakt</a>
         </div>
@@ -602,208 +602,117 @@
 
 </section>
 
-<!-- ═══════════ NEWSLETTER ═══════════ -->
+<!-- ═══════════ NEWSLETTER / LEAD MAGNET ═══════════ -->
 <div class="section-divider"><div class="divider-icon"><i class="fas fa-envelope-open-text"></i></div></div>
 
 <section class="section fade-in" id="newsletter">
-  <h2 class="section-title">Newsletter</h2>
+  <h2 class="section-title">Darmowy plan na start</h2>
 
   <style>
-    .lm-wrapper {
-      max-width: 760px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0,255,136,0.25);
-      border-radius: 24px;
-      padding: 56px 48px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .lm-wrapper::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,255,136,0.07), transparent 70%);
-      pointer-events: none;
-    }
-    .lm-badge {
-      display: inline-block;
-      padding: 6px 20px;
-      background: rgba(0,255,136,0.1);
-      border: 1px solid rgba(0,255,136,0.3);
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--neon-green);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .lm-subtitle {
-      color: var(--gray);
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .lm-bullets {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: left;
-      max-width: 400px;
-      margin: 0 auto 36px;
-    }
-    .lm-bullet {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--gray);
-      font-size: 15px;
-    }
-    .lm-bullet i {
-      color: var(--neon-green);
-      font-size: 16px;
-      min-width: 18px;
-    }
-    .lm-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .lm-form input {
-      width: 100%;
-      padding: 16px 20px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(0,255,136,0.25);
-      border-radius: 50px;
-      color: var(--white);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.3s;
-      box-sizing: border-box;
-    }
-    .lm-form input::placeholder { color: rgba(255,255,255,0.3); }
-    .lm-form input:focus { border-color: rgba(0,255,136,0.6); }
-    .lm-form button {
-      width: 100%;
-      padding: 16px 28px;
-      background: linear-gradient(135deg, var(--neon-green), var(--dark-green));
-      color: #0a0a0a;
-      border: none;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 8px 30px rgba(0,255,136,0.35);
-    }
-    .lm-form button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,255,136,0.55);
-    }
-    .lm-disclaimer {
-      margin-top: 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.25);
-    }
-    .lm-success {
-      display: none;
-      padding: 24px;
-      background: rgba(0,255,136,0.08);
-      border: 1px solid rgba(0,255,136,0.3);
-      border-radius: 16px;
-      color: var(--neon-green);
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 20px;
-      animation: fadeIn 0.5s ease;
-    }
-    @media (max-width: 768px) {
-      .lm-wrapper { padding: 36px 20px; }
+    .lm4 { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center;
+           background: rgba(255,255,255,0.04); border: 1px solid rgba(0,255,136,0.25); border-radius: 24px; padding: 48px;
+           box-shadow: 0 8px 40px rgba(0,0,0,0.35); position: relative; overflow: hidden; }
+    .lm4::before { content: ''; position: absolute; top: -120px; right: -120px; width: 420px; height: 420px;
+           background: radial-gradient(circle, rgba(0,255,136,0.10), transparent 70%); pointer-events: none; }
+    .lm4 > * { position: relative; }
+    .lm4-badge { display: inline-block; padding: 6px 18px; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3);
+           border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--neon-green); letter-spacing: 1px; text-transform: uppercase; }
+    .lm4 h3 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; font-weight: 900; text-transform: uppercase; margin: 16px 0 12px; color: var(--white); }
+    .lm4 h3 span { color: var(--neon-green); }
+    .lm4-sub { color: var(--gray); font-size: 16px; line-height: 1.65; margin-bottom: 20px; }
+    .lm4-list { list-style: none; display: grid; gap: 10px; margin: 0 0 24px; padding: 0; }
+    .lm4-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--gray); font-size: 15px; }
+    .lm4-list i { color: var(--neon-green); margin-top: 4px; min-width: 16px; }
+    .lm4-form { display: grid; gap: 10px; }
+    .lm4-form input[type=text], .lm4-form input[type=email] { width: 100%; padding: 15px 20px; background: rgba(255,255,255,0.06);
+           border: 1px solid rgba(0,255,136,0.25); border-radius: 50px; color: var(--white); font-size: 16px; outline: none; box-sizing: border-box; font-family: inherit; }
+    .lm4-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .lm4-form input:focus { border-color: rgba(0,255,136,0.6); }
+    .lm4-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,0.55); text-align: left; }
+    .lm4-consent input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--neon-green); flex: none; }
+    .lm4-consent a { color: var(--neon-green); }
+    .lm4-form button { width: 100%; padding: 16px 28px; background: linear-gradient(135deg, var(--neon-green), var(--dark-green)); color: #0a0a0a;
+           border: none; border-radius: 50px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 30px rgba(0,255,136,0.35); font-family: inherit; }
+    .lm4-form button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,255,136,0.55); }
+    .lm4-form button:disabled { opacity: .6; transform: none; cursor: default; }
+    .lm4-err { color: #ff9a7a; font-size: 13px; min-height: 0; }
+    .lm4-ok { display: none; padding: 22px; background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.3); border-radius: 16px; color: var(--gray); font-size: 15px; line-height: 1.6; }
+    .lm4-ok strong { color: var(--neon-green); display: block; font-size: 18px; margin-bottom: 4px; }
+    .lm4-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .lm4-mock { position: relative; height: 420px; }
+    .lm4-mock img { position: absolute; width: 66%; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.08); }
+    .lm4-mock .p1 { left: 0; top: 40px; transform: rotate(-6deg); }
+    .lm4-mock .p2 { right: 0; top: 70px; transform: rotate(5deg); }
+    .lm4-mock .p3 { left: 17%; top: 0; z-index: 2; }
+    .lm4-more { margin-top: 14px; font-size: 13px; color: rgba(255,255,255,0.45); }
+    .lm4-more a { color: var(--neon-green); }
+    @media (max-width: 860px) {
+      .lm4 { grid-template-columns: 1fr; padding: 32px 20px; gap: 24px; }
+      .lm4-mock { height: 330px; max-width: 340px; width: 100%; margin: 0 auto 8px; order: -1; }
     }
   </style>
 
-  <div class="lm-wrapper">
-    <div class="lm-badge">📬 Zapisz się do newslettera</div>
-    <p class="lm-subtitle">
-      Zapisz się do mojego newslettera i regularnie otrzymuj porady treningowe, żywieniowe i motywacyjne prosto na maila.<br>
-      <strong style="color: var(--white);">Na start w prezencie:</strong> mój jadłospis i przepisy — gotowe menu na 7 dni, które możesz wdrożyć od jutra w 2 wariantach kalorycznych (1800 oraz 2500).
-    </p>
-    <div class="lm-bullets">
-      <div class="lm-bullet"><i class="fas fa-check-circle"></i> 7-dniowe menu z przepisami</div>
-      <div class="lm-bullet"><i class="fas fa-check-circle"></i> Dopasowane do różnych poziomów kalorii</div>
-      <div class="lm-bullet"><i class="fas fa-check-circle"></i> Proste składniki, krótki czas przygotowania</div>
-      <div class="lm-bullet"><i class="fas fa-check-circle"></i> Wysyłam na maila w ciągu 5 minut</div>
-      <div class="lm-bullet"><i class="fas fa-check-circle"></i> Regularne wskazówki w newsletterze</div>
+  <div class="lm4">
+    <div>
+      <span class="lm4-badge"><i class="fas fa-gift"></i> Darmowy plan PDF</span>
+      <h3>Pierwsze 4 tygodnie <span>na siłowni</span></h3>
+      <p class="lm4-sub">Gotowy plan dla osób, które zaczynają od zera – albo boją się, że wszyscy będą patrzeć. Wiesz, co robić, zanim przekroczysz próg.</p>
+      <ul class="lm4-list">
+        <li><i class="fas fa-check-circle"></i>Checklista przed pierwszą wizytą i niepisane zasady sali</li>
+        <li><i class="fas fa-check-circle"></i>2 treningi całego ciała z opisem techniki i wideo</li>
+        <li><i class="fas fa-check-circle"></i>Jak dobrać ciężar i kiedy go zwiększać</li>
+        <li><i class="fas fa-check-circle"></i>Rozpiska tydzień po tygodniu + dziennik do wydruku</li>
+        <li><i class="fas fa-check-circle"></i>W prezencie w kolejnych mailach: mój jadłospis na 7 dni</li>
+      </ul>
+      <form class="lm4-form" id="lm4-form" novalidate>
+        <input type="text" id="lm4-name" placeholder="Imię" autocomplete="given-name">
+        <input type="email" id="lm4-email" placeholder="Twój e-mail" autocomplete="email" inputmode="email">
+        <input type="text" id="lm4-hp" class="lm4-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="lm4-consent"><input type="checkbox" id="lm4-consent">
+          <span>Chcę otrzymać plan i zapisuję się do newslettera (porady treningowe i żywieniowe, max. kilka maili w miesiącu). Możesz wypisać się w każdej chwili. <a href="polityka-prywatnosci.html" target="_blank">Polityka prywatności</a>.</span></label>
+        <div class="lm4-err" id="lm4-err"></div>
+        <button type="submit" id="lm4-btn"><i class="fas fa-paper-plane"></i> Wyślij mi plan</button>
+      </form>
+      <div class="lm4-ok" id="lm4-ok"><strong>Gotowe! Sprawdź skrzynkę 📬</strong>Plan wyślę w ciągu kilku minut. Nie widzisz maila? Zajrzyj do zakładek Oferty lub Spam.</div>
+      <p class="lm4-more">Chcesz najpierw zobaczyć, co jest w środku? <a href="4-tygodnie/">Zobacz szczegóły planu</a></p>
     </div>
-    <div class="lm-form" id="lm-form">
-      <input type="text" id="lm-name" placeholder="Imię i nazwisko">
-      <input type="email" id="lm-email" placeholder="Twój adres e-mail">
-      <button onclick="submitLeadMagnet()">
-        <i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis
-      </button>
-    </div>
-    <p class="lm-disclaimer">Zapisując się, dołączasz do mojego newslettera. Bez spamu — możesz wypisać się w każdej chwili.</p>
-    <div class="lm-success" id="lm-success">
-      ✅ Gotowe! Jesteś zapisany/a do newslettera — sprawdź skrzynkę, jadłospis już leci do Ciebie.
+    <div class="lm4-mock" aria-hidden="true">
+      <img class="p1" src="images/lm-4tyg-plan.jpg" alt="" loading="lazy">
+      <img class="p2" src="images/lm-4tyg-trening.jpg" alt="" loading="lazy">
+      <img class="p3" src="images/lm-4tyg-cover.jpg" alt="Okładka planu Pierwsze 4 tygodnie na siłowni" loading="lazy">
     </div>
   </div>
 </section>
 
 <script>
-  async function submitLeadMagnet() {
-    const name  = document.getElementById('lm-name').value.trim();
-    const email = document.getElementById('lm-email').value.trim();
-
-    if (!name) {
-      alert('Wpisz imię i nazwisko.');
-      return;
-    }
-    if (!email || !email.includes('@')) {
-      alert('Wpisz poprawny adres e-mail.');
-      return;
-    }
-
-    const btn = document.querySelector('#lm-form button');
-    btn.textContent = 'Wysyłam...';
-    btn.disabled = true;
-
-    try {
-      const res = await fetch('/.netlify/functions/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name })
+  (function () {
+    var f = document.getElementById('lm4-form'), err = document.getElementById('lm4-err'), btn = document.getElementById('lm4-btn');
+    var params = new URLSearchParams(location.search);
+    var source = ('strona-glowna' + (params.get('utm_source') ? '-' + params.get('utm_source') : '')).slice(0, 40);
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('lm4-name').value.trim();
+      var email = document.getElementById('lm4-email').value.trim();
+      err.textContent = '';
+      if (!name) { err.textContent = 'Wpisz imię.'; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Wpisz poprawny adres e-mail.'; return; }
+      if (!document.getElementById('lm4-consent').checked) { err.textContent = 'Zaznacz zgodę, żebym mógł wysłać Ci plan.'; return; }
+      btn.disabled = true; btn.textContent = 'Wysyłam…';
+      fetch('/.netlify/functions/subscribe', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, list: '4tygodnie', source: source, hp: document.getElementById('lm4-hp').value })
+      }).then(function (r) {
+        if (!r.ok) throw new Error();
+        f.style.display = 'none'; document.getElementById('lm4-ok').style.display = 'block';
+        if (window.gtag) gtag('event', 'generate_lead', { lead_magnet: '4tygodnie', source: source });
+        var msg = document.getElementById('message');
+        if (msg && !msg.value) msg.value = 'Dzień dobry!\n\nPobrałem/am plan „Pierwsze 4 tygodnie na siłowni” i chciałbym/chciałabym dowiedzieć się więcej o bezpłatnym pierwszym treningu.\n\nPozdrawiam!';
+      }).catch(function () {
+        err.textContent = 'Coś poszło nie tak. Spróbuj ponownie za chwilę albo napisz na kontakt@erykpersonalny.pl.';
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Wyślij mi plan';
       });
-
-      if (res.ok) {
-        document.getElementById('lm-form').style.display = 'none';
-        document.getElementById('lm-success').style.display = 'block';
-        setTimeout(() => {
-          const msg = document.getElementById('message');
-          if (msg && !msg.value) {
-            msg.value = 'Dzień dobry!\n\nPobrałem/am jadłospis i chciałbym/chciałabym dowiedzieć się więcej o bezpłatnej konsultacji.\n\nPozdrawiam!';
-          }
-        }, 500);
-      } else {
-        alert('Coś poszło nie tak. Spróbuj ponownie.');
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis';
-        btn.disabled = false;
-      }
-    } catch (e) {
-      alert('Błąd połączenia. Spróbuj ponownie.');
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Zapisz się i pobierz jadłospis';
-      btn.disabled = false;
-    }
-  }
+    });
+  })();
 </script>
 
 
@@ -1165,7 +1074,7 @@
                 <a href="#cennik" onclick="event.preventDefault(); scrollToSection('cennik')">Cennik</a>
                 <a href="#blog" onclick="event.preventDefault(); scrollToSection('blog')">Blog</a>
                 <a href="kalkulator.html">Kalkulator kalorii</a>
-                <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Newsletter</a>
+                <a href="#newsletter" onclick="event.preventDefault(); scrollToSection('newsletter')">Darmowy plan</a>
             </div>
         </div>
         <div class="footer-bottom">

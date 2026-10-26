@@ -164,7 +164,7 @@
             <a href="index.html#cennik">Cennik</a>
             <a href="index.html#blog">Blog</a>
             <a href="kalkulator.html">Kalkulator</a>
-            <a href="index.html#newsletter">Newsletter</a>
+            <a href="index.html#newsletter">Darmowy plan</a>
             <a href="index.html#faq">FAQ</a>
             <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
         </div>
@@ -415,12 +415,57 @@
         </div>
       </div>
       <p class="calc-result-cta">
-        Chcesz zobaczyć jak mogą wyglądać twoje posiłki?<br>
-        <strong>Zapisz się do newslettera i pobierz moje bezpłatne jadłospisy na 1800 oraz 2500 kcal.</strong>
+        Chcesz zobaczyć, jak mogą wyglądać Twoje posiłki?<br>
+        <strong>Odbierz moje bezpłatne jadłospisy na 1800 oraz 2500 kcal – z przepisami i gotowaniem raz na 2 dni.</strong>
       </p>
-      <a class="calc-result-btn" href="index.html#newsletter">
-        <i class="fas fa-download"></i> Pobierz bezpłatny jadłospis
-      </a>
+      <form class="jd-form" id="jd-form" novalidate>
+        <input type="text" id="jd-name" placeholder="Imię" autocomplete="given-name">
+        <input type="email" id="jd-email" placeholder="Twój e-mail" autocomplete="email" inputmode="email">
+        <input type="text" id="jd-hp" class="jd-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="jd-consent"><input type="checkbox" id="jd-consent"><span>Chcę otrzymać jadłospisy i zapisuję się do newslettera (porady treningowe i żywieniowe, max. kilka maili w miesiącu). Możesz wypisać się w każdej chwili. <a href="polityka-prywatnosci.html" target="_blank">Polityka prywatności</a>.</span></label>
+        <div class="jd-err" id="jd-err"></div>
+        <button type="submit" class="calc-result-btn" id="jd-btn"><i class="fas fa-download"></i> Wyślij mi jadłospisy</button>
+      </form>
+      <div class="jd-ok" id="jd-ok"><strong>Gotowe! Sprawdź skrzynkę 📬</strong> Jadłospisy wyślę w ciągu kilku minut.</div>
+      <style>
+        .jd-form { display: grid; gap: 10px; max-width: 460px; margin: 18px auto 0; }
+        .jd-form input[type=text], .jd-form input[type=email] { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(0,255,136,0.25);
+          border-radius: 50px; color: #fff; font-size: 16px; outline: none; box-sizing: border-box; font-family: inherit; }
+        .jd-form input:focus { border-color: rgba(0,255,136,0.6); }
+        .jd-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,0.55); text-align: left; }
+        .jd-consent input { width: 18px; height: 18px; margin-top: 1px; accent-color: #00ff88; flex: none; }
+        .jd-consent a { color: #00ff88; }
+        .jd-form button { border: none; cursor: pointer; width: 100%; font-family: inherit; }
+        .jd-form button:disabled { opacity: .6; cursor: default; }
+        .jd-err { color: #ff9a7a; font-size: 13px; }
+        .jd-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .jd-ok { display: none; max-width: 460px; margin: 18px auto 0; padding: 18px; background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.3); border-radius: 16px; color: #ccc; }
+        .jd-ok strong { color: #00ff88; }
+      </style>
+      <script>
+        (function () {
+          var f = document.getElementById('jd-form'), err = document.getElementById('jd-err'), btn = document.getElementById('jd-btn');
+          f.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = document.getElementById('jd-name').value.trim(), email = document.getElementById('jd-email').value.trim();
+            err.textContent = '';
+            if (!name) { err.textContent = 'Wpisz imię.'; return; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Wpisz poprawny adres e-mail.'; return; }
+            if (!document.getElementById('jd-consent').checked) { err.textContent = 'Zaznacz zgodę, żebym mógł wysłać Ci jadłospisy.'; return; }
+            btn.disabled = true; btn.textContent = 'Wysyłam…';
+            fetch('/.netlify/functions/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: name, email: email, list: 'jadlospis', source: 'kalkulator', hp: document.getElementById('jd-hp').value })
+            }).then(function (r) {
+              if (!r.ok) throw new Error();
+              f.style.display = 'none'; document.getElementById('jd-ok').style.display = 'block';
+              if (window.gtag) gtag('event', 'generate_lead', { lead_magnet: 'jadlospis', source: 'kalkulator' });
+            }).catch(function () {
+              err.textContent = 'Coś poszło nie tak. Spróbuj ponownie za chwilę.';
+              btn.disabled = false; btn.innerHTML = '<i class="fas fa-download"></i> Wyślij mi jadłospisy';
+            });
+          });
+        })();
+      </script>
     </div>
   </div>
 </section>
@@ -492,7 +537,7 @@
                 <a href="index.html#cennik">Cennik</a>
                 <a href="index.html#blog">Blog</a>
                 <a href="kalkulator.html">Kalkulator kalorii</a>
-                <a href="index.html#newsletter">Newsletter</a>
+                <a href="index.html#newsletter">Darmowy plan</a>
             </div>
         </div>
         <div class="footer-bottom">

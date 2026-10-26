@@ -57,7 +57,7 @@
         '<div class="lm4b-ok"><strong>Gotowe! Sprawdź skrzynkę 📬</strong> Plan wyślę w ciągu kilku minut. Nie widzisz maila? Zajrzyj do zakładek Oferty lub Spam.</div>' +
         '<p class="lm4b-more">Zobacz, co jest w środku: <a href="/4-tygodnie/">szczegóły planu</a></p>' +
       '</div>' +
-      '<div class="lm4b-img" aria-hidden="true"><img src="/images/lm-4tyg-cover.jpg" alt="" loading="lazy"></div>' +
+      '<div class="lm4b-img" aria-hidden="true"><img src="/images/lm-4tyg-cover.jpg?v=2" alt="" loading="lazy"></div>' +
     '</div>';
 
   var f = box.querySelector('form'), err = box.querySelector('.lm4b-err'), btn = f.querySelector('button');

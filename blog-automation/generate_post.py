@@ -104,9 +104,38 @@ def read_file(path: str) -> str:
         return f.read()
 
 
-def pick_topic(topics_data: dict):
+MAX_PENDING = int(os.environ.get("BLOG_MAX_PENDING", "2"))  # ile wpisów może czekać na review
+
+
+def open_blog_prs() -> list:
+    """Otwarte PR-y z wpisami (GitHub API). Bez tokenu (lokalnie) -> pusta lista."""
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if not token or not repo:
+        return []
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/pulls?state=open&per_page=100",
+        headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        prs = json.load(r)
+    return [p for p in prs if p["head"]["ref"].startswith("blog/")]
+
+
+def pending_topic_ids(prs: list) -> set:
+    """Tematy, które już czekają w otwartym PR (znacznik 'topic-id: N' w opisie lub gałąź blog/tN-...)."""
+    ids = set()
+    for p in prs:
+        m = re.search(r"topic-id:\s*(\d+)", p.get("body") or "")
+        if m:
+            ids.add(int(m.group(1)))
+        m = re.match(r"blog/t(\d+)-", p["head"]["ref"])
+        if m:
+            ids.add(int(m.group(1)))
+    return ids
+
+
+def pick_topic(topics_data: dict, skip: set = frozenset()):
     for t in topics_data["topics"]:
-        if not t.get("used"):
+        if not t.get("used") and t["id"] not in skip:
             return t
     return None
 
@@ -293,7 +322,12 @@ def mark_used(topics_data: dict, topic_id: int) -> None:
 
 def main() -> None:
     topics_data = json.loads(read_file(TOPICS_PATH))
-    topic = pick_topic(topics_data)
+    prs = open_blog_prs()
+    if len(prs) >= MAX_PENDING:
+        print(f"Na review czeka już {len(prs)} wpis(y) – nie generuję kolejnego, żeby nie mnożyć zaległości.")
+        _set_output("created", "false")
+        return
+    topic = pick_topic(topics_data, pending_topic_ids(prs))
     if topic is None:
         print("Brak nieużytych tematów w topics.json — nic do zrobienia.")
         # Sygnał dla workflow: nie otwieraj PR.
@@ -320,6 +354,7 @@ def main() -> None:
     _set_output("created", "true")
     _set_output("title", article["title"])
     _set_output("slug", slug)
+    _set_output("topic_id", str(topic["id"]))
     _set_output_multiline("sources", format_sources_md(article["sources"]))
 
 

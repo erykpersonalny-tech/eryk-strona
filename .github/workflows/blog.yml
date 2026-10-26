@@ -30,13 +30,14 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python blog-automation/generate_post.py
 
       - name: Open Pull Request
         if: steps.gen.outputs.created == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: blog/${{ steps.gen.outputs.slug }}
+          branch: blog/t${{ steps.gen.outputs.topic_id }}-${{ steps.gen.outputs.slug }}
           commit-message: "Nowy wpis: ${{ steps.gen.outputs.title }}"
           title: "Nowy wpis do przejrzenia: ${{ steps.gen.outputs.title }}"
           body: |
@@ -52,4 +53,7 @@ jobs:
             ${{ steps.gen.outputs.sources }}
 
             Merge = publikacja (Netlify wdroży automatycznie).
+            Nie chcesz tego wpisu? Zamknij PR – temat wróci do kolejki przy następnym uruchomieniu.
+
+            topic-id: ${{ steps.gen.outputs.topic_id }}
           labels: blog, do-przejrzenia

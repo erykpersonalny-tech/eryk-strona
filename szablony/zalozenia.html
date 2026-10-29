@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Dodatkowe założenia</title>
+<link rel="stylesheet" href="fonts/inter/400.css"><link rel="stylesheet" href="fonts/inter/500.css"><link rel="stylesheet" href="fonts/inter/700.css"><link rel="stylesheet" href="fonts/inter/800.css"><link rel="stylesheet" href="fonts/inter/900.css">
+<!--
+  Szablon „Dodatkowe założenia” – Eryk Jóskowski.
+  Dane wstrzykuje render.js (window.DATA). Przykład danych: zalozenia.przyklad.json.
+  Pola tekstowe przyjmują \n jako nową linię i <b>…</b> jako pogrubienie.
+-->
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --black:#0a0a0a; --ink:#121412; --green:#00ff88; --green-ink:#0a9d5a; --mint:#bff5dc; --mint-bg:#ecfdf4; --grey:#5c625e; --line:#e3e7e4; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif; color:var(--ink); font-size:10.2px; line-height:1.45; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  b { font-weight:700; }
+  .page { width:210mm; min-height:297mm; display:flex; flex-direction:column; }
+  .hero { background:var(--black); color:#fff; position:relative; overflow:hidden; padding:7mm 8mm 5mm; }
+  .hero::after { content:""; position:absolute; right:-20px; top:-80px; width:380px; height:260px; background:radial-gradient(closest-side, rgba(0,255,136,.30), rgba(0,255,136,0)); }
+  .hero > * { position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:10px; font-size:9px; font-weight:800; letter-spacing:.3em; color:var(--green); text-transform:uppercase; }
+  .brand i { width:6px; height:18px; border-radius:3px; background:var(--green); display:block; }
+  h1 { font-size:31px; font-weight:900; text-transform:uppercase; letter-spacing:-.01em; margin:6px 0 7px; }
+  .who { display:inline-block; border:1.2px solid rgba(0,255,136,.6); border-radius:999px; padding:4px 13px; font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--green); }
+  .body { flex:1; padding:5mm 8mm 0; display:flex; flex-direction:column; gap:10px; }
+  .card { border:1.2px solid var(--mint); border-radius:12px; padding:12px 14px; break-inside:avoid; }
+  .eyebrow { font-size:7.4px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--green-ink); }
+  .ico { width:24px; height:24px; border-radius:6px; background:var(--black); display:flex; align-items:center; justify-content:center; flex:none; }
+  .ico svg { width:13px; height:13px; stroke:var(--green); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .energy { display:grid; grid-template-columns:1.25fr 1fr 1fr 1fr; gap:8px; align-items:stretch; }
+  .energy .main { display:flex; gap:12px; align-items:flex-start; padding:4px 0; }
+  .big { font-size:30px; font-weight:900; letter-spacing:-.02em; line-height:1.1; margin-top:4px; }
+  .big small { font-size:12px; font-weight:800; margin-left:2px; }
+  .sub { font-size:8.8px; color:var(--grey); margin-top:3px; }
+  .macro { background:var(--mint-bg); border-radius:9px; padding:9px 11px; }
+  .macro .v { font-size:19px; font-weight:900; margin:3px 0 4px; }
+  .trio { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .trio .card { padding:13px 14px; }
+  .trio .ico { margin-bottom:12px; }
+  .trio .v { font-size:19px; font-weight:800; line-height:1.15; margin:4px 0 7px; white-space:pre-line; }
+  .trio p { font-size:9px; color:var(--grey); white-space:pre-line; }
+  .duties h2 { font-size:12.5px; font-weight:800; text-transform:uppercase; }
+  .duties ul { list-style:none; display:grid; gap:6px; margin-top:9px; }
+  .duties li { display:flex; gap:10px; align-items:flex-start; font-size:10.6px; }
+  .duties li::before { content:""; flex:none; width:12px; height:12px; margin-top:1px; border:1.5px solid #6b706c; border-radius:3px; }
+  .dark { background:var(--black); color:#fff; border:0; border-radius:12px; padding:11px 14px; position:relative; overflow:hidden; break-inside:avoid; }
+  .dark::after { content:""; position:absolute; left:45%; top:-70px; width:300px; height:200px; background:radial-gradient(closest-side, rgba(0,255,136,.22), rgba(0,255,136,0)); }
+  .dark > * { position:relative; z-index:1; }
+  .dark .eyebrow { color:var(--green); }
+  .dark p { margin-top:4px; font-size:10.6px; }
+  .ver { break-inside:avoid; }
+  .ver-head { display:flex; gap:10px; align-items:center; margin:4px 0 6px; }
+  .ver-head .tag { border:1px solid var(--mint); background:var(--mint-bg); color:var(--green-ink); border-radius:999px; padding:2px 12px; font-size:7.4px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+  .ver-head h3 { font-size:12px; font-weight:800; text-transform:uppercase; }
+  .week { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+  .day { border:1.2px solid var(--mint); border-radius:8px; min-height:130px; padding:7px 6px; display:flex; flex-direction:column; gap:5px; }
+  .day .d { font-size:7.6px; font-weight:800; letter-spacing:.14em; color:#444; margin-bottom:2px; }
+  .chip { border-radius:5px; padding:4px 6px; font-size:7.2px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+  .chip.silowy { background:var(--green); color:var(--black); }
+  .chip.cardio { background:var(--black); color:var(--green); }
+  .chip.kroki { background:var(--mint-bg); border:1px solid var(--mint); color:var(--green-ink); }
+  .compact .day { min-height:84px; }
+  .compact.body { gap:8px; }
+  .ver .note { font-size:9px; color:var(--grey); margin-top:5px; }
+  .mint { background:var(--mint-bg); }
+  .mint p { margin-top:4px; font-size:10.6px; }
+  .legend { margin-top:auto; padding:9px 0 9px; border-top:1px solid var(--line); display:flex; align-items:center; gap:16px; font-size:8.4px; }
+  .legend i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:6px; vertical-align:-2px; }
+  .legend .r { margin-left:auto; color:var(--grey); font-size:7.8px; }
+  .foot { background:var(--black); color:#fff; padding:5mm 8mm; display:flex; align-items:center; justify-content:space-between; margin-top:3mm; }
+  .foot .n { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.14em; font-size:10.5px; }
+  .foot .n i { width:5px; height:16px; border-radius:3px; background:var(--green); display:block; }
+  .foot .r { font-size:7.6px; letter-spacing:.24em; color:#cfd3d0; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="page" id="root"></div>
+<script>
+window.DATA = /*DATA*/null;
+(function () {
+  const D = window.DATA;
+  if (!D) { document.getElementById('root').textContent = 'Brak danych (uruchom przez render.js).'; window.__ready = true; return; }
+  const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/&lt;b&gt;/g,'<b>').replace(/&lt;\/b&gt;/g,'</b>');
+  const ICON = {
+    kcal: '<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M12 18a2.5 2.5 0 0 1-2.5-2.5c0-1.5 1.2-2.7 2.5-4 1.3 1.3 2.5 2.5 2.5 4A2.5 2.5 0 0 1 12 18z"/>',
+    cardio: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>',
+    steps: '<circle cx="13" cy="4" r="1.6"/><path d="M10 21l2-6 3 3v3M7 12l3-4 4 1 2 3 3 1M12 15l-1-6"/>',
+    strength: '<path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/>',
+    duty: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'
+  };
+  const ico = k => `<div class="ico"><svg viewBox="0 0 24 24">${ICON[k]}</svg></div>`;
+  const DAYS = ['PON','WT','ŚR','CZW','PT','SOB','ND'];
+  const chip = c => {
+    const [type, label] = String(c).split(':');
+    const def = { silowy:'Siłowy', cardio:'Cardio', kroki:'Kroki' }[type] || type;
+    return `<span class="chip ${type}">${esc(label || def)}</span>`;
+  };
+  const e = D.energy, a = D.activity;
+  let h = `
+  <div class="hero"><div class="brand"><i></i>Eryk Jóskowski · Trener personalny</div>
+    <h1>Dodatkowe założenia</h1><span class="who">Podopieczny: ${esc(D.name)}</span></div>
+  <div class="body${(D.versions||[]).length > 1 ? ' compact' : ''}">
+    <div class="card energy">
+      <div class="main">${ico('kcal')}<div><div class="eyebrow">Zapotrzebowanie dzienne</div>
+        <div class="big">${esc(e.kcal)}<small>kcal</small></div><div class="sub">${esc(e.note)}</div></div></div>
+      <div class="macro"><div class="eyebrow">Białko</div><div class="v">${esc(e.protein)} g</div><div class="sub">${esc(e.protein_note)}</div></div>
+      <div class="macro"><div class="eyebrow">Tłuszcze</div><div class="v">${esc(e.fat)} g</div><div class="sub">${esc(e.fat_note)}</div></div>
+      <div class="macro"><div class="eyebrow">Węglowodany</div><div class="v">${esc(e.carbs)} g</div><div class="sub">${esc(e.carbs_note)}</div></div>
+    </div>
+    <div class="trio">
+      <div class="card">${ico('cardio')}<div class="eyebrow">Aktywność cardio</div><div class="v">${esc(a.cardio.value)}</div><p>${esc(a.cardio.note)}</p></div>
+      <div class="card">${ico('steps')}<div class="eyebrow">Liczba kroków</div><div class="v">${esc(a.steps.value)}</div><p>${esc(a.steps.note)}</p></div>
+      <div class="card">${ico('strength')}<div class="eyebrow">Trening siłowy</div><div class="v">${esc(a.strength.value)}</div><p>${esc(a.strength.note)}</p></div>
+    </div>
+    <div class="card duties"><div style="display:flex;gap:10px;align-items:center">${ico('duty')}<h2>Obowiązki</h2></div>
+      <ul>${(D.duties||[]).map(d => `<li>${esc(d)}</li>`).join('')}</ul></div>
+    <div class="dark"><div class="eyebrow">Zasada łączenia</div><p>${esc(D.rule)}</p></div>`;
+  (D.versions||[]).forEach((v, i) => {
+    h += `<div class="ver"><div class="ver-head"><span class="tag">Wersja ${i+1}</span><h3>${esc(v.title)}</h3></div>
+      <div class="week">${DAYS.map((d, j) => `<div class="day"><div class="d">${d}</div>${(v.days[j]||[]).map(chip).join('')}</div>`).join('')}</div>
+      ${v.note ? `<div class="note">${esc(v.note)}</div>` : ''}</div>`;
+  });
+  if (D.progress) h += `<div class="card mint"><div class="eyebrow">Kontrola postępów</div><p>${esc(D.progress)}</p></div>`;
+  h += `<div class="legend"><span><i style="background:var(--green)"></i>Trening siłowy</span><span><i style="background:var(--black)"></i>Cardio</span><span><i style="background:var(--mint-bg);border:1px solid var(--mint)"></i>Kroki</span>
+      <span class="r">Rozkład dni jest przykładowy — dopasuj go do swojego tygodnia, zachowując liczbę sesji.</span></div>
+  </div>
+  <div class="foot"><span class="n"><i></i>ERYK JÓSKOWSKI</span><span class="r">Trener personalny · Rumia · erykpersonalny.pl</span></div>`;
+  document.getElementById('root').innerHTML = h;
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>

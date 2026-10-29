@@ -1,0 +1,29 @@
+{
+  "name": "Jasiek",
+  "energy": {
+    "kcal": "2 900",
+    "note": "Tempo: +0,8–1,2 kg/miesiąc",
+    "protein": 164, "protein_note": "2,0 g / kg masy ciała",
+    "fat": 97, "fat_note": "ok. 30% energii",
+    "carbs": 343, "carbs_note": "pozostała część"
+  },
+  "activity": {
+    "cardio": { "value": "Bez dodatkowego\ncardio", "note": "Przy budowie masy kroki w zupełności wystarczą. Dodatkowe cardio tylko, jeśli masz na nie ochotę." },
+    "steps": { "value": "8–9 tys.\nna dzień", "note": "Teraz robisz średnio ok. 8,3 tys. Utrzymaj ten poziom także w dni bez treningu." },
+    "strength": { "value": "3 razy\nw tygodniu", "note": "Plan znajdziesz w HubFit. Zapisuj ciężary po każdej serii." }
+  },
+  "duties": [
+    "Trenuj w stałe dni: poniedziałek, środa, piątek. Traktuj je jak spotkanie, którego nie przekładasz.",
+    "Białko w każdym głównym posiłku (mięso, ryba, jaja, nabiał). Łącznie ok. 164 g dziennie.",
+    "Śpij minimum 7 godzin. Bez snu nadwyżka kalorii nie zamieni się w mięśnie."
+  ],
+  "rule": "Treningi siłowe rób z dniem przerwy pomiędzy. W dni wolne nie odpuszczaj kroków – spacer to Twoja regeneracja, a nie dodatkowy trening.",
+  "versions": [
+    {
+      "title": "3 treningi siłowe",
+      "days": [["silowy","kroki"],["kroki"],["silowy","kroki"],["kroki"],["silowy","kroki"],["kroki"],["kroki"]],
+      "note": "Klasyczny rozkład: dzień treningu, dzień przerwy. Weekend wolny od siłowni."
+    }
+  ],
+  "progress": "Waż się 3 razy w tygodniu rano, po toalecie, przed jedzeniem i wpisuj wynik w HubFit. Po 3 tygodniach sprawdzimy średni trend. Jeśli waga stoi, dodamy ok. 150 kcal, jeśli rośnie szybciej niż 1,2 kg/miesiąc – odejmiemy."
+}

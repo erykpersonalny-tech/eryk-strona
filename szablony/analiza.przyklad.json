@@ -1,0 +1,32 @@
+{
+  "name": "Kasia",
+  "period": "13.10 – 19.10",
+  "intro": "Podsumowanie 7 dni Twojego jedzenia i plan kilku prostych zmian. Bez diety cud, bez zakazów – małe nawyki, które robią największą różnicę.",
+  "stats": [
+    { "label": "Płyny", "value": "~2", "unit": "l / dzień", "desc": "Stabilnie cały tydzień – tak trzymaj." },
+    { "label": "Sen", "value": "7,1", "unit": "h średnio" },
+    { "label": "Słodkie", "value": "6", "unit": "/ 7 dni", "bad": true, "desc": "W tym 5 kawałków ciasta w 3 dni (pt.–nd.)." },
+    { "label": "Białko (szacunek)", "value": "65–75", "unit": "g", "desc": "Na dzień. Cel: ok. 100+ g." }
+  ],
+  "good": [
+    "<b>Regularne posiłki</b> w tygodniu – 4–5 posiłków o podobnych porach.",
+    "<b>Owoce i warzywa</b> pojawiają się codziennie.",
+    "<b>Uczciwy zapis</b> – także weekendu. Dzięki temu wiemy, gdzie realnie działać."
+  ],
+  "habits": [
+    { "title": "Białko w każdym posiłku", "todo": ["W każdym z 4 głównych posiłków porcja białka <b>wielkości Twojej dłoni</b> (ok. 20–30 g): mięso, ryba, jajka, twaróg, skyr."] },
+    { "title": "II śniadanie = stały „slot białkowy”", "todo": ["Ok. 10:00–11:00 zawsze masz pod ręką gotowca z listy poniżej."] },
+    { "title": "Słodkie – zaplanowane, nie przypadkowe", "todo": ["<b>1 zaplanowana słodka rzecz dziennie</b>, zjedzona do posiłku."] },
+    { "title": "Minimum 7 h snu", "todo": ["Stała pora kładzenia się (także w weekend, ± 1 h)."] }
+  ],
+  "snacks": [
+    { "name": "Skyr naturalny", "protein": "~17 g", "per": "150 g" },
+    { "name": "Serek wiejski", "protein": "~20 g", "per": "200 g" },
+    { "name": "Jogurt wysokobiałkowy", "protein": "~15–20 g", "per": "opak." },
+    { "name": "Twarożek półtłusty", "protein": "~18 g", "per": "100 g" },
+    { "name": "2 jajka na twardo", "protein": "~13 g", "per": "2 szt." },
+    { "name": "Kefir lub maślanka", "protein": "~13 g", "per": "400 ml" },
+    { "name": "Pasta z tuńczyka + chleb", "protein": "~20 g", "per": "½ puszki" },
+    { "name": "Shake białkowy", "protein": "~20 g", "per": "porcja" }
+  ]
+}

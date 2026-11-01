@@ -56,6 +56,9 @@ pokazują” musi wynikać z tego, co faktycznie znalazłeś. Gdzie dowody są
 niejednoznaczne, pisz ostrożnie („badania sugerują”, „u większości osób”)
 zamiast twardych stwierdzeń. Czego nie da się podeprzeć badaniem, podaj
 jako praktyczną wskazówkę trenera, nie jako fakt naukowy.
+Wartości z sekcji „1a. METODYKA ERYKA” mają pierwszeństwo przed tym,
+co znajdziesz w researchu. Nie cytuj badań w tekście (bez nazw, autorów,
+lat) i nie dodawaj sekcji „Źródła”.
 
 Potem zwróć odpowiedź DOKŁADNIE w tym formacie: najpierw pola metadanych
 (każde w jednej linii jako "KLUCZ: wartość"), potem osobna linia

@@ -5,6 +5,9 @@ on:
     # 08:00 UTC 1. i 15. dnia miesiąca ≈ co 2 tygodnie.
     - cron: "0 8 1,15 * *"
   workflow_dispatch: {}   # pozwala też odpalić ręcznie z zakładki Actions
+  push:                   # ręczne odpalenie z poziomu repo: zmień plik blog-automation/.generuj
+    branches: [main]
+    paths: ["blog-automation/.generuj"]
 
 permissions:
   contents: write

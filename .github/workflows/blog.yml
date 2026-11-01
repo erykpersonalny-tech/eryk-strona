@@ -48,11 +48,10 @@ jobs:
 
             **Do sprawdzenia przed merge:**
             - [ ] Ton i głos zgodne ze style guide
-            - [ ] Każda liczba/statystyka ma pokrycie w źródłach poniżej (podpisujesz się swoim nazwiskiem)
             - [ ] Zdjęcie pasuje (jeśli fallback — podmień URL w `blog-*.html` i karcie na `index.html`)
             - [ ] Jedno podsumowanie, jedna ściągawka, jedno CTA
 
-            **Źródła użyte przez model (zweryfikuj, zanim zaufasz liczbom):**
+            **Badania, na których oparto wpis (tylko do wglądu, nie trafiają do wpisu):**
             ${{ steps.gen.outputs.sources }}
 
             Merge = publikacja (Netlify wdroży automatycznie).

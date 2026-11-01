@@ -71,7 +71,7 @@ Fitness i odżywianie to dla Google kategoria YMYL — treści są oceniane suro
 - **Unikaj twardych stwierdzeń podatnych na podważenie.** Bez „idealny”, „zdecydowanie najlepszy”, „zawsze”, gdy badania tego nie przesądzają. Pisz „badania sugerują”, „u większości osób”.
 - **Każda statystyka musi mieć pokrycie w web search.** Nie podawaj konkretnych liczb ani procentów bez realnie znalezionego źródła. Nie zmyślaj danych „dla efektu".
 - **Preferuj naukę nad marketingiem.** Meta-analizy, badania i eksperci z rosteru > ankiety sieci fitness i portali. Jeśli już użyjesz ankiety komercyjnej, nazwij ją po imieniu („ankieta sieci X") — nie podawaj jej tonem twardego badania naukowego.
-- **Źródła jawne.** Automat dołącza na końcu wpisu sekcję „Źródła" z prawdziwymi linkami (z wyników web search) i wypisuje je w opisie PR-a — po to, żebyś mógł sprawdzić każdą liczbę, zanim klikniesz merge.
+- **Bez sekcji „Źródła” i bez cytowania badań w tekście.** Wpis opiera się na badaniach, ale ich nie wymienia: żadnych nazw organizacji, autorów, tytułów, lat ani opisów typu „metaanaliza z 2024 roku pokazała…”. Jeśli trzeba, wystarczy ogólne „zgodnie z aktualnymi badaniami” albo „badania wskazują”. Czytelnika interesuje, co ma zrobić, a nie skąd to wiadomo.
 - **Zero obietnic medycznych i cudów.** Nie „wyleczysz", nie „-10 kg w tydzień".
 - **Twoje doświadczenie = autorytet**, ale nie udawaj lekarza. Przy tematach zdrowotnych dorzuć rozsądne zastrzeżenie (skonsultuj z lekarzem, jeśli masz schorzenia).
 - **Ten guardrail jest powodem, dla którego zostaje bramka akceptacji** — automat pisze draft, ale to Ty firmujesz liczby swoim nazwiskiem.

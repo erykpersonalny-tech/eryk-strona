@@ -351,8 +351,8 @@ def main() -> None:
     slug = slugify(article["title"])
     hero_1200, hero_400 = fetch_hero(article.get("hero_query", topic["category"]))
 
-    # Doklej sekcję "Źródła" (z prawdziwych cytowań web search) na koniec treści.
-    article["content_html"] += build_sources_html(article["sources"])
+    # Wpis NIE ma sekcji "Źródła" (decyzja Eryka 01.11.2026: czytelników to nie interesuje).
+    # Badania z web search trafiają tylko do opisu PR-a, do wglądu.
 
     post_path = os.path.join(REPO_ROOT, f"blog-{slug}.html")
     with open(post_path, "w", encoding="utf-8") as f:

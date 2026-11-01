@@ -1,5 +1,5 @@
 {
-  "_komentarz": "Kolejka tematów. Automat bierze pierwszy z \"used\": false, generuje wpis i ustawia \"used\": true. Dopisuj nowe tematy na końcu. Kategoria musi być jedną z: Trening, Dieta, Motywacja. keyword = fraza, którą klient wpisuje w Google.",
+  "_komentarz": "Kolejka tematów. Automat bierze pierwszy z \"used\": false, generuje wpis i ustawia \"used\": true. Dopisuj nowe tematy na końcu. Kategoria musi być jedną z: Trening, Dieta, Motywacja. keyword = fraza, którą klient wpisuje w Google. Lista z 01.11.2026 celuje w odbiorców planu „Pierwsze 4 tygodnie na siłowni”: początkujący i osoby ze stresem przed siłownią.",
   "topics": [
     {
       "id": 1,
@@ -23,67 +23,116 @@
       "keyword": "pierwszy raz na siłowni plan"
     },
     {
-      "id": 4,
+      "id": 13,
+      "used": false,
+      "category": "Trening",
+      "topic": "Pierwszy trening na siłowni krok po kroku: od szatni do ostatniej serii",
+      "keyword": "pierwszy trening na siłowni"
+    },
+    {
+      "id": 14,
+      "used": false,
+      "category": "Motywacja",
+      "topic": "Stres przed siłownią: skąd się bierze i jak go oswoić",
+      "keyword": "strach przed siłownią"
+    },
+    {
+      "id": 15,
+      "used": false,
+      "category": "Trening",
+      "topic": "Jaki ciężar wybrać na początek — prosta metoda bez zgadywania",
+      "keyword": "jaki ciężar na początek siłownia"
+    },
+    {
+      "id": 16,
+      "used": false,
+      "category": "Trening",
+      "topic": "Maszyny czy wolne ciężary — od czego zacząć jako początkujący",
+      "keyword": "maszyny czy wolne ciężary"
+    },
+    {
+      "id": 17,
+      "used": false,
+      "category": "Trening",
+      "topic": "Ile razy w tygodniu chodzić na siłownię, gdy dopiero zaczynasz",
+      "keyword": "ile razy w tygodniu na siłownię"
+    },
+    {
+      "id": 18,
+      "used": false,
+      "category": "Trening",
+      "topic": "Zakwasy po pierwszym treningu — czy to normalne i co z nimi zrobić",
+      "keyword": "zakwasy po pierwszym treningu"
+    },
+    {
+      "id": 19,
+      "used": false,
+      "category": "Motywacja",
+      "topic": "Niepisane zasady siłowni — co musisz wiedzieć, żeby czuć się pewnie",
+      "keyword": "zasady na siłowni"
+    },
+    {
+      "id": 20,
+      "used": false,
+      "category": "Dieta",
+      "topic": "Co jeść przed i po treningu, gdy dopiero zaczynasz",
+      "keyword": "co jeść przed treningiem"
+    },
+    {
+      "id": 21,
+      "used": false,
+      "category": "Trening",
+      "topic": "Trening siłowy dla kobiet na start — dlaczego ciężary Cię nie „napakują”",
+      "keyword": "trening siłowy dla kobiet początkujących"
+    },
+    {
+      "id": 22,
+      "used": false,
+      "category": "Trening",
+      "topic": "Siłownia przy nadwadze — jak zacząć bezpiecznie i bez wstydu",
+      "keyword": "siłownia z nadwagą"
+    },
+    {
+      "id": 23,
+      "used": false,
+      "category": "Trening",
+      "topic": "Rozgrzewka przed treningiem siłowym — 10 minut, które wystarczą",
+      "keyword": "rozgrzewka przed siłownią"
+    },
+    {
+      "id": 24,
+      "used": false,
+      "category": "Motywacja",
+      "topic": "Miesiąc na siłowni i nie widzę efektów — co sprawdzić",
+      "keyword": "brak efektów na siłowni"
+    },
+    {
+      "id": 25,
+      "used": false,
+      "category": "Dieta",
+      "topic": "Ile białka potrzebujesz, gdy zaczynasz trenować, i skąd je brać",
+      "keyword": "ile białka dziennie"
+    },
+    {
+      "id": 26,
+      "used": false,
+      "category": "Trening",
+      "topic": "Cardio czy siłownia na początek, gdy chcesz schudnąć",
+      "keyword": "cardio czy siłownia na odchudzanie"
+    },
+    {
+      "id": 27,
+      "used": false,
+      "category": "Motywacja",
+      "topic": "Jak wrócić na siłownię po długiej przerwie i nie zrezygnować po tygodniu",
+      "keyword": "powrót na siłownię po przerwie"
+    },
+    {
+      "id": 28,
       "used": false,
       "category": "Dieta",
       "topic": "Ile realnie da się schudnąć w 3 miesiące",
       "keyword": "ile można schudnąć w 3 miesiące"
-    },
-    {
-      "id": 5,
-      "used": false,
-      "category": "Dieta",
-      "topic": "Deficyt kaloryczny dla początkującego — jak policzyć bez aplikacji",
-      "keyword": "jak policzyć deficyt kaloryczny"
-    },
-    {
-      "id": 6,
-      "used": false,
-      "category": "Dieta",
-      "topic": "Co jeść, żeby schudnąć, gdy nie umiesz gotować",
-      "keyword": "co jeść żeby schudnąć bez gotowania"
-    },
-    {
-      "id": 7,
-      "used": false,
-      "category": "Dieta",
-      "topic": "Ile białka naprawdę potrzebujesz na redukcji i skąd je brać",
-      "keyword": "ile białka na redukcji"
-    },
-    {
-      "id": 8,
-      "used": false,
-      "category": "Trening",
-      "topic": "Jak schudnąć, mając tylko 3 godziny tygodniowo na trening",
-      "keyword": "jak schudnąć mając mało czasu"
-    },
-    {
-      "id": 9,
-      "used": false,
-      "category": "Trening",
-      "topic": "Cardio czy siłownia na redukcji — co wybrać przy braku czasu",
-      "keyword": "cardio czy siłownia na redukcji"
-    },
-    {
-      "id": 10,
-      "used": false,
-      "category": "Motywacja",
-      "topic": "Jak nie odpuścić po dwóch tygodniach — utrzymanie nawyku",
-      "keyword": "jak nie odpuścić treningu"
-    },
-    {
-      "id": 11,
-      "used": false,
-      "category": "Dieta",
-      "topic": "Dlaczego diety-cud nie działają i co działa zamiast nich",
-      "keyword": "dlaczego diety cud nie działają"
-    },
-    {
-      "id": 12,
-      "used": false,
-      "category": "Trening",
-      "topic": "Trening dla zapracowanego — minimum, które daje efekty",
-      "keyword": "trening dla zapracowanych"
     }
   ]
 }

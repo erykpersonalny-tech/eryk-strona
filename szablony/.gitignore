@@ -1,2 +1,6 @@
 fonts/
 .render-*.html
+# Dane klientów nigdy nie trafiają do (publicznego) repo
+*.json
+!*.przyklad.json
+*.pdf

@@ -7,5 +7,10 @@ http://www.erykpersonalny.pl/* https://erykpersonalny.pl/:splat 301!
 # Redirect www to non-www
 https://www.erykpersonalny.pl/* https://erykpersonalny.pl/:splat 301!
 
+# Brakujące materiały (PDF-y z maili) i szablony mają zwracać prawdziwe 404,
+# a nie stronę główną. Istniejące pliki są serwowane normalnie (reguły bez ! ich nie nadpisują).
+/materialy/*  /404.html  404
+/szablony/*   /404.html  404
+
 # 404 fallback - wszystkie inne zapytania na index.html
 /*    /index.html   200

@@ -24,7 +24,7 @@
     },
     {
       "id": 13,
-      "used": false,
+      "used": true,
       "category": "Trening",
       "topic": "Pierwszy trening na siłowni krok po kroku: od szatni do ostatniej serii",
       "keyword": "pierwszy trening na siłowni"

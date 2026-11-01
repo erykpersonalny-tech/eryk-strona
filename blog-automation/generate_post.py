@@ -48,8 +48,14 @@ OUTPUT_INSTRUCTIONS = """
 # ZADANIE
 
 Napisz jeden wpis na bloga wg powyższego przewodnika. Najpierw zrób
-research (użyj web search, żeby liczby i fakty były aktualne i zgodne
-z mainstreamem nauki oraz z rosterem zaufanych źródeł).
+research w web search (wyszukiwarka zwraca wyłącznie PubMed / PMC).
+Szukaj po angielsku i opieraj się na najlepszych dowodach: stanowiska
+organizacji naukowych (ACSM, ISSN), metaanalizy i przeglądy systematyczne,
+dopiero potem pojedyncze badania RCT. Każda liczba i każde „badania
+pokazują” musi wynikać z tego, co faktycznie znalazłeś. Gdzie dowody są
+niejednoznaczne, pisz ostrożnie („badania sugerują”, „u większości osób”)
+zamiast twardych stwierdzeń. Czego nie da się podeprzeć badaniem, podaj
+jako praktyczną wskazówkę trenera, nie jako fakt naukowy.
 
 Potem zwróć odpowiedź DOKŁADNIE w tym formacie: najpierw pola metadanych
 (każde w jednej linii jako "KLUCZ: wartość"), potem osobna linia
@@ -176,7 +182,13 @@ def generate_article(topic: dict) -> dict:
         max_tokens=8000,
         system=system,
         messages=[{"role": "user", "content": user}],
-        tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+        tools=[{
+            "type": "web_search_20250305",
+            "name": "web_search",
+            "max_uses": 8,
+            # Źródła wyłącznie z recenzowanych badań (PubMed / PubMed Central).
+            "allowed_domains": ["pubmed.ncbi.nlm.nih.gov", "pmc.ncbi.nlm.nih.gov"],
+        }],
     )
 
     # Zbierz tekst ze wszystkich bloków tekstowych (reszta to bloki web search).

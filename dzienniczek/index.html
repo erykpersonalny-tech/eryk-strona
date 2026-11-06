@@ -49,7 +49,7 @@
         <div style="font-weight:700;letter-spacing:.24em;font-size:10.5px;color:#00ff88;text-transform:uppercase">Eryk Jóskowski · Trener Personalny</div>
       </div>
       <h1 style="text-transform:uppercase;font-size:clamp(24px,6vw,34px);font-weight:900;line-height:1;margin:0;background:linear-gradient(135deg,#fff 45%,#00ff88);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Dzienniczek żywieniowy</h1>
-      <p style="margin:0;font-size:13px;line-height:1.5;color:#c9ccca;max-width:560px">Przez 7 dni wpisuj wszystko, co jesz i pijesz, najlepiej ze zdjęciem. Nie zmieniaj nawyków na czas zapisu – liczy się realny obraz. Każdy zapisany dzień trafia od razu do mnie.</p>
+      <p style="margin:0;font-size:13px;line-height:1.5;color:#c9ccca;max-width:560px">Przez 7 dni wpisuj wszystko, co jesz i pijesz, najlepiej ze zdjęciem. Nie zmieniaj nawyków na czas zapisu – liczy się realny obraz. Każdy zapisany dzień trafia od razu do mnie. Wybierz dzień tygodnia, który uzupełniasz – data ustawi się sama.</p>
       <div data-noprint style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:4px">
         <label style="display:flex;flex-direction:column;gap:5px">
           <span class="lbl">Imię i nazwisko</span>
@@ -58,10 +58,6 @@
         <label style="display:flex;flex-direction:column;gap:5px">
           <span class="lbl">E-mail (ten sam co w HubFit)</span>
           <input id="f-email" class="hin" type="email" inputmode="email" placeholder="twoj@email.pl" autocomplete="email">
-        </label>
-        <label style="display:flex;flex-direction:column;gap:5px">
-          <span class="lbl">Początek tygodnia (poniedziałek)</span>
-          <input id="f-start" class="hin" type="date" style="color-scheme:dark">
         </label>
       </div>
       <label data-noprint class="consent">
@@ -89,8 +85,8 @@
           </div>
           <div style="font-size:22px;font-weight:900;color:#0a9d5a"><span id="water-l"></span><span style="font-size:12px;color:#5f6660;font-weight:700"> l</span></div>
         </div>
-        <div id="glasses" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px"></div>
-        <div style="font-size:11px;color:#5f6660">Jedna szklanka = 250 ml. Kliknij, aby zaznaczyć.</div>
+        <div id="glasses" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px"></div>
+        <div style="font-size:11px;color:#5f6660">Jedna szklanka = 250 ml (do 4 l). Kliknij, aby zaznaczyć.</div>
       </div>
 
       <div class="card">
@@ -197,6 +193,9 @@
     days: saved.days || {}, sent: saved.sent || {}, completedAt: saved.completedAt || null,
     day: (new Date().getDay() + 6) % 7
   };
+  if (S.start) Object.keys(S.days).forEach(function (k) {
+    var d = S.days[k]; if (d && !d.date) { var x = new Date(S.start + 'T12:00:00'); x.setDate(x.getDate() + Number(k)); d.date = x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); }
+  });
 
   function persist() {
     try {
@@ -211,6 +210,7 @@
     var d = JSON.parse(JSON.stringify(dayData(i)));
     d.meals = d.meals || {};
     fn(d);
+    if (!d.date) d.date = isoOf(autoDate(i));
     d.updatedAt = Date.now();
     S.days[i] = d;
     persist();
@@ -220,7 +220,14 @@
   function dayFilled(i) { var d = S.days[i]; if (!d) return false; return Object.keys(d.meals || {}).some(function (k) { return mealHas(d.meals[k]); }); }
   function dayUnsent(i) { var d = S.days[i]; return !!d && dayFilled(i) && (!S.sent[i] || S.sent[i] < (d.updatedAt || 0)); }
 
-  function dateObj(i) { if (!S.start) return null; var d = new Date(S.start + 'T12:00:00'); d.setDate(d.getDate() + i); return d; }
+  // Data dnia: zapisana przy pierwszym wpisie, a jeśli dzień jest pusty – ostatni taki dzień tygodnia (dziś albo wcześniej).
+  function isoOf(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function autoDate(i) { var t = new Date(); t.setHours(12, 0, 0, 0); t.setDate(t.getDate() - (((t.getDay() + 6) % 7) - i + 7) % 7); return t; }
+  function dateObj(i) { var d = S.days[i]; return d && d.date ? new Date(d.date + 'T12:00:00') : autoDate(i); }
+  function startIso() {
+    var ds = DAYS.map(function (_, i) { return dayFilled(i) ? isoFor(i) : null; }).filter(Boolean).sort();
+    return ds[0] || isoFor(S.day);
+  }
   function dateFor(i) { var d = dateObj(i); return d ? String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') : ''; }
   function isoFor(i) { var d = dateObj(i); return d ? d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') : ''; }
   function fmtL(n) { return String(parseFloat((n * GLASS_ML / 1000).toFixed(2))).replace('.', ','); }
@@ -274,7 +281,7 @@
     $('water-l').textContent = fmtL(d.water || 0);
     $('sleep').textContent = fmtH(d.sleep || 0);
     var g = '';
-    for (var k = 0; k < 12; k++) {
+    for (var k = 0; k < 16; k++) {
       var on = k < (d.water || 0);
       g += '<button type="button" data-glass="' + k + '" title="' + ((k + 1) * GLASS_ML) + ' ml" style="border:0;background:transparent;padding:0;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center">' +
         '<svg width="26" height="34" viewBox="0 0 26 34"><path d="M3 3h20l-2.6 27a2 2 0 0 1-2 1.8H7.6a2 2 0 0 1-2-1.8z" fill="' + (on ? '#00cc6a' : '#f3f5f4') + '" stroke="' + (on ? '#0a9d5a' : '#c8cdca') + '" stroke-width="1.8" stroke-linejoin="round"/></svg></button>';
@@ -309,7 +316,8 @@
 
   function renderReport() {
     $('report-name').textContent = 'Dzienniczek żywieniowy' + (S.name ? ' – ' + S.name : '');
-    $('report-range').textContent = S.start ? dateFor(0) + ' – ' + dateFor(6) : '';
+    var rs = DAYS.map(function (_, i) { return dayFilled(i) ? isoFor(i) : null; }).filter(Boolean).sort();
+    $('report-range').textContent = rs.length ? rs[0].split('-').reverse().slice(0, 2).join('.') + ' – ' + rs[rs.length - 1].split('-').reverse().slice(0, 2).join('.') : '';
     $('report-days').innerHTML = DAYS.map(function (n, i) {
       var d = dayData(i);
       var ms = MEALS.map(function (def) { return { def: def, m: (d.meals || {})[def.id] }; }).filter(function (x) { return mealHas(x.m); });
@@ -332,7 +340,6 @@
     var p = [];
     if (!S.name.trim()) p.push('wpisz imię i nazwisko');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(S.email.trim())) p.push('wpisz poprawny e-mail');
-    if (!S.start) p.push('wybierz początek tygodnia');
     if (!S.consent) p.push('zaznacz zgodę na przetwarzanie danych');
     return p;
   }
@@ -341,7 +348,7 @@
     var d = dayData(i);
     return {
       clientId: S.clientId, name: S.name.trim(), email: S.email.trim().toLowerCase(), consent: S.consent,
-      start: S.start, dayIndex: i, dayName: DAYS[i], date: isoFor(i),
+      start: startIso(), dayIndex: i, dayName: DAYS[i], date: isoFor(i),
       water_l: Number(((d.water || 0) * GLASS_ML / 1000).toFixed(2)), glasses: d.water || 0, sleep_h: d.sleep || 0,
       meals: MEALS.map(function (def) { var m = mealOf(d, def.id); return { id: def.id, label: def.label, time: m.time, text: m.text, photos: m.photos }; })
         .filter(function (m) { return mealHas(m); }),
@@ -398,10 +405,9 @@
   });
 
   // ---------- zdarzenia ----------
-  $('f-name').value = S.name; $('f-email').value = S.email; $('f-start').value = S.start; $('f-consent').checked = S.consent;
+  $('f-name').value = S.name; $('f-email').value = S.email; $('f-consent').checked = S.consent;
   $('f-name').addEventListener('input', function (e) { S.name = e.target.value; persist(); });
   $('f-email').addEventListener('input', function (e) { S.email = e.target.value; persist(); });
-  $('f-start').addEventListener('change', function (e) { S.start = e.target.value; persist(); renderAll(); });
   $('f-consent').addEventListener('change', function (e) { S.consent = e.target.checked; persist(); });
 
   $('tabs').addEventListener('click', function (e) {
@@ -445,7 +451,7 @@
   $('clear-all').addEventListener('click', function () {
     if (!window.confirm('Usunąć wszystkie wpisy z dzienniczka na tym urządzeniu?')) return;
     S.name = ''; S.start = ''; S.days = {}; S.sent = {}; S.completedAt = null; S.clientId = uid();
-    $('f-name').value = ''; $('f-start').value = '';
+    $('f-name').value = '';
     persist(); renderAll();
   });
 

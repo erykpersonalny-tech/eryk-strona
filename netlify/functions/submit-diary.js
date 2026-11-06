@@ -33,7 +33,7 @@ exports.handler = async (event) => {
   if (!EMAIL_RE.test(email)) return reply(400, { error: 'Nieprawidłowy e-mail.' });
   if (d.consent !== true) return reply(400, { error: 'Brak zgody na przetwarzanie danych.' });
   if (!Number.isInteger(d.dayIndex) || d.dayIndex < 0 || d.dayIndex > 6) return reply(400, { error: 'Nieprawidłowy dzień.' });
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(d.date || ''))) return reply(400, { error: 'Brak daty – wybierz początek tygodnia.' });
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(d.date || ''))) return reply(400, { error: 'Brak daty dnia – odśwież stronę i spróbuj ponownie.' });
 
   const meals = (Array.isArray(d.meals) ? d.meals : []).slice(0, 6).map((m) => ({
     id: String(m.id || '').slice(0, 4),

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Wzmocnienie nadgarstków – Eryk Jóskowski</title>
+<link rel="stylesheet" href="fonts/inter/400.css"><link rel="stylesheet" href="fonts/inter/500.css"><link rel="stylesheet" href="fonts/inter/700.css"><link rel="stylesheet" href="fonts/inter/800.css"><link rel="stylesheet" href="fonts/inter/900.css">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --black:#0a0a0a; --ink:#141614; --green:#00ff88; --green-ink:#0a9d5a; --mint:#bff5dc; --mint-bg:#ecfdf4; --grey:#5c625e; --line:#e3e7e4; --soft:#f4f6f5; --warn:#d9480f; --warn-bg:#fff3ec; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif; color:var(--ink); font-size:10px; line-height:1.4; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  b { font-weight:700; }
+  .page { width:210mm; height:297mm; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .hero { flex:none; background:var(--black); color:#fff; position:relative; overflow:hidden; padding:9mm 12mm 7mm; }
+  .hero::after { content:""; position:absolute; right:-60px; top:-90px; width:420px; height:320px; background:radial-gradient(closest-side, rgba(0,255,136,.28), rgba(0,255,136,0)); }
+  .hero > * { position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:10px; font-size:8.5px; font-weight:800; letter-spacing:.3em; color:var(--green); text-transform:uppercase; }
+  .brand i { width:6px; height:20px; border-radius:3px; background:var(--green); display:block; }
+  .rule { height:1px; background:rgba(0,255,136,.45); margin:6px 0 8px; }
+  h1 { font-size:26px; font-weight:900; line-height:1.05; text-transform:uppercase; letter-spacing:-.01em; }
+  h1 em { font-style:normal; color:var(--green); }
+  .hero p { margin-top:7px; font-size:10.5px; color:#d8dcd9; max-width:160mm; }
+  .chips { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .chip { border:1px solid rgba(0,255,136,.5); border-radius:999px; padding:4px 12px; font-size:8.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--green); }
+  .chip.grey { border-color:rgba(255,255,255,.25); color:#d8dcd9; }
+  .body { flex:1; padding:5mm 10mm 0; display:flex; flex-direction:column; gap:6px; }
+  .eyebrow { font-size:7.5px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--green-ink); }
+  .card { border:1px solid var(--line); border-radius:12px; padding:8px 12px; }
+  .card.dark { background:var(--black); color:#fff; border:0; position:relative; overflow:hidden; }
+  .card.dark::after { content:""; position:absolute; right:-40px; top:-60px; width:240px; height:180px; background:radial-gradient(closest-side, rgba(0,255,136,.25), rgba(0,255,136,0)); }
+  .card.dark > * { position:relative; z-index:1; }
+  .card.dark .eyebrow { color:var(--green); }
+  .card.warn { background:var(--warn-bg); border-color:#f6c9b0; }
+  .card.warn .eyebrow { color:var(--warn); }
+  .flow { display:flex; align-items:center; gap:6px; margin-top:7px; }
+  .step { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:9px; padding:6px 7px; text-align:center; font-size:8.6px; font-weight:700; line-height:1.25; }
+  .step span { display:block; color:var(--green); font-size:10px; font-weight:900; }
+  .arr { color:var(--green); font-weight:900; font-size:12px; }
+  .meta { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:7px; }
+  .meta div { border-top:1px solid rgba(0,255,136,.35); padding-top:5px; font-size:8.6px; color:#d8dcd9; }
+  .meta b { display:block; color:#fff; font-size:12px; font-weight:900; }
+  .num { width:22px; height:22px; border-radius:7px; background:var(--black); color:var(--green); font-weight:800; font-size:11px; display:inline-flex; align-items:center; justify-content:center; flex:none; }
+  .ex { border:1px solid var(--line); border-radius:11px; overflow:hidden; break-inside:avoid; }
+  .ex-head { display:flex; align-items:center; gap:10px; padding:5px 12px; background:var(--soft); }
+  .ex-head h3 { flex:1; font-size:11.3px; font-weight:800; }
+  .ex-head .sets { font-weight:800; font-size:10.3px; color:var(--green-ink); white-space:nowrap; }
+  .ex-body { display:grid; grid-template-columns:1fr 1.35fr; gap:14px; padding:6px 12px 7px; }
+  .muted { color:var(--grey); }
+  ul.dots { list-style:none; display:grid; gap:3px; }
+  ul.dots li { position:relative; padding-left:11px; }
+  ul.dots li::before { content:""; position:absolute; left:0; top:6px; width:5px; height:5px; border-radius:50%; background:var(--green-ink); }
+  .card.dark ul.dots li::before { background:var(--green); }
+  a.vid { display:inline-block; margin-top:5px; font-size:9px; font-weight:800; color:var(--green-ink); text-decoration:none; border:1px solid var(--mint); background:var(--mint-bg); border-radius:999px; padding:2px 9px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .foot { flex:none; height:9mm; padding:0 12mm; display:flex; align-items:center; justify-content:space-between; font-size:7px; letter-spacing:.22em; color:#8b918d; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="brand"><i></i>Eryk Jóskowski · Trener personalny</div>
+    <div class="rule"></div>
+    <h1>Wzmocnienie <em>nadgarstków</em></h1>
+    <p>10-minutowy obwód z hantlami, który wzmacnia nadgarstki i przedramiona we wszystkich kierunkach ruchu: zgięcie, wyprost, rotacja i odchylenia na boki, plus siła chwytu.</p>
+    <div class="chips"><span class="chip">Obwód × 2</span><span class="chip">ok. 10 min</span><span class="chip grey">Hantle + ławka</span></div>
+  </div>
+
+  <div class="body">
+    <div class="card dark">
+      <div class="eyebrow">Jak to zrobić</div>
+      <div class="flow">
+        <div class="step"><span>1</span>Uginanie nadgarstków</div><div class="arr">›</div>
+        <div class="step"><span>2</span>Prostowanie nadgarstków</div><div class="arr">›</div>
+        <div class="step"><span>3</span>Pronacja / supinacja</div><div class="arr">›</div>
+        <div class="step"><span>4</span>Odchylenia na boki</div><div class="arr">›</div>
+        <div class="step"><span>5</span>Spacer farmera</div>
+      </div>
+      <div class="meta">
+        <div><b>2 obwody</b>wszystkie 5 ćwiczeń po kolei, potem od nowa</div>
+        <div><b>12–15 powt.</b>w ćw. 1–4; spacer farmera 30–40 s</div>
+        <div><b>15 s</b>przerwy między ćwiczeniami</div>
+        <div><b>60 s</b>przerwy między obwodami</div>
+      </div>
+    </div>
+
+    <div class="ex"><div class="ex-head"><span class="num">1</span><h3>Uginanie nadgarstków z hantlami</h3><span class="sets">2 × 12–15</span></div>
+      <div class="ex-body"><div><p class="muted">Zginacze nadgarstka, wewnętrzna strona przedramienia.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-wrist-curl">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Usiądź, przedramiona oparte na udach, dłonie skierowane w górę, nadgarstki tuż za kolanami.</li><li>Opuść hantle w dół, potem zegnij nadgarstki maksymalnie w górę.</li><li>Ruch tylko w nadgarstku, przedramiona nie odrywają się od ud.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">2</span><h3>Prostowanie nadgarstków z hantlami</h3><span class="sets">2 × 12–15</span></div>
+      <div class="ex-body"><div><p class="muted">Prostowniki nadgarstka, zewnętrzna strona przedramienia.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-wrist-extension">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Ustawienie jak w ćw. 1, tylko dłonie skierowane w dół.</li><li>Unoś grzbiety dłoni w górę, zatrzymaj na 1 s i opuszczaj powoli (ok. 3 s).</li><li>To zwykle słabsza strona – ciężar mniejszy niż w uginaniu.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">3</span><h3>Pronacja i supinacja z hantlem</h3><span class="sets">2 × 12–15</span></div>
+      <div class="ex-body"><div><p class="muted">Rotatory przedramienia (nawracacze i odwracacze).</p><a class="vid" href="https://www.youtube.com/watch?v=OVuQ4rJfFEE">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Usiądź, oba przedramiona oparte o uda, w każdej ręce hantel pionowo jak młotek – ćwiczysz obie ręce naraz.</li><li>Powoli obracaj dłoń w dół i w górę, na ile pozwala zakres.</li><li>Chwyć hantel bliżej jednego końca – im dłuższa część wystaje nad dłonią, tym trudniej.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">4</span><h3>Odchylenie promieniowe i łokciowe z hantlem</h3><span class="sets">2 × 12–15</span></div>
+      <div class="ex-body"><div><p class="muted">Mięśnie stabilizujące nadgarstek na boki (kciuk i mały palec).</p><a class="vid" href="https://www.youtube.com/watch?v=saJbuK47z-4">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Stań, ręce wyprostowane wzdłuż ciała, w każdej hantel jak młotek – obie ręce naraz.</li><li>Odchylaj nadgarstek raz w stronę kciuka, raz w stronę małego palca. Ramię się nie rusza.</li><li>Progres: chwyć hantel za jeden koniec – dłuższa dźwignia.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">5</span><h3>Spacer farmera z hantlami</h3><span class="sets">2 × 30–40 s</span></div>
+      <div class="ex-body"><div><p class="muted">Siła chwytu, przedramiona, stabilizacja barków i tułowia.</p><a class="vid" href="https://musclewiki.com/pl-pl/exercise/dumbbell-farmer-walk">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Weź ciężkie hantle, wyprostuj się, barki w dół i do tyłu.</li><li>Idź krótkimi krokami, nadgarstki proste, ściskaj mocno uchwyty.</li><li>Brak miejsca do chodzenia? Stój w miejscu i trzymaj hantle przez ten sam czas.</li></ul></div></div>
+
+    <div class="grid2">
+      <div class="card" style="border-color:var(--mint); background:var(--mint-bg)">
+        <div class="eyebrow">Progresja – spokojnie i stopniowo</div>
+        <ul class="dots" style="margin-top:5px"><li>Zapisuj ciężar i powtórzenia (w spacerze – czas).</li><li>Gdy w obu seriach zrobisz <b>15 powtórzeń z pełną kontrolą</b>, w kolejnym tygodniu dodaj najmniejszy możliwy ciężar i wróć do 12.</li><li>W ćw. 3 i 4 progresem może być też chwyt dalej od talerza.</li></ul>
+      </div>
+      <div class="card warn">
+        <div class="eyebrow">Uwaga</div>
+        <ul class="dots" style="margin-top:5px"><li>Ćwiczenia mają być <b>bez bólu</b>. Kłucie lub ból w nadgarstku – przerwij i daj mi znać.</li><li>Pełny zakres ruchu przed ciężarem – szarpanie i „bujanie” to znak, że jest za ciężko.</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Eryk Jóskowski · Trener personalny · Rumia</span><span>erykpersonalny.pl</span></div>
+</div>
+</body>
+</html>

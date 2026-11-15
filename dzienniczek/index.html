@@ -31,6 +31,9 @@
   .consent input{width:20px;height:20px;margin:1px 0 0;accent-color:#00cc6a;flex:none}
   .consent a{color:#00ff88}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .hin.missing{border-color:#ff6b4a;box-shadow:0 0 0 2px rgba(255,107,74,.35)}
+  .consent.missing{color:#ffb3a3}
+  .consent.missing input{outline:2px solid #ff6b4a;outline-offset:2px}
   @media print{
     body{background:#fff}
     [data-noprint]{display:none !important}
@@ -49,7 +52,7 @@
         <div style="font-weight:700;letter-spacing:.24em;font-size:10.5px;color:#00ff88;text-transform:uppercase">Eryk Jóskowski · Trener Personalny</div>
       </div>
       <h1 style="text-transform:uppercase;font-size:clamp(24px,6vw,34px);font-weight:900;line-height:1;margin:0;background:linear-gradient(135deg,#fff 45%,#00ff88);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Dzienniczek żywieniowy</h1>
-      <p style="margin:0;font-size:13px;line-height:1.5;color:#c9ccca;max-width:560px">Przez 7 dni wpisuj wszystko, co jesz i pijesz, najlepiej ze zdjęciem. Nie zmieniaj nawyków na czas zapisu – liczy się realny obraz. Każdy zapisany dzień trafia od razu do mnie. Wybierz dzień tygodnia, który uzupełniasz – data ustawi się sama.</p>
+      <p style="margin:0;font-size:13px;line-height:1.5;color:#c9ccca;max-width:560px">Przez 7 dni wpisuj wszystko, co jesz i pijesz, najlepiej ze zdjęciem. Nie zmieniaj nawyków na czas zapisu – liczy się realny obraz. Każdy wysłany dzień trafia od razu do mnie. Wybierz dzień, który uzupełniasz – zakładki to zawsze ostatnie 7 dni, a data ustawia się sama.</p>
       <div data-noprint style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:4px">
         <label style="display:flex;flex-direction:column;gap:5px">
           <span class="lbl">Imię i nazwisko</span>
@@ -69,7 +72,14 @@
 
   <main id="editor" data-noprint style="max-width:860px;width:100%;margin:0 auto;padding:16px 14px 30px;display:flex;flex-direction:column;gap:14px;flex:1">
 
-    <nav id="tabs" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;position:sticky;top:0;z-index:5;background:#f3f5f4;padding:8px 0"></nav>
+    <div style="position:sticky;top:0;z-index:5;background:#f3f5f4;padding:8px 0 4px">
+      <nav id="tabs" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px"></nav>
+      <div style="display:flex;gap:14px;justify-content:center;font-size:10.5px;color:#5f6660;font-weight:600;margin-top:6px">
+        <span><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#00cc6a;margin-right:4px"></span>wysłany</span>
+        <span><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#f0a020;margin-right:4px"></span>zapisany, niewysłany</span>
+      </div>
+    </div>
+    <div id="old-banner" class="notice" hidden></div>
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
       <h2 style="margin:0;font-size:22px;font-weight:900;text-transform:uppercase"><span id="day-name"></span> <span id="day-date" style="color:#0a9d5a"></span></h2>
@@ -125,12 +135,12 @@
       <div style="position:relative">
         <div style="font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#00ff88;font-weight:700">Po 7 dniach</div>
         <div style="font-size:15px;font-weight:800;text-transform:uppercase;margin-top:2px">Zakończ dzienniczek</div>
-        <p style="margin:6px 0 0;font-size:12.5px;color:#c9ccca;line-height:1.5">Kliknij „Zakończ i wyślij” – niewysłane dni pójdą razem, a ja dostanę informację, że dzienniczek jest kompletny. Dane zapisują się też automatycznie na tym urządzeniu.</p>
+        <p style="margin:6px 0 0;font-size:12.5px;color:#c9ccca;line-height:1.5"><span id="progress" style="color:#00ff88;font-weight:700"></span> Kliknij „Zakończ i wyślij” – niewysłane dni pójdą razem, a ja dostanę informację, że dzienniczek jest kompletny. Następnego dnia telefon sam zacznie nowy, pusty dzienniczek. Wpisy zapisują się automatycznie na tym telefonie.</p>
       </div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;position:relative">
         <button id="send-all" type="button" class="btn-main">Zakończ i wyślij</button>
         <button id="open-report" type="button" class="btn-ghost">Raport PDF</button>
-        <button id="clear-all" type="button" class="btn-ghost">Wyczyść dane</button>
+        <button id="clear-all" type="button" class="btn-ghost">Zacznij od nowa</button>
       </div>
       <div id="all-msg" class="notice" hidden style="position:relative"></div>
     </section>
@@ -176,8 +186,8 @@
     { id: 'ko', label: 'Kolacja' },
     { id: 'px', label: 'Przekąski / inne' }
   ];
-  var GLASS_ML = 250;
-  var KEY = 'ej-dzienniczek-v1';          // ten sam klucz co poprzednia wersja – dane klientów zostają
+  var GLASS_ML = 250, GLASSES = 16;
+  var KEY = 'ej-dzienniczek-v1';          // ten sam klucz co poprzednie wersje – dane klientów są migrowane
   var ENDPOINT = '/.netlify/functions/submit-diary';
   var MAX_PAYLOAD = 5 * 1024 * 1024;
 
@@ -185,54 +195,86 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function uid() { return (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)); }
 
-  // ---------- stan ----------
+  // ---------- daty (wszystko w czasie lokalnym telefonu, klucz dnia = RRRR-MM-DD) ----------
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function isoOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function parseIso(s) { return new Date(s + 'T12:00:00'); }
+  function addDays(iso, n) { var d = parseIso(iso); d.setDate(d.getDate() + n); return isoOf(d); }
+  function today() { return isoOf(new Date()); }
+  function weekdayIdx(iso) { return (parseIso(iso).getDay() + 6) % 7; }
+  function ddmm(iso) { var p = iso.split('-'); return p[2] + '.' + p[1]; }
+  function windowDays() { var t = today(), out = []; for (var k = 6; k >= 0; k--) out.push(addDays(t, -k)); return out; }   // ostatnie 7 dni, chronologicznie
+
+  // ---------- stan + migracja ----------
   var saved = (function () { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
   var S = {
-    name: saved.name || '', email: saved.email || '', start: saved.start || '',
-    consent: !!saved.consent, clientId: saved.clientId || uid(),
-    days: saved.days || {}, sent: saved.sent || {}, completedAt: saved.completedAt || null,
-    day: (new Date().getDay() + 6) % 7
+    name: saved.name || '', email: saved.email || '', consent: !!saved.consent, clientId: saved.clientId || uid(),
+    entries: saved.entries || {}, sent: saved.v === 3 ? (saved.sent || {}) : {}, completedAt: saved.completedAt || null,
+    day: today()
   };
-  if (S.start) Object.keys(S.days).forEach(function (k) {
-    var d = S.days[k]; if (d && !d.date) { var x = new Date(S.start + 'T12:00:00'); x.setDate(x.getDate() + Number(k)); d.date = x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); }
-  });
+  var notes = [];   // komunikaty po wczytaniu (np. o rozpoczęciu nowego tygodnia)
+
+  // Wersje 1–2 trzymały dni jako 0–6 (pon–ndz) + ewentualnie „początek tygodnia” albo datę w dniu.
+  if (saved.v !== 3 && saved.days) {
+    Object.keys(saved.days).forEach(function (k) {
+      var d = saved.days[k]; if (!d) return;
+      var iso = d.date;
+      if (!iso && saved.start) iso = addDays(saved.start, Number(k));
+      if (!iso) { var t = today(); iso = addDays(t, -((weekdayIdx(t) - Number(k) + 7) % 7)); }
+      delete d.date;
+      S.entries[iso] = d;
+      if (saved.sent && saved.sent[k]) S.sent[iso] = saved.sent[k];
+    });
+  }
+
+  function dayData(iso) { return S.entries[iso] || { water: 0, sleep: 0, meals: {} }; }
+  function mealOf(d, id) { var m = (d.meals || {})[id] || {}; return { text: m.text || '', time: m.time || '', photos: m.photos || [] }; }
+  function mealHas(m) { return m && ((m.text || '').trim() || (m.photos || []).length); }
+  function dayFilled(iso) { var d = S.entries[iso]; return !!d && Object.keys(d.meals || {}).some(function (k) { return mealHas(d.meals[k]); }); }
+  function dayUnsent(iso) { var d = S.entries[iso]; return dayFilled(iso) && (!S.sent[iso] || S.sent[iso] < (d.updatedAt || 0)); }
+  function filledDates() { return Object.keys(S.entries).filter(dayFilled).sort(); }
+  function windowFilled() { return filledDates().filter(inWindow); }
+  function inWindow(iso) { return windowDays().indexOf(iso) !== -1; }
+  function oldUnsent() { return filledDates().filter(function (iso) { return !inWindow(iso) && dayUnsent(iso); }); }
+  function oldSent() { return filledDates().filter(function (iso) { return !inWindow(iso) && !dayUnsent(iso); }); }
+
+  function resetEntries() { S.entries = {}; S.sent = {}; S.completedAt = null; S.clientId = uid(); }
+
+  // Porządki przy wczytaniu – klient nie musi niczego czyścić sam.
+  (function cleanup() {
+    // 1) puste dni (tylko kliknięte) spoza okna – bez wartości
+    Object.keys(S.entries).forEach(function (iso) { if (!dayFilled(iso) && !inWindow(iso)) delete S.entries[iso]; });
+    // 2) dzienniczek zakończony wcześniej niż dziś → nowy tydzień
+    if (S.completedAt && isoOf(new Date(S.completedAt)) < today()) {
+      notes.push('Poprzedni dzienniczek (wysłany ' + ddmm(isoOf(new Date(S.completedAt))) + ') jest już u mnie. Zaczynasz nowy – wcześniejsze wpisy zostały usunięte z tego urządzenia.');
+      resetEntries();
+    }
+    // 3) dni sprzed ostatnich 7, które są już wysłane – są u trenera, nie mieszamy ich z bieżącym tygodniem
+    var dropped = oldSent();
+    dropped.forEach(function (iso) { delete S.entries[iso]; delete S.sent[iso]; });
+    if (dropped.length && !notes.length) notes.push('Dni wysłane wcześniej (' + dropped.map(ddmm).join(', ') + ') są już u mnie, więc zniknęły z zakładek. Zakładki pokazują zawsze ostatnie 7 dni.');
+  })();
 
   function persist() {
     try {
-      localStorage.setItem(KEY, JSON.stringify({ name: S.name, email: S.email, start: S.start, consent: S.consent,
-        clientId: S.clientId, days: S.days, sent: S.sent, completedAt: S.completedAt }));
+      localStorage.setItem(KEY, JSON.stringify({ v: 3, name: S.name, email: S.email, consent: S.consent,
+        clientId: S.clientId, entries: S.entries, sent: S.sent, completedAt: S.completedAt }));
       $('save-err').hidden = true;
     } catch (e) { $('save-err').hidden = false; }
   }
-
-  function dayData(i) { return S.days[i] || { water: 0, sleep: 0, meals: {} }; }
-  function touchDay(i, fn) {
-    var d = JSON.parse(JSON.stringify(dayData(i)));
+  function touchDay(iso, fn) {
+    var d = JSON.parse(JSON.stringify(dayData(iso)));
     d.meals = d.meals || {};
     fn(d);
-    if (!d.date) d.date = isoOf(autoDate(i));
     d.updatedAt = Date.now();
-    S.days[i] = d;
+    S.entries[iso] = d;
     persist();
   }
-  function mealOf(d, id) { var m = d.meals[id] || {}; return { text: m.text || '', time: m.time || '', photos: m.photos || [] }; }
-  function mealHas(m) { return m && ((m.text || '').trim() || (m.photos || []).length); }
-  function dayFilled(i) { var d = S.days[i]; if (!d) return false; return Object.keys(d.meals || {}).some(function (k) { return mealHas(d.meals[k]); }); }
-  function dayUnsent(i) { var d = S.days[i]; return !!d && dayFilled(i) && (!S.sent[i] || S.sent[i] < (d.updatedAt || 0)); }
 
-  // Data dnia: zapisana przy pierwszym wpisie, a jeśli dzień jest pusty – ostatni taki dzień tygodnia (dziś albo wcześniej).
-  function isoOf(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-  function autoDate(i) { var t = new Date(); t.setHours(12, 0, 0, 0); t.setDate(t.getDate() - (((t.getDay() + 6) % 7) - i + 7) % 7); return t; }
-  function dateObj(i) { var d = S.days[i]; return d && d.date ? new Date(d.date + 'T12:00:00') : autoDate(i); }
-  function startIso() {
-    var ds = DAYS.map(function (_, i) { return dayFilled(i) ? isoFor(i) : null; }).filter(Boolean).sort();
-    return ds[0] || isoFor(S.day);
-  }
-  function dateFor(i) { var d = dateObj(i); return d ? String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') : ''; }
-  function isoFor(i) { var d = dateObj(i); return d ? d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') : ''; }
   function fmtL(n) { return String(parseFloat((n * GLASS_ML / 1000).toFixed(2))).replace('.', ','); }
   function fmtH(h) { return String(h).replace('.', ','); }
-  function fmtTime(ts) { var d = new Date(ts); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  function fmtTime(ts) { var d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function dayLabel(iso) { return iso === today() ? 'Dziś' : iso === addDays(today(), -1) ? 'Wczoraj' : DAYS[weekdayIdx(iso)]; }
 
   // ---------- zdjęcia ----------
   function compress(file) {
@@ -255,35 +297,52 @@
 
   // ---------- render ----------
   function renderTabs() {
-    $('tabs').innerHTML = DAYS.map(function (_, i) {
-      var active = i === S.day, filled = dayFilled(i), unsent = dayUnsent(i);
+    var t = today();
+    $('tabs').innerHTML = windowDays().map(function (iso) {
+      var active = iso === S.day, filled = dayFilled(iso), unsent = dayUnsent(iso), isToday = iso === t;
       var dot = !filled ? 'transparent' : (unsent ? '#f0a020' : '#00cc6a');
-      return '<button type="button" data-tab="' + i + '" style="border:1px solid ' + (active ? '#0a0a0a' : '#e4e7e5') + ';background:' + (active ? '#0a0a0a' : '#fff') + ';color:' + (active ? '#00ff88' : '#0a0a0a') + ';border-radius:11px;min-height:54px;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">' +
-        '<span style="font-size:13px;font-weight:900;text-transform:uppercase">' + SHORT[i] + '</span>' +
-        '<span style="font-size:9.5px;font-weight:600;opacity:.75">' + (dateFor(i) || '&nbsp;') + '</span>' +
-        '<span style="width:6px;height:6px;border-radius:50%;background:' + dot + '"></span></button>';
+      return '<button type="button" data-tab="' + iso + '" aria-pressed="' + active + '" style="border:' + (isToday && !active ? '2px solid #00cc6a' : '1px solid ' + (active ? '#0a0a0a' : '#e4e7e5')) + ';background:' + (active ? '#0a0a0a' : '#fff') + ';color:' + (active ? '#00ff88' : '#0a0a0a') + ';border-radius:11px;min-height:58px;padding:5px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">' +
+        '<span style="font-size:13px;font-weight:900;text-transform:uppercase">' + SHORT[weekdayIdx(iso)] + '</span>' +
+        '<span style="font-size:9.5px;font-weight:700;opacity:.8">' + (isToday ? 'DZIŚ' : ddmm(iso)) + '</span>' +
+        '<span style="width:7px;height:7px;border-radius:50%;background:' + dot + ';border:1px solid ' + (filled ? dot : 'transparent') + '"></span></button>';
     }).join('');
-    $('filled').textContent = 'Uzupełnione dni: ' + DAYS.filter(function (_, i) { return dayFilled(i); }).length + '/7';
+    var n = windowFilled().length;
+    $('filled').textContent = 'Uzupełnione dni: ' + n + '/7';
+    $('progress').textContent = n ? 'Masz uzupełnione ' + n + ' z 7 dni.' : '';
+    renderBanner();
+  }
+
+  function renderBanner() {
+    var ou = oldUnsent(), el = $('old-banner'), html = '';
+    if (ou.length) {
+      html = '<strong>Masz niewysłane dni sprzed tygodnia:</strong> ' + ou.map(ddmm).join(', ') + '. Nie ma ich już w zakładkach, ale są zapisane na tym telefonie.' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:9px"><button type="button" id="old-send" class="btn-main" style="min-height:42px;font-size:12px">Wyślij je teraz</button>' +
+        '<button type="button" id="old-drop" style="border:1px solid #f0b8ad;border-radius:11px;background:#fff;color:#9a2b17;font-weight:700;font-size:12px;padding:0 14px;min-height:42px;cursor:pointer">Usuń je</button></div>';
+      el.className = 'notice err';
+    } else if (notes.length) {
+      html = notes.join('<br>'); el.className = 'notice ok';
+    }
+    el.innerHTML = html; el.hidden = !html;
   }
 
   function renderStatus() {
     var i = S.day, msg;
-    if (!dayFilled(i)) msg = 'Uzupełnij posiłki, potem wyślij.';
-    else if (dayUnsent(i)) msg = S.sent[i] ? '<span style="color:#b26b00;font-weight:700">Masz niewysłane zmiany</span> (ostatnio wysłano o ' + fmtTime(S.sent[i]) + ')' : '<span style="color:#b26b00;font-weight:700">Dzień jeszcze niewysłany</span>';
+    if (!dayFilled(i)) msg = 'Dopisz przynajmniej jeden posiłek, potem wyślij.';
+    else if (dayUnsent(i)) msg = S.sent[i] ? '<span style="color:#b26b00;font-weight:700">Masz niewysłane zmiany</span> (ostatnio wysłano o ' + fmtTime(S.sent[i]) + ')' : '<span style="color:#b26b00;font-weight:700">Dzień zapisany na telefonie, jeszcze niewysłany</span>';
     else msg = '<span style="color:#0a9d5a;font-weight:700">✓ Wysłano o ' + fmtTime(S.sent[i]) + '</span> – możesz jeszcze poprawić i wysłać ponownie.';
     $('day-status').innerHTML = msg;
   }
 
   function renderDay() {
     var i = S.day, d = dayData(i);
-    $('day-name').textContent = DAYS[i];
-    $('day-date').textContent = dateFor(i);
+    $('day-name').textContent = DAYS[weekdayIdx(i)];
+    $('day-date').textContent = ddmm(i) + (i === today() ? ' · dziś' : '');
     $('water-l').textContent = fmtL(d.water || 0);
     $('sleep').textContent = fmtH(d.sleep || 0);
     var g = '';
-    for (var k = 0; k < 16; k++) {
+    for (var k = 0; k < GLASSES; k++) {
       var on = k < (d.water || 0);
-      g += '<button type="button" data-glass="' + k + '" title="' + ((k + 1) * GLASS_ML) + ' ml" style="border:0;background:transparent;padding:0;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center">' +
+      g += '<button type="button" data-glass="' + k + '" aria-label="' + ((k + 1) * GLASS_ML) + ' ml" style="border:0;background:transparent;padding:0;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center">' +
         '<svg width="26" height="34" viewBox="0 0 26 34"><path d="M3 3h20l-2.6 27a2 2 0 0 1-2 1.8H7.6a2 2 0 0 1-2-1.8z" fill="' + (on ? '#00cc6a' : '#f3f5f4') + '" stroke="' + (on ? '#0a9d5a' : '#c8cdca') + '" stroke-width="1.8" stroke-linejoin="round"/></svg></button>';
     }
     $('glasses').innerHTML = g;
@@ -292,7 +351,7 @@
       var photos = m.photos.map(function (src, pi) {
         return '<div style="position:relative;width:76px;height:76px;border-radius:10px;overflow:hidden;border:1px solid #e4e7e5">' +
           '<div style="width:100%;height:100%;background-image:url(' + src + ');background-size:cover;background-position:center"></div>' +
-          '<button type="button" data-rm="' + def.id + ':' + pi + '" title="Usuń zdjęcie" style="position:absolute;top:3px;right:3px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.75);color:#fff;font-size:14px;line-height:1;cursor:pointer">×</button></div>';
+          '<button type="button" data-rm="' + def.id + ':' + pi + '" aria-label="Usuń zdjęcie" style="position:absolute;top:3px;right:3px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.75);color:#fff;font-size:15px;line-height:1;cursor:pointer">×</button></div>';
       }).join('');
       return '<div style="background:#fff;border:1px solid #e4e7e5;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">' +
@@ -300,7 +359,7 @@
           '<span data-st="' + def.id + '" style="font-size:10.5px;font-weight:700;color:#0a9d5a">' + (mealHas(m) ? '✓ uzupełnione' : '') + '</span></div>' +
           '<label style="display:flex;align-items:center;gap:7px;font-size:11px;color:#5f6660;font-weight:600">Godzina <input type="time" data-time="' + def.id + '" value="' + esc(m.time) + '" style="border:1px solid #e4e7e5;border-radius:9px;padding:8px 9px;font-size:16px;min-height:40px;background:#fafbfa"></label>' +
         '</div>' +
-        '<textarea data-text="' + def.id + '" rows="3" placeholder="Co zjadłeś/aś i ile? np. 2 jajka, 2 kromki chleba (ok. 70 g), łyżka masła, kawa z mlekiem" style="width:100%;border:1px solid #e4e7e5;border-radius:10px;padding:10px 12px;font-size:16px;line-height:1.45;resize:vertical;background:#fafbfa;color:#0a0a0a">' + esc(m.text) + '</textarea>' +
+        '<textarea data-text="' + def.id + '" rows="3" placeholder="Co zjadłeś i ile? np. 2 jajka, 2 kromki chleba (ok. 70 g), łyżka masła, kawa z mlekiem. Pominięty posiłek? Zostaw puste." style="width:100%;border:1px solid #e4e7e5;border-radius:10px;padding:10px 12px;font-size:16px;line-height:1.45;resize:vertical;background:#fafbfa;color:#0a0a0a">' + esc(m.text) + '</textarea>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">' + photos +
           '<label style="width:76px;height:76px;border-radius:10px;border:1.5px dashed #00cc6a;background:rgba(0,255,136,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:#0a9d5a">' +
           '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>' +
@@ -315,11 +374,11 @@
   function renderAll() { renderTabs(); renderDay(); }
 
   function renderReport() {
+    var fd = filledDates();
     $('report-name').textContent = 'Dzienniczek żywieniowy' + (S.name ? ' – ' + S.name : '');
-    var rs = DAYS.map(function (_, i) { return dayFilled(i) ? isoFor(i) : null; }).filter(Boolean).sort();
-    $('report-range').textContent = rs.length ? rs[0].split('-').reverse().slice(0, 2).join('.') + ' – ' + rs[rs.length - 1].split('-').reverse().slice(0, 2).join('.') : '';
-    $('report-days').innerHTML = DAYS.map(function (n, i) {
-      var d = dayData(i);
+    $('report-range').textContent = fd.length ? ddmm(fd[0]) + ' – ' + ddmm(fd[fd.length - 1]) : '';
+    $('report-days').innerHTML = (fd.length ? fd : []).map(function (iso) {
+      var d = dayData(iso);
       var ms = MEALS.map(function (def) { return { def: def, m: (d.meals || {})[def.id] }; }).filter(function (x) { return mealHas(x.m); });
       var rows = ms.map(function (x) {
         var ph = (x.m.photos || []).map(function (src) { return '<div style="width:110px;height:110px;border-radius:8px;border:1px solid #e4e7e5;background-image:url(' + src + ');background-size:cover;background-position:center"></div>'; }).join('');
@@ -329,30 +388,34 @@
       }).join('');
       return '<div style="border:1px solid #e4e7e5;border-radius:12px;overflow:hidden;break-inside:avoid;background:#fff">' +
         '<div style="background:#0a0a0a;color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
-        '<div style="font-weight:900;text-transform:uppercase;font-size:13px">' + n + ' <span style="color:#00ff88">' + dateFor(i) + '</span></div>' +
+        '<div style="font-weight:900;text-transform:uppercase;font-size:13px">' + DAYS[weekdayIdx(iso)] + ' <span style="color:#00ff88">' + ddmm(iso) + '</span></div>' +
         '<div style="display:flex;gap:14px;font-size:11.5px;font-weight:700;color:#c9ccca"><span>Płyny: <span style="color:#00ff88">' + fmtL(d.water || 0) + ' l</span></span><span>Sen: <span style="color:#00ff88">' + fmtH(d.sleep || 0) + ' h</span></span></div></div>' +
         '<div style="padding:6px 14px 10px;display:flex;flex-direction:column">' + (rows || '<div style="font-size:12px;color:#5f6660;padding:8px 0">Brak wpisów.</div>') + '</div></div>';
-    }).join('');
+    }).join('') || '<div style="font-size:13px;color:#5f6660">Brak uzupełnionych dni.</div>';
   }
 
   // ---------- wysyłka ----------
+  var FIELDS = [
+    { id: 'f-name', bad: function () { return !S.name.trim(); }, msg: 'wpisz imię i nazwisko' },
+    { id: 'f-email', bad: function () { return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(S.email.trim()); }, msg: 'wpisz poprawny e-mail' },
+    { id: 'f-consent', bad: function () { return !S.consent; }, msg: 'zaznacz zgodę na przetwarzanie danych' }
+  ];
   function problems() {
     var p = [];
-    if (!S.name.trim()) p.push('wpisz imię i nazwisko');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(S.email.trim())) p.push('wpisz poprawny e-mail');
-    if (!S.consent) p.push('zaznacz zgodę na przetwarzanie danych');
+    FIELDS.forEach(function (f) { var bad = f.bad(), el = $(f.id); (f.id === 'f-consent' ? el.parentNode : el).classList.toggle('missing', bad); if (bad) p.push(f.msg); });
     return p;
   }
+  function goToFields() { var first = document.querySelector('.missing'); if (first) { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); var inp = first.tagName === 'INPUT' ? first : first.querySelector('input'); if (inp) setTimeout(function () { inp.focus(); }, 400); } }
 
-  function payloadFor(i, complete) {
-    var d = dayData(i);
+  function payloadFor(iso, complete) {
+    var d = dayData(iso), fd = filledDates();
     return {
       clientId: S.clientId, name: S.name.trim(), email: S.email.trim().toLowerCase(), consent: S.consent,
-      start: startIso(), dayIndex: i, dayName: DAYS[i], date: isoFor(i),
+      start: fd[0] || iso, dayIndex: weekdayIdx(iso), dayName: DAYS[weekdayIdx(iso)], date: iso,
       water_l: Number(((d.water || 0) * GLASS_ML / 1000).toFixed(2)), glasses: d.water || 0, sleep_h: d.sleep || 0,
       meals: MEALS.map(function (def) { var m = mealOf(d, def.id); return { id: def.id, label: def.label, time: m.time, text: m.text, photos: m.photos }; })
         .filter(function (m) { return mealHas(m); }),
-      complete: !!complete, filledDays: DAYS.filter(function (_, k) { return dayFilled(k); }).length,
+      complete: !!complete, filledDays: fd.length,
       hp: $('f-hp').value, sentAt: new Date().toISOString()
     };
   }
@@ -366,53 +429,77 @@
 
   function show(el, ok, html) { el.className = 'notice ' + (ok ? 'ok' : 'err'); el.innerHTML = html; el.hidden = false; }
 
-  function sendDay(i, complete) {
+  function sendDay(iso, complete) {
     var stamp = Date.now();
-    return post(payloadFor(i, complete)).then(function () { S.sent[i] = stamp; persist(); });
+    return post(payloadFor(iso, complete)).then(function () { S.sent[iso] = stamp; persist(); });
+  }
+  function sendChain(list, lastComplete) {
+    var chain = Promise.resolve();
+    list.forEach(function (iso) { chain = chain.then(function () { return sendDay(iso, iso === lastComplete); }); });
+    return chain;
   }
 
   $('send-day').addEventListener('click', function () {
-    var p = problems(), btn = this, el = $('send-msg');
-    if (p.length) return show(el, false, 'Zanim wyślesz: ' + p.join(', ') + ' (pola na górze strony).');
+    var btn = this, el = $('send-msg');
     if (!dayFilled(S.day)) return show(el, false, 'Ten dzień jest pusty – dopisz przynajmniej jeden posiłek.');
+    var p = problems();
+    if (p.length) { show(el, false, 'Zanim wyślesz: ' + p.join(', ') + '. Przeniosłem Cię do tych pól na górze strony.'); return goToFields(); }
     btn.disabled = true; btn.textContent = 'Wysyłam…';
     sendDay(S.day, false).then(function () {
       show(el, true, '✓ Dzień wysłany. Dziękuję!'); renderTabs(); renderStatus();
     }).catch(function (e) {
-      show(el, false, esc(e.message) + ' Dane są bezpieczne na tym urządzeniu – spróbuj za chwilę.');
+      show(el, false, esc(e.message) + ' Dane są bezpieczne na tym telefonie – spróbuj za chwilę.');
     }).then(function () { btn.disabled = false; btn.textContent = 'Wyślij dzień'; });
   });
 
   $('send-all').addEventListener('click', function () {
-    var p = problems(), btn = this, el = $('all-msg');
-    if (p.length) return show(el, false, 'Zanim wyślesz: ' + p.join(', ') + '.');
-    var filled = DAYS.map(function (_, i) { return i; }).filter(dayFilled);
+    var btn = this, el = $('all-msg');
+    var filled = filledDates();
     if (!filled.length) return show(el, false, 'Dzienniczek jest pusty.');
+    var p = problems();
+    if (p.length) { show(el, false, 'Zanim wyślesz: ' + p.join(', ') + '.'); return goToFields(); }
     if (filled.length < 7 && !window.confirm('Uzupełnione dni: ' + filled.length + '/7. Na pewno zakończyć i wysłać?')) return;
     var todo = filled.filter(dayUnsent);
     var last = filled[filled.length - 1];
     if (todo.indexOf(last) === -1) todo.push(last);       // ostatni dzień zawsze idzie z flagą "complete"
     btn.disabled = true; btn.textContent = 'Wysyłam…';
-    var chain = Promise.resolve();
-    todo.forEach(function (i) { chain = chain.then(function () { return sendDay(i, i === last); }); });
-    chain.then(function () {
+    sendChain(todo, last).then(function () {
       S.completedAt = Date.now(); persist(); renderTabs(); renderStatus();
-      show(el, true, '✓ Dzienniczek wysłany w całości. Odezwę się z analizą.');
+      show(el, true, '✓ Dzienniczek wysłany w całości. Odezwę się z analizą. Jutro ten telefon zacznie automatycznie nowy, pusty dzienniczek.');
     }).catch(function (e) {
       renderTabs();
       show(el, false, esc(e.message) + ' Część dni mogła się nie wysłać – spróbuj ponownie, nic nie zginie.');
     }).then(function () { btn.disabled = false; btn.textContent = 'Zakończ i wyślij'; });
   });
 
+  $('old-banner').addEventListener('click', function (e) {
+    var el = $('old-banner');
+    if (e.target.id === 'old-send') {
+      var p = problems();
+      if (p.length) { goToFields(); return; }
+      e.target.disabled = true; e.target.textContent = 'Wysyłam…';
+      var list = oldUnsent();
+      sendChain(list, null).then(function () { list.forEach(function (iso) { delete S.entries[iso]; delete S.sent[iso]; }); notes = ['✓ Zaległe dni (' + list.map(ddmm).join(', ') + ') wysłane.']; persist(); renderTabs(); }).catch(function (err) {
+        e.target.disabled = false; e.target.textContent = 'Wyślij je teraz';
+        el.insertAdjacentHTML('beforeend', '<div style="margin-top:8px">' + esc(err.message) + ' Spróbuj za chwilę.</div>');
+      });
+    }
+    if (e.target.id === 'old-drop') {
+      if (!window.confirm('Usunąć niewysłane dni sprzed tygodnia z tego telefonu? Tego nie da się cofnąć.')) return;
+      oldUnsent().forEach(function (iso) { delete S.entries[iso]; delete S.sent[iso]; });
+      persist(); renderTabs();
+    }
+  });
+
   // ---------- zdarzenia ----------
   $('f-name').value = S.name; $('f-email').value = S.email; $('f-consent').checked = S.consent;
-  $('f-name').addEventListener('input', function (e) { S.name = e.target.value; persist(); });
-  $('f-email').addEventListener('input', function (e) { S.email = e.target.value; persist(); });
-  $('f-consent').addEventListener('change', function (e) { S.consent = e.target.checked; persist(); });
+  $('f-name').addEventListener('input', function (e) { S.name = e.target.value; e.target.classList.remove('missing'); persist(); });
+  $('f-email').addEventListener('input', function (e) { S.email = e.target.value; e.target.classList.remove('missing'); persist(); });
+  $('f-consent').addEventListener('change', function (e) { S.consent = e.target.checked; e.target.parentNode.classList.remove('missing'); persist(); });
 
   $('tabs').addEventListener('click', function (e) {
     var b = e.target.closest('[data-tab]'); if (!b) return;
-    S.day = Number(b.dataset.tab); renderAll();
+    S.day = b.dataset.tab; renderAll();
   });
   $('glasses').addEventListener('click', function (e) {
     var b = e.target.closest('[data-glass]'); if (!b) return;
@@ -434,9 +521,12 @@
   $('meals').addEventListener('change', function (e) {
     var t = e.target; if (!t.dataset.photo) return;
     var id = t.dataset.photo, files = Array.prototype.slice.call(t.files || []); t.value = '';
+    var day = S.day;
     Promise.all(files.map(function (f) { return compress(f).catch(function () { return null; }); })).then(function (out) {
-      var cur = mealOf(dayData(S.day), id).photos;
-      setMeal(id, { photos: cur.concat(out.filter(Boolean)) }); renderAll();
+      var cur = mealOf(dayData(day), id).photos;
+      var keep = S.day; S.day = day;
+      setMeal(id, { photos: cur.concat(out.filter(Boolean)) });
+      S.day = keep; renderAll();
     });
   });
   $('meals').addEventListener('click', function (e) {
@@ -449,10 +539,18 @@
   $('close-report').addEventListener('click', function () { $('report').hidden = true; $('editor').hidden = false; });
   $('print-report').addEventListener('click', function () { window.print(); });
   $('clear-all').addEventListener('click', function () {
-    if (!window.confirm('Usunąć wszystkie wpisy z dzienniczka na tym urządzeniu?')) return;
-    S.name = ''; S.start = ''; S.days = {}; S.sent = {}; S.completedAt = null; S.clientId = uid();
-    $('f-name').value = '';
+    var unsent = filledDates().filter(dayUnsent).length;
+    var msg = 'Zacząć nowy dzienniczek? Wszystkie wpisy zostaną usunięte z tego telefonu (imię i e-mail zostają).' + (unsent ? '\n\nUWAGA: ' + unsent + ' dni nie zostało jeszcze wysłanych – one przepadną.' : '');
+    if (!window.confirm(msg)) return;
+    resetEntries(); notes = []; S.day = today();
     persist(); renderAll();
+    show($('all-msg'), true, 'Gotowe – zaczynasz nowy, pusty dzienniczek.');
+  });
+
+  // Po północy (telefon zostawiony z otwartą stroną) – odśwież okno dni przy powrocie do karty.
+  var shownFor = today();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && today() !== shownFor) { shownFor = today(); if (!inWindow(S.day)) S.day = today(); renderAll(); }
   });
 
   persist();

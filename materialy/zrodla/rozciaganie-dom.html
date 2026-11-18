@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Rozciąganie i mobilność w domu – Eryk Jóskowski</title>
+<link rel="stylesheet" href="fonts/inter/400.css"><link rel="stylesheet" href="fonts/inter/500.css"><link rel="stylesheet" href="fonts/inter/700.css"><link rel="stylesheet" href="fonts/inter/800.css"><link rel="stylesheet" href="fonts/inter/900.css">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --black:#0a0a0a; --ink:#141614; --green:#00ff88; --green-ink:#0a9d5a; --mint:#bff5dc; --mint-bg:#ecfdf4; --grey:#5c625e; --line:#e3e7e4; --soft:#f4f6f5; --warn:#d9480f; --warn-bg:#fff3ec; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif; color:var(--ink); font-size:10px; line-height:1.4; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  b { font-weight:700; }
+  .page { width:210mm; height:297mm; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .hero { flex:none; background:var(--black); color:#fff; position:relative; overflow:hidden; padding:9mm 12mm 7mm; }
+  .hero::after { content:""; position:absolute; right:-60px; top:-90px; width:420px; height:320px; background:radial-gradient(closest-side, rgba(0,255,136,.28), rgba(0,255,136,0)); }
+  .hero > * { position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:10px; font-size:8.5px; font-weight:800; letter-spacing:.3em; color:var(--green); text-transform:uppercase; }
+  .brand i { width:6px; height:20px; border-radius:3px; background:var(--green); display:block; }
+  .rule { height:1px; background:rgba(0,255,136,.45); margin:6px 0 8px; }
+  h1 { font-size:26px; font-weight:900; line-height:1.05; text-transform:uppercase; letter-spacing:-.01em; }
+  h1 em { font-style:normal; color:var(--green); }
+  .hero p { margin-top:7px; font-size:10.5px; color:#d8dcd9; max-width:160mm; }
+  .chips { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .chip { border:1px solid rgba(0,255,136,.5); border-radius:999px; padding:4px 12px; font-size:8.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--green); }
+  .chip.grey { border-color:rgba(255,255,255,.25); color:#d8dcd9; }
+  .body { flex:1; padding:5mm 10mm 0; display:flex; flex-direction:column; gap:6px; }
+  .eyebrow { font-size:7.5px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--green-ink); }
+  .card { border:1px solid var(--line); border-radius:12px; padding:8px 12px; }
+  .card.dark { background:var(--black); color:#fff; border:0; position:relative; overflow:hidden; }
+  .card.dark::after { content:""; position:absolute; right:-40px; top:-60px; width:240px; height:180px; background:radial-gradient(closest-side, rgba(0,255,136,.25), rgba(0,255,136,0)); }
+  .card.dark > * { position:relative; z-index:1; }
+  .card.dark .eyebrow { color:var(--green); }
+  .card.warn { background:var(--warn-bg); border-color:#f6c9b0; }
+  .card.warn .eyebrow { color:var(--warn); }
+  .flow { display:flex; align-items:center; gap:6px; margin-top:7px; }
+  .step { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:9px; padding:6px 7px; text-align:center; font-size:8.6px; font-weight:700; line-height:1.25; }
+  .step span { display:block; color:var(--green); font-size:10px; font-weight:900; }
+  .arr { color:var(--green); font-weight:900; font-size:12px; }
+  .meta { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:7px; }
+  .meta div { border-top:1px solid rgba(0,255,136,.35); padding-top:5px; font-size:8.6px; color:#d8dcd9; }
+  .meta b { display:block; color:#fff; font-size:12px; font-weight:900; }
+  .num { width:22px; height:22px; border-radius:7px; background:var(--black); color:var(--green); font-weight:800; font-size:11px; display:inline-flex; align-items:center; justify-content:center; flex:none; }
+  .ex { border:1px solid var(--line); border-radius:11px; overflow:hidden; break-inside:avoid; }
+  .ex-head { display:flex; align-items:center; gap:10px; padding:5px 12px; background:var(--soft); }
+  .ex-head h3 { flex:1; font-size:11.3px; font-weight:800; }
+  .ex-head .sets { font-weight:800; font-size:10.3px; color:var(--green-ink); white-space:nowrap; }
+  .ex-body { display:grid; grid-template-columns:1fr 1.35fr; gap:14px; padding:6px 12px 7px; }
+  .muted { color:var(--grey); }
+  ul.dots { list-style:none; display:grid; gap:3px; }
+  ul.dots li { position:relative; padding-left:11px; }
+  ul.dots li::before { content:""; position:absolute; left:0; top:6px; width:5px; height:5px; border-radius:50%; background:var(--green-ink); }
+  .card.dark ul.dots li::before { background:var(--green); }
+  a.vid { display:inline-block; margin-top:5px; font-size:9px; font-weight:800; color:var(--green-ink); text-decoration:none; border:1px solid var(--mint); background:var(--mint-bg); border-radius:999px; padding:2px 9px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .foot { flex:none; height:9mm; padding:0 12mm; display:flex; align-items:center; justify-content:space-between; font-size:7px; letter-spacing:.22em; color:#8b918d; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="brand"><i></i>Eryk Jóskowski · Trener personalny</div>
+    <div class="rule"></div>
+    <h1>Rozciąganie <em>i mobilność</em><br>w domu, bez sprzętu</h1>
+    <p>Proste ćwiczenia na biodra, dolną część pleców, mięśnie najszersze i klatkę piersiową. Do zrobienia na macie lub dywanie – wystarczy kawałek ściany.</p>
+    <div class="chips"><span class="chip">6 ćwiczeń</span><span class="chip">ok. 15 min</span><span class="chip grey">Bez sprzętu</span></div>
+  </div>
+
+  <div class="body">
+    <div class="card dark">
+      <div class="eyebrow">Jak to zrobić</div>
+      <div class="flow">
+        <div class="step"><span>1</span>Zginacze bioder</div><div class="arr">›</div>
+        <div class="step"><span>2</span>Pozycja 90/90</div><div class="arr">›</div>
+        <div class="step"><span>3</span>Skłon w bok</div><div class="arr">›</div>
+        <div class="step"><span>4</span>Pozycja dziecka</div><div class="arr">›</div>
+        <div class="step"><span>5</span>Klatka przy ścianie</div><div class="arr">›</div>
+        <div class="step"><span>6</span>Otwieranie książki</div>
+      </div>
+      <div class="meta">
+        <div><b>Po kolei</b>2 serie każdego ćwiczenia, potem następne</div>
+        <div><b>30–45 s</b>przytrzymanie na każdą stronę</div>
+        <div><b>Oddech</b>spokojny, długi wydech pogłębia pozycję</div>
+        <div><b>Odczucie</b>wyraźne rozciąganie, nigdy ból</div>
+      </div>
+    </div>
+
+    <div class="ex"><div class="ex-head"><span class="num">1</span><h3>Rozciąganie zginaczy bioder w klęku jednonóż</h3><span class="sets">2 × 30–45 s / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Zginacze bioder (biodrowo-lędźwiowy), przód uda.</p><a class="vid" href="https://www.youtube.com/watch?v=F55tzqJggAY">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Klęk na jednym kolanie (podłóż ręcznik), druga stopa z przodu.</li><li>Podwiń miednicę pod siebie i napnij pośladek nogi, na której klęczysz.</li><li>Lekko przesuń biodra do przodu – bez wyginania dolnej części pleców.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">2</span><h3>Pozycja 90/90 siedząc</h3><span class="sets">2 × 30–45 s / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Mobilność bioder: rotacja wewnętrzna i zewnętrzna, pośladki.</p><a class="vid" href="https://www.youtube.com/watch?v=t4Zz6-aG8Iw">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Usiądź, przednia noga zgięta pod kątem prostym przed sobą, tylna – pod kątem prostym z boku.</li><li>Wyprostuj plecy i pochyl tułów lekko nad przednią nogę.</li><li>Ciężko? Podeprzyj się rękami za sobą.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">3</span><h3>Skłon w bok w staniu</h3><span class="sets">2 × 30–45 s / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Mięsień czworoboczny lędźwi, boczna część tułowia.</p><a class="vid" href="https://www.youtube.com/watch?v=UsGVN8loFOA">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Stań prosto, stopy razem, jedna ręka nad głową.</li><li>Pochyl tułów w bok, w stronę przeciwną do rozciąganej, biodro lekko wypchnij na zewnątrz. Mocniej? Dodaj lekki skłon do przodu.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">4</span><h3>Pozycja dziecka z sięganiem w bok</h3><span class="sets">2 × 30–45 s / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Mięsień najszerszy grzbietu, boczna część tułowia.</p><a class="vid" href="https://www.youtube.com/watch?v=GRUbJjv8tBs">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Uklęknij, usiądź na piętach i połóż tułów na udach, ręce daleko przed sobą.</li><li>Przejdź dłońmi w prawo – rozciągasz lewą stronę. Biodra zostają na piętach.</li><li>Wróć na środek i zrób to samo w drugą stronę.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">5</span><h3>Rozciąganie klatki przy ścianie</h3><span class="sets">2 × 30–45 s / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Mięśnie klatki piersiowej, przód barku.</p><a class="vid" href="https://www.youtube.com/watch?v=VpwzheWKVTQ">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Stań bokiem do ściany, przedramię na ścianie, łokieć na wysokości barku, zgięty pod kątem prostym.</li><li>Zrób mały krok do przodu i lekko obróć tułów od ściany.</li><li>Bark nisko, z dala od ucha. Mrowienie w dłoni – zmniejsz zakres.</li></ul></div></div>
+
+    <div class="ex"><div class="ex-head"><span class="num">6</span><h3>Otwieranie książki leżąc na boku</h3><span class="sets">2 × 8–10 / strona</span></div>
+      <div class="ex-body"><div><p class="muted">Klatka piersiowa i rotacja w odcinku piersiowym.</p><a class="vid" href="https://www.youtube.com/watch?v=rDviWORCWEw">▶ Zobacz wideo</a></div>
+      <ul class="dots"><li>Połóż się na boku, kolana zgięte i złączone, ręce wyprostowane przed sobą.</li><li>Górną ręką zatocz łuk nad sobą na drugą stronę, wzrok podąża za dłonią.</li><li>Zatrzymaj na 2–3 s w końcowej pozycji. Kolana nie odrywają się od siebie.</li></ul></div></div>
+
+    <div class="grid2">
+      <div class="card" style="border-color:var(--mint); background:var(--mint-bg)">
+        <div class="eyebrow">Jak często</div>
+        <ul class="dots" style="margin-top:5px"><li>3–5 razy w tygodniu, najlepiej po treningu albo wieczorem.</li><li>Z tygodnia na tydzień wchodź odrobinę głębiej w pozycję lub wydłużaj przytrzymanie do 60 s.</li></ul>
+      </div>
+      <div class="card warn">
+        <div class="eyebrow">Uwaga</div>
+        <ul class="dots" style="margin-top:5px"><li>Rozciąganie ma być <b>bez bólu</b>. Kłucie, drętwienie lub ból w stawie – przerwij i daj mi znać.</li><li>Bez sprężynowania – trzymasz pozycję spokojnie.</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Eryk Jóskowski · Trener personalny · Rumia</span><span>erykpersonalny.pl</span></div>
+</div>
+</body>
+</html>

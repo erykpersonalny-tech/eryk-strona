@@ -1,7 +1,7 @@
 """Buduje HTML e-booka „Rozgrzewki RAMP”. Użycie: python3 build.py > rozgrzewki.html"""
 import html, sys
 sys.path.insert(0, __import__('os').path.dirname(__file__))
-from dane import EX, LOWER, UPPER
+from dane import EX, CHAPTERS
 
 e = html.escape
 
@@ -68,15 +68,24 @@ td.c { font-weight:800; white-space:nowrap; }
 .row .nm { font-weight:700; font-size:12px; }
 .row .cue { color:var(--grey); font-size:10px; margin-top:2px; }
 .row .dose { font-weight:800; font-size:11px; text-align:right; }
-.log td, .log th { text-align:center; } .log td { height:24px; } .log td:first-child, .log th:first-child { text-align:left; width:70px; }
 a.vid { display:inline-block; text-align:center; font-size:8.8px; font-weight:800; color:var(--green-ink); text-decoration:none; border:1px solid var(--mint); background:var(--mint-bg); border-radius:999px; padding:3px 8px; }
 .ramprow { padding:10px 14px; border-top:1px solid var(--line); background:var(--mint-bg); font-size:9.4px; }
 .ramprow b { color:var(--green-ink); }
 """
 
-PHASES = [("R", "Raise – rozgrzanie", "podnosisz tętno i temperaturę ciała"),
-          ("A M", "Activate + Mobilise – aktywacja i mobilność", "budzisz mięśnie i otwierasz zakres w stawach, które zaraz pracują"),
-          ("P", "Potentiate – pobudzenie", "dynamiczne ćwiczenie i serie wstępne pierwszego ćwiczenia")]
+
+PH = [("R", "Rozgrzanie", "2–3 min",
+       "2–3 minuty ruchu całym ciałem. Podnosisz tętno i temperaturę ciała – ma być Ci ciepło, a nie ciężko."),
+      ("A+M", "Mobilność i przygotowanie", "4–6 min",
+       "3–5 ćwiczeń dobranych do treningu: zwiększasz zakres ruchu w stawach, które zaraz będą pracować, i przygotowujesz je do obciążenia. Ruchy spokojne i kontrolowane, bez zmęczenia."),
+      ("P", "Pobudzenie i serie wstępne", "3–5 min",
+       "Krótkie ćwiczenie dynamiczne, a potem serie wstępne pierwszego ćwiczenia z rosnącym ciężarem. To najważniejsza część rozgrzewki – nie pomijaj jej.")]
+NSETS = sum(len(c[3]) for c in CHAPTERS)
+NDAY = sum(len(c[3]) for c in CHAPTERS if c[0] != "SOS")
+
+
+def aid(x):
+    return "a-" + x.lower().replace("ó", "o").replace("ł", "l")
 
 
 def foot(right="erykpersonalny.pl"):
@@ -85,30 +94,38 @@ def foot(right="erykpersonalny.pl"):
 
 def head_html():
     fonts = "".join(f'<link rel="stylesheet" href="fonts/inter/{w}.css">' for w in (400, 500, 700, 800, 900))
-    return f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Rozgrzewki RAMP – Eryk Jóskowski</title>{fonts}<style>{CSS}</style></head><body>'
+    extra = """.chap-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+a.chap { display:block; text-decoration:none; border:1px solid var(--line); border-radius:12px; padding:13px 14px; }
+a.chap .k { display:inline-block; font-size:10px; font-weight:900; color:var(--black); background:var(--green); border-radius:6px; padding:3px 9px; letter-spacing:.06em; }
+a.chap h3 { font-size:14px; font-weight:900; text-transform:uppercase; margin-top:8px; }
+a.chap p { color:var(--grey); margin-top:3px; }
+a.chap .ids { margin-top:7px; font-size:9px; font-weight:700; color:var(--green-ink); }
+a.chap.sos { background:var(--warn-bg); border-color:#f6c9b0; } a.chap.sos .k { background:var(--warn); color:#fff; }
+.chaphead { padding:12mm 12mm 9mm; }
+.chaphead h1 { font-size:34px; font-weight:900; text-transform:uppercase; margin-top:10px; letter-spacing:-.01em; }
+.chaphead h1 em { font-style:normal; color:var(--green); }
+.chaphead p { margin-top:6px; color:#d8dcd9; font-size:11.5px; max-width:160mm; }
+.back { font-size:8.6px; font-weight:800; color:var(--green-ink); text-decoration:none; }"""
+    return f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Rozgrzewki RAMP – Eryk Jóskowski</title>{fonts}<style>{CSS}{extra}</style></head><body>'
 
 
 def cover():
+    tiles = "".join(f'<div><b>{l}</b><span>{t}</span></div>' for l, t, _, _ in PH)
     return f'''<div class="page"><div class="dark cover">
   <div class="brand"><i></i>Eryk Jóskowski · Trener personalny</div><div class="rule"></div>
   <h1>Rozgrzewki<br><em>przed treningiem</em><br>siłowym</h1>
-  <p class="lead">20 gotowych zestawów – 10 przed treningiem dołu ciała i 10 przed treningiem góry. Każdy ułożony według protokołu RAMP, do zrobienia w 8–15 minut, z filmem do każdego ćwiczenia.</p>
-  <div class="chips"><span class="chip">10 × dół ciała</span><span class="chip">10 × góra ciała</span><span class="chip">8–15 min</span></div>
-  <div class="ramp-big"><div><b>R</b><span>Raise</span></div><div><b>A</b><span>Activate</span></div><div><b>M</b><span>Mobilise</span></div><div><b>P</b><span>Potentiate</span></div></div>
+  <p class="lead">{NDAY} gotowych zestawów pod Twój dzień treningowy – góra, dół, FBW, push i pull – oraz osobny rozdział na sytuacje problemowe i dni, gdy brakuje czasu. Każdy zestaw według protokołu RAMP, 8–15 minut, z filmem do każdego ćwiczenia.</p>
+  <div class="chips"><span class="chip">Góra · Dół · FBW</span><span class="chip">Push · Pull</span><span class="chip">8–15 min</span></div>
+  <div class="ramp-big" style="grid-template-columns:repeat(3,1fr)">{tiles}</div>
 </div></div>'''
 
 
 def intro():
-    ph = "".join(f'''<div class="phase"><div class="letter">{l}</div><div><h3>{t}</h3><p>{d}</p></div><div class="t">{tm}</div></div>'''
-                 for (l, t, d), tm in zip(
-                     [("R", "Raise – rozgrzanie", "2–3 minuty ruchu całym ciałem. Podnosisz tętno i temperaturę mięśni – na tym etapie ma być Ci ciepło, a nie ciężko."),
-                      ("A+M", "Activate + Mobilise – aktywacja i mobilność", "3–5 ćwiczeń dobranych do treningu: otwierasz zakres w stawach, które zaraz pracują, i „budzisz” mięśnie, które je stabilizują. Ruchy kontrolowane, bez zmęczenia."),
-                      ("P", "Potentiate – pobudzenie", "Krótkie ćwiczenie dynamiczne i serie wstępne pierwszego ćwiczenia z rosnącym ciężarem. To najważniejsza część rozgrzewki – nie pomijaj jej.")],
-                     ["2–3 min", "4–6 min", "3–5 min"]))
+    ph = "".join(f'''<div class="phase"><div class="letter">{l}</div><div><h3>{t}</h3><p>{d}</p></div><div class="t">{tm}</div></div>''' for l, t, tm, d in PH)
     return f'''<div class="page"><div class="body" style="padding-top:12mm">
   <div><div class="eyebrow">Jak korzystać z e-booka</div><h2 style="margin-top:4px">Protokół RAMP w praktyce</h2></div>
   <div class="card">{ph}</div>
-  <div class="card mint"><div class="eyebrow">Serie wstępne (ramping) – faza P</div>
+  <div class="card mint"><div class="eyebrow">Serie wstępne – faza P</div>
     <p style="margin-top:6px">Ostatni krok każdej rozgrzewki to kilka serii pierwszego ćwiczenia z treningu, z rosnącym ciężarem. Liczba powtórzeń spada, ciężar rośnie – żadna seria nie męczy. Przerwy 60–90 s.</p>
     <table style="margin-top:8px"><tr><th>Seria</th><th>Gdy pracujesz na 1–6 powt.</th><th>Gdy pracujesz na 6–12 powt.</th></tr>
       <tr><td class="c">1</td><td>pusty gryf / bardzo lekko × 8–10</td><td>ok. 50% ciężaru roboczego × 8</td></tr>
@@ -116,13 +133,12 @@ def intro():
       <tr><td class="c">3</td><td>ok. 60% × 4–5</td><td>–</td></tr>
       <tr><td class="c">4</td><td>ok. 75% × 2–3</td><td>–</td></tr>
       <tr><td class="c">5</td><td>ok. 85–90% × 1–2</td><td>–</td></tr></table>
-    <p style="margin-top:6px;color:var(--grey)">„Wersja rozszerzona” (zestawy D10 i G10) = wszystkie 5 serii z lewej kolumny, przed bardzo ciężkimi seriami jeszcze 1 × 1 na ok. 90–95%.</p></div>
+    <p style="margin-top:6px;color:var(--grey)">„Wersja rozszerzona” (ciężkie dni siły) = wszystkie 5 serii z lewej kolumny, przed bardzo ciężkimi seriami jeszcze 1 × 1 na ok. 90–95%.</p></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
     <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots">
-      <li>Patrzysz na <b>pierwsze ćwiczenie</b> treningu i wybierasz zestaw pod nie.</li>
-      <li>Coś Cię ogranicza (kolana, barki, biodra)? Wybierz zestaw „problemowy”.</li>
-      <li>Mało czasu – zestaw <b>Ekspres</b> (D9 / G9).</li>
-      <li>Zestawy możesz zmieniać – różnorodność nie zaszkodzi.</li></ul></div>
+      <li>Sprawdź, jaki masz dzisiaj dzień: <b>góra, dół, FBW, push czy pull</b>, i otwórz ten rozdział.</li>
+      <li>Wybierz zestaw pod <b>pierwsze ćwiczenie</b> treningu.</li>
+      <li>Coś Cię ogranicza albo masz mało czasu? Rozdział <b>Problemy i ekspres</b>.</li></ul></div>
     <div class="card"><div class="eyebrow">Zasady</div><ul class="dots">
       <li>Ćwiczenia robisz po kolei, bez długich przerw.</li>
       <li>Kolejność jest ułożona tak, żeby nie wstawać i kłaść się co chwilę.</li>
@@ -134,16 +150,27 @@ def intro():
 
 
 def index():
-    def rows(sets):
-        return "".join(f'<tr><td class="c"><a href="#{s["id"]}">{s["id"]}</a></td><td><a href="#{s["id"]}">{e(s["title"])}</a></td><td>{e(s["when"])}</td><td class="c">{s["time"]}</td></tr>' for s in sets)
+    tiles = ""
+    for code, name, desc, sets in CHAPTERS:
+        ids = " · ".join(s["id"] for s in sets)
+        tiles += f'<a class="chap{" sos" if code == "SOS" else ""}" href="#{aid('ch-' + code)}"><span class="k">{code}</span><h3>{e(name)}</h3><p>{e(desc)}</p><div class="ids">{len(sets)} zestawów: {ids}</div></a>'
     return f'''<div class="page"><div class="body" style="padding-top:12mm">
-  <div><div class="eyebrow">Spis zestawów</div><h2 style="margin-top:4px">Wybierz rozgrzewkę</h2></div>
-  <div class="card"><div class="eyebrow">Dół ciała</div><table class="idx" style="margin-top:6px"><tr><th></th><th>Zestaw</th><th>Kiedy</th><th>Czas</th></tr>{rows(LOWER)}</table></div>
-  <div class="card"><div class="eyebrow">Góra ciała</div><table class="idx" style="margin-top:6px"><tr><th></th><th>Zestaw</th><th>Kiedy</th><th>Czas</th></tr>{rows(UPPER)}</table></div>
+  <div><div class="eyebrow">Spis treści</div><h2 style="margin-top:4px">Jaki masz dzisiaj trening?</h2>
+  <p style="margin-top:4px;color:var(--grey)">Kliknij rozdział – przeniesie Cię do listy zestawów.</p></div>
+  <div class="chap-grid">{tiles}</div>
 </div>{foot("3")}</div>'''
 
 
-def set_page(s, part, pageno):
+def chapter_page(code, name, desc, sets, pages, pageno):
+    rows = "".join(f'<tr><td class="c"><a href="#{aid(s['id'])}">{s["id"]}</a></td><td><a href="#{aid(s['id'])}"><b>{e(s["title"])}</b></a></td><td>{e(s["when"])}</td><td class="c">{s["time"]}</td><td class="c">str. {pages[s["id"]]}</td></tr>' for s in sets)
+    return f'''<div class="page" id="{aid('ch-' + code)}">
+  <div class="dark chaphead"><div class="brand"><i></i>Rozdział · {code}</div><div class="rule"></div>
+    <h1>{e(name.split(" (")[0]).replace("Dzień ", "Dzień <em>", 1) + ("</em>" if name.startswith("Dzień ") else "")}</h1><p>{e(desc)}</p></div>
+  <div class="body"><div class="card"><table class="idx"><tr><th></th><th>Zestaw</th><th>Kiedy</th><th>Czas</th><th></th></tr>{rows}</table></div>
+  <a class="back" href="#spis">‹ wróć do spisu treści</a></div>{foot(str(pageno))}</div>'''
+
+
+def set_page(s, chap, pageno):
     def rows(items, start):
         out = ""
         for i, (k, dose) in enumerate(items, start):
@@ -151,28 +178,32 @@ def set_page(s, part, pageno):
             out += f'<div class="row"><span class="n">{i}</span><div><div class="nm">{e(name)}</div><div class="cue">{e(cue)}</div></div><div class="dose">{e(dose)}</div><a class="vid" href="{url}">▶ Wideo</a></div>'
         return out
     n_r, n_am = len(s["R"]), len(s["AM"])
-    ramp = s["ramp"]
-    return f'''<div class="page" id="{s["id"]}">
-  <div class="dark sethead"><div class="top"><div class="brand"><i></i>{part}</div><span class="timechip">{s["time"]}</span></div>
+    (l1, t1, m1, _), (l2, t2, m2, _), (l3, t3, m3, _) = PH
+    return f'''<div class="page" id="{aid(s['id'])}">
+  <div class="dark sethead"><div class="top"><div class="brand"><i></i>Rozgrzewka · {e(chap)}</div><span class="timechip">{s["time"]}</span></div>
     <div class="rule"></div><span class="setid">{s["id"]}</span>
     <h1>{e(s["title"])}</h1><p><b style="color:#fff">Kiedy:</b> {e(s["when"])}</p></div>
   <div class="body">
-    <div class="ph"><div class="ph-head"><div class="l">R</div><h3>Raise – rozgrzanie</h3><span>2–3 min</span></div>{rows(s["R"], 1)}</div>
-    <div class="ph"><div class="ph-head"><div class="l">A+M</div><h3>Activate + Mobilise</h3><span>4–6 min</span></div>{rows(s["AM"], n_r + 1)}</div>
-    <div class="ph"><div class="ph-head"><div class="l">P</div><h3>Potentiate – pobudzenie</h3><span>3–5 min</span></div>{rows(s["P"], n_r + n_am + 1)}
-      <div class="ramprow"><b>Serie wstępne:</b> {e(ramp)} – według tabeli ze strony 2.</div></div>
-    <div class="card" style="margin-top:auto;margin-bottom:4mm"><div class="eyebrow">Moje serie wstępne – zapisz ciężary</div>
-      <table class="log" style="margin-top:6px"><tr><th>Seria</th><th>Trening 1</th><th>Trening 2</th><th>Trening 3</th><th>Trening 4</th></tr>{"".join(f"<tr><td class='c'>{i}</td><td></td><td></td><td></td><td></td></tr>" for i in range(1,6))}</table></div>
+    <div class="ph"><div class="ph-head"><div class="l">{l1}</div><h3>{t1}</h3><span>{m1}</span></div>{rows(s["R"], 1)}</div>
+    <div class="ph"><div class="ph-head"><div class="l">{l2}</div><h3>{t2}</h3><span>{m2}</span></div>{rows(s["AM"], n_r + 1)}</div>
+    <div class="ph"><div class="ph-head"><div class="l">{l3}</div><h3>{t3}</h3><span>{m3}</span></div>{rows(s["P"], n_r + n_am + 1)}
+      <div class="ramprow"><b>Serie wstępne:</b> {e(s["ramp"])} – według tabeli ze strony 2.</div></div>
+    <a class="back" style="margin-top:auto;margin-bottom:3mm" href="#spis">‹ wróć do spisu treści</a>
   </div>{foot(str(pageno))}</div>'''
 
 
 def build():
-    out = [head_html(), cover(), intro(), index()]
-    p = 4
-    for s in LOWER:
-        out.append(set_page(s, "Rozgrzewka · dół ciała", p)); p += 1
-    for s in UPPER:
-        out.append(set_page(s, "Rozgrzewka · góra ciała", p)); p += 1
+    pages, p = {}, 4
+    for code, name, desc, sets in CHAPTERS:
+        pages["ch-" + code] = p; p += 1
+        for s in sets:
+            pages[s["id"]] = p; p += 1
+    out = [head_html(), cover(), intro(), index().replace('<div class="page">', '<div class="page" id="spis">', 1)]
+    for code, name, desc, sets in CHAPTERS:
+        out.append(chapter_page(code, name, desc, sets, pages, pages["ch-" + code]))
+        chap = name.split(" (")[0].replace("Dzień ", "dzień ").replace("Problemy", "problemy")
+        for s in sets:
+            out.append(set_page(s, chap, pages[s["id"]]))
     out.append("</body></html>")
     return "".join(out)
 

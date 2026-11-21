@@ -75,7 +75,7 @@ a.vid { display:inline-block; text-align:center; font-size:8.8px; font-weight:80
 
 
 PH = [("R", "Rozgrzanie", "2–3 min",
-       "2–3 minuty ruchu całym ciałem. Podnosisz tętno i temperaturę ciała – ma być Ci ciepło, a nie ciężko."),
+       "2–3 minuty na dowolnym przyrządzie do cardio: ergometr wioślarski, orbitrek, rowerek lub bieżnia – wybierasz to, co lubisz. Podnosisz tętno i temperaturę ciała – ma być Ci ciepło, a nie ciężko."),
       ("A+M", "Mobilność i przygotowanie", "4–6 min",
        "3–5 ćwiczeń dobranych do treningu: zwiększasz zakres ruchu w stawach, które zaraz będą pracować, i przygotowujesz je do obciążenia. Ruchy spokojne i kontrolowane, bez zmęczenia."),
       ("P", "Pobudzenie i serie wstępne", "3–5 min",
@@ -135,10 +135,7 @@ def intro():
       <tr><td class="c">5</td><td>ok. 85–90% × 1–2</td><td>–</td></tr></table>
     <p style="margin-top:6px;color:var(--grey)">„Wersja rozszerzona” (ciężkie dni siły) = wszystkie 5 serii z lewej kolumny, przed bardzo ciężkimi seriami jeszcze 1 × 1 na ok. 90–95%.</p></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
-    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots">
-      <li>Sprawdź, jaki masz dzisiaj dzień: <b>góra, dół, FBW, push czy pull</b>, i otwórz ten rozdział.</li>
-      <li>Wybierz zestaw pod <b>pierwsze ćwiczenie</b> treningu.</li>
-      <li>Coś Cię ogranicza albo masz mało czasu? Rozdział <b>Problemy i ekspres</b>.</li></ul></div>
+    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots"><li>Otwórz rozdział z dzisiejszym dniem: <b>góra, dół, FBW, push albo pull</b>.</li><li>Wybierz zestaw, którego nazwa pasuje do pierwszego ćwiczenia treningu. Nic nie pasuje? Zestaw nr 1.</li><li>Zestaw z rozdziału <b>Problemy i ekspres</b> – tylko gdy tak ustalimy.</li></ul></div>
     <div class="card"><div class="eyebrow">Zasady</div><ul class="dots">
       <li>Ćwiczenia robisz po kolei, bez długich przerw.</li>
       <li>Kolejność jest ułożona tak, żeby nie wstawać i kłaść się co chwilę.</li>
@@ -162,11 +159,11 @@ def index():
 
 
 def chapter_page(code, name, desc, sets, pages, pageno):
-    rows = "".join(f'<tr><td class="c"><a href="#{aid(s['id'])}">{s["id"]}</a></td><td><a href="#{aid(s['id'])}"><b>{e(s["title"])}</b></a></td><td>{e(s["when"])}</td><td class="c">{s["time"]}</td><td class="c">str. {pages[s["id"]]}</td></tr>' for s in sets)
+    rows = "".join(f'<tr><td class="c"><a href="#{aid(s['id'])}">{s["id"]}</a></td><td><a href="#{aid(s['id'])}"><b>{e(s["title"])}</b></a></td><td class="c">{s["time"]}</td><td class="c">str. {pages[s["id"]]}</td></tr>' for s in sets)
     return f'''<div class="page" id="{aid('ch-' + code)}">
   <div class="dark chaphead"><div class="brand"><i></i>Rozdział · {code}</div><div class="rule"></div>
     <h1>{e(name.split(" (")[0]).replace("Dzień ", "Dzień <em>", 1) + ("</em>" if name.startswith("Dzień ") else "")}</h1><p>{e(desc)}</p></div>
-  <div class="body"><div class="card"><table class="idx"><tr><th></th><th>Zestaw</th><th>Kiedy</th><th>Czas</th><th></th></tr>{rows}</table></div>
+  <div class="body"><div class="card"><table class="idx"><tr><th></th><th>Zestaw</th><th>Czas</th><th></th></tr>{rows}</table></div>
   <a class="back" href="#spis">‹ wróć do spisu treści</a></div>{foot(str(pageno))}</div>'''
 
 
@@ -175,14 +172,14 @@ def set_page(s, chap, pageno):
         out = ""
         for i, (k, dose) in enumerate(items, start):
             name, url, cue = EX[k]
-            out += f'<div class="row"><span class="n">{i}</span><div><div class="nm">{e(name)}</div><div class="cue">{e(cue)}</div></div><div class="dose">{e(dose)}</div><a class="vid" href="{url}">▶ Wideo</a></div>'
+            out += f'<div class="row"><span class="n">{i}</span><div><div class="nm">{e(name)}</div><div class="cue">{e(cue)}</div></div><div class="dose">{e(dose)}</div>{(f'<a class="vid" href="{url}">▶ Wideo</a>' if url else "<span></span>")}</div>'
         return out
     n_r, n_am = len(s["R"]), len(s["AM"])
     (l1, t1, m1, _), (l2, t2, m2, _), (l3, t3, m3, _) = PH
     return f'''<div class="page" id="{aid(s['id'])}">
   <div class="dark sethead"><div class="top"><div class="brand"><i></i>Rozgrzewka · {e(chap)}</div><span class="timechip">{s["time"]}</span></div>
     <div class="rule"></div><span class="setid">{s["id"]}</span>
-    <h1>{e(s["title"])}</h1><p><b style="color:#fff">Kiedy:</b> {e(s["when"])}</p></div>
+    <h1>{e(s["title"])}</h1></div>
   <div class="body">
     <div class="ph"><div class="ph-head"><div class="l">{l1}</div><h3>{t1}</h3><span>{m1}</span></div>{rows(s["R"], 1)}</div>
     <div class="ph"><div class="ph-head"><div class="l">{l2}</div><h3>{t2}</h3><span>{m2}</span></div>{rows(s["AM"], n_r + 1)}</div>

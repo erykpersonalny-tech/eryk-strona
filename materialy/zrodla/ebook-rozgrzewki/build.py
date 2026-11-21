@@ -81,7 +81,7 @@ PH = [("R", "Rozgrzanie", "2–3 min",
       ("P", "Pobudzenie i serie wstępne", "3–5 min",
        "Krótkie ćwiczenie dynamiczne, a potem serie wstępne pierwszego ćwiczenia z rosnącym ciężarem. To najważniejsza część rozgrzewki – nie pomijaj jej.")]
 NSETS = sum(len(c[3]) for c in CHAPTERS)
-NDAY = sum(len(c[3]) for c in CHAPTERS if c[0] != "SOS")
+NDAY = sum(len(c[3]) for c in CHAPTERS if c[0] not in ("PROBLEMY", "EKSPRES"))
 
 
 def aid(x):
@@ -105,6 +105,8 @@ a.chap.sos { background:var(--warn-bg); border-color:#f6c9b0; } a.chap.sos .k { 
 .chaphead h1 { font-size:34px; font-weight:900; text-transform:uppercase; margin-top:10px; letter-spacing:-.01em; }
 .chaphead h1 em { font-style:normal; color:var(--green); }
 .chaphead p { margin-top:6px; color:#d8dcd9; font-size:11.5px; max-width:160mm; }
+.bigid { font-size:54px !important; line-height:1; margin-top:4px !important; color:var(--green); letter-spacing:.02em !important; }
+.sethead .sub { font-size:13px; color:#fff; font-weight:700; margin-top:4px; }
 .back { font-size:8.6px; font-weight:800; color:var(--green-ink); text-decoration:none; }"""
     return f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Rozgrzewki RAMP – Eryk Jóskowski</title>{fonts}<style>{CSS}{extra}</style></head><body>'
 
@@ -135,7 +137,7 @@ def intro():
       <tr><td class="c">5</td><td>ok. 85–90% × 1–2</td><td>–</td></tr></table>
     <p style="margin-top:6px;color:var(--grey)">„Wersja rozszerzona” (ciężkie dni siły) = wszystkie 5 serii z lewej kolumny, przed bardzo ciężkimi seriami jeszcze 1 × 1 na ok. 90–95%.</p></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
-    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots"><li>Otwórz rozdział z dzisiejszym dniem: <b>góra, dół, FBW, push albo pull</b>.</li><li>Wybierz zestaw, którego nazwa pasuje do pierwszego ćwiczenia treningu. Nic nie pasuje? Zestaw nr 1.</li><li>Zestaw z rozdziału <b>Problemy i ekspres</b> – tylko gdy tak ustalimy.</li></ul></div>
+    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots"><li>Numer rozgrzewki (np. <b>FB3</b>) znajdziesz w swoim planie treningowym w HubFit.</li><li>Kliknij rozdział w spisie treści i przejdź do zestawu o tym numerze.</li><li>Zestawy <b>Problemy</b> i <b>Ekspres</b> stosujesz tylko wtedy, gdy wpiszę je w plan.</li></ul></div>
     <div class="card"><div class="eyebrow">Zasady</div><ul class="dots">
       <li>Ćwiczenia robisz po kolei, bez długich przerw.</li>
       <li>Kolejność jest ułożona tak, żeby nie wstawać i kłaść się co chwilę.</li>
@@ -150,7 +152,7 @@ def index():
     tiles = ""
     for code, name, desc, sets in CHAPTERS:
         ids = " · ".join(s["id"] for s in sets)
-        tiles += f'<a class="chap{" sos" if code == "SOS" else ""}" href="#{aid('ch-' + code)}"><span class="k">{code}</span><h3>{e(name)}</h3><p>{e(desc)}</p><div class="ids">{len(sets)} zestawów: {ids}</div></a>'
+        tiles += f'<a class="chap{" sos" if code in ("PROBLEMY", "EKSPRES") else ""}" href="#{aid('ch-' + code)}"><span class="k">{code}</span><h3>{e(name)}</h3><p>{e(desc)}</p><div class="ids">{len(sets)} {"zestawy" if len(sets) in (2,3,4) else "zestawów"}: {ids}</div></a>'
     return f'''<div class="page"><div class="body" style="padding-top:12mm">
   <div><div class="eyebrow">Spis treści</div><h2 style="margin-top:4px">Jaki masz dzisiaj trening?</h2>
   <p style="margin-top:4px;color:var(--grey)">Kliknij rozdział – przeniesie Cię do listy zestawów.</p></div>
@@ -159,15 +161,16 @@ def index():
 
 
 def chapter_page(code, name, desc, sets, pages, pageno):
-    rows = "".join(f'<tr><td class="c"><a href="#{aid(s['id'])}">{s["id"]}</a></td><td><a href="#{aid(s['id'])}"><b>{e(s["title"])}</b></a></td><td class="c">{s["time"]}</td><td class="c">str. {pages[s["id"]]}</td></tr>' for s in sets)
+    named = code in ("PROBLEMY", "EKSPRES")
+    rows = "".join(f'<tr><td class="c"><a href="#{aid(s['id'])}">{s["id"]}</a></td>{(f'<td><a href="#{aid(s["id"])}"><b>{e(s["title"])}</b></a></td>' if named else "")}<td class="c">{s["time"]}</td><td class="c">str. {pages[s["id"]]}</td></tr>' for s in sets)
     return f'''<div class="page" id="{aid('ch-' + code)}">
   <div class="dark chaphead"><div class="brand"><i></i>Rozdział · {code}</div><div class="rule"></div>
     <h1>{e(name.split(" (")[0]).replace("Dzień ", "Dzień <em>", 1) + ("</em>" if name.startswith("Dzień ") else "")}</h1><p>{e(desc)}</p></div>
-  <div class="body"><div class="card"><table class="idx"><tr><th></th><th>Zestaw</th><th>Czas</th><th></th></tr>{rows}</table></div>
+  <div class="body"><div class="card"><table class="idx"><tr><th>Zestaw</th>{"<th></th>" if named else ""}<th>Czas</th><th></th></tr>{rows}</table></div>
   <a class="back" href="#spis">‹ wróć do spisu treści</a></div>{foot(str(pageno))}</div>'''
 
 
-def set_page(s, chap, pageno):
+def set_page(s, chap, pageno, named=False):
     def rows(items, start):
         out = ""
         for i, (k, dose) in enumerate(items, start):
@@ -178,8 +181,8 @@ def set_page(s, chap, pageno):
     (l1, t1, m1, _), (l2, t2, m2, _), (l3, t3, m3, _) = PH
     return f'''<div class="page" id="{aid(s['id'])}">
   <div class="dark sethead"><div class="top"><div class="brand"><i></i>Rozgrzewka · {e(chap)}</div><span class="timechip">{s["time"]}</span></div>
-    <div class="rule"></div><span class="setid">{s["id"]}</span>
-    <h1>{e(s["title"])}</h1></div>
+    <div class="rule"></div>
+    <h1 class="bigid">{s["id"]}</h1>{(f'<p class="sub">{e(s["title"])}</p>' if named else "")}</div>
   <div class="body">
     <div class="ph"><div class="ph-head"><div class="l">{l1}</div><h3>{t1}</h3><span>{m1}</span></div>{rows(s["R"], 1)}</div>
     <div class="ph"><div class="ph-head"><div class="l">{l2}</div><h3>{t2}</h3><span>{m2}</span></div>{rows(s["AM"], n_r + 1)}</div>
@@ -200,7 +203,7 @@ def build():
         out.append(chapter_page(code, name, desc, sets, pages, pages["ch-" + code]))
         chap = name.split(" (")[0].replace("Dzień ", "dzień ").replace("Problemy", "problemy")
         for s in sets:
-            out.append(set_page(s, chap, pages[s["id"]]))
+            out.append(set_page(s, chap, pages[s["id"]], code in ("PROBLEMY", "EKSPRES")))
     out.append("</body></html>")
     return "".join(out)
 

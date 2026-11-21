@@ -137,7 +137,7 @@ def intro():
       <tr><td class="c">5</td><td>ok. 85–90% × 1–2</td><td>–</td></tr></table>
     <p style="margin-top:6px;color:var(--grey)">„Wersja rozszerzona” (ciężkie dni siły) = wszystkie 5 serii z lewej kolumny, przed bardzo ciężkimi seriami jeszcze 1 × 1 na ok. 90–95%.</p></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
-    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots"><li>Numer rozgrzewki (np. <b>FB3</b>) znajdziesz w swoim planie treningowym w HubFit.</li><li>Kliknij rozdział w spisie treści i przejdź do zestawu o tym numerze.</li><li>Zestawy <b>Problemy</b> i <b>Ekspres</b> stosujesz tylko wtedy, gdy wpiszę je w plan.</li></ul></div>
+    <div class="card"><div class="eyebrow">Jak wybrać zestaw</div><ul class="dots"><li>Otwórz rozdział z dzisiejszym dniem treningowym: <b>góra, dół, FBW, push albo pull</b>.</li><li>Wybierz dowolny zestaw z tego rozdziału – każdy pasuje. Możesz je zmieniać z treningu na trening.</li><li>Mało czasu? Rozdział <b>Ekspres</b>. Rozdział <b>Problemy</b> – tylko gdy ustalimy to razem.</li></ul></div>
     <div class="card"><div class="eyebrow">Zasady</div><ul class="dots">
       <li>Ćwiczenia robisz po kolei, bez długich przerw.</li>
       <li>Kolejność jest ułożona tak, żeby nie wstawać i kłaść się co chwilę.</li>
